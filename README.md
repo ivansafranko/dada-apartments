@@ -1,44 +1,90 @@
-# Ivan Šafranko — Design Portfolio
+# Apartments Dada - Croatian Rental Website
 
-A modern, single-page design portfolio showcasing UI/UX work, including mobile apps and concept website redesigns.
+A modern, responsive website for apartment rentals in Krapinske Toplice, Croatia.
 
-## 📌 Highlights
+## 🏠 About
 
-- Mobile application “Moj OPG” — image gallery with lightbox and keyboard navigation
-- Wallplay — Website Redesign — scrollable preview with fit‑to‑width zoomable modal
-- CallApp — Concept Website — same zoomable, scrollable experience
-- Smooth, header-aware navigation (Explore, My Work, Contact)
-- Netlify Forms contact with inline validation and success state
+Apartments Dada offers premium apartment rentals in the peaceful spa town of Krapinske Toplice. Our accommodations combine modern comfort with traditional Croatian hospitality, located near the famous Aquae Vivae Water Park.
 
-## 📁 Project Structure
+## 🎨 Design System
+
+This website implements a comprehensive design system based on modern property rental platforms:
+
+- **Colors**: Navy blue primary (#3A4A5C), orange accents (#FF8C00), light gray backgrounds
+- **Typography**: Inter font family with proper hierarchy
+- **Layout**: Asymmetric grid with generous whitespace
+- **Components**: Cards, forms, navigation with hover effects
+
+## 📁 File Structure
 
 ```
-├── index.html          # Main page markup
-├── styles.css          # Styles and component system
-├── script.js           # Interactions (lightbox, zoom modal, smooth scroll, form)
-├── images/             # Project assets (moj-opg, wallplay, callapp)
-├── netlify.toml        # Netlify config (redirects, env)
-└── README.md           # This file
+├── index.html          # Main HTML structure
+├── styles.css          # Complete CSS with design system
+├── script.js           # Interactive JavaScript features
+├── design-system.json  # Design system documentation
+└── README.md          # This file
 ```
-
-## 🚀 Deploying to Netlify
-
-1. Push the repo to Git and connect to Netlify, or drag‑and‑drop the folder in the Netlify UI.
-2. Ensure Forms notifications are enabled:
-   - Site Settings → Forms → Form notifications → Email → choose `contact-form`.
-3. That’s it — works fine on a `*.netlify.app` domain.
 
 ## ✨ Features
 
-- Responsive layout and typography
-- Keyboard-accessible galleries and modals
-- Performance‑minded loading and transitions
+### Navigation
+- Fixed header with smooth scrolling
+- Hover underlines for navigation links
+- Special CTA button styling for Contact
 
-## 📞 Contact
+### Sections
+1. **Hero** - Value proposition with search functionality
+2. **About** - Information about Krapinske Toplice and location benefits
+3. **Apartments** - Two location groups with 4 apartments total
+4. **Process** - How to book steps
+5. **Testimonials** - Guest reviews with rotating highlights
+6. **Contact** - Contact form with validation
+7. **Footer** - Brand information and social links
 
-- Email: ivan.safranko@gmail.com
-- Phone: +385 99 872 9979
+### Interactive Elements
+- Form validation for contact form
+- Search functionality with apartment highlighting
+- Smooth scrolling navigation
+- Hover effects on cards and buttons
+- Responsive mobile menu
+- Loading animations
+- Scroll-triggered animations
+
+## 🏨 Apartment Listings
+
+### City Center Location
+- **Dada Apartment 1** - Deluxe Suite (2BR, 1BA)
+- **Dada Apartment 2** - Family Comfort (3BR, 2BA)
+
+### Peaceful Residential Area  
+- **Dada Apartment 3** - Garden View (2BR, 1BA)
+- **Dada Apartment 4** - Nature Retreat (1BR, 1BA)
+
+## 📱 Responsive Design
+
+- Mobile-first approach
+- Breakpoints: 768px (tablet), 480px (mobile)
+- Flexible grid layouts
+- Optimized typography scaling
+- Touch-friendly interaction areas
+
+## 🚀 Getting Started
+
+1. Open `index.html` in a modern web browser
+2. No build process required - pure HTML, CSS, JS
+3. All fonts load from Google Fonts CDN
+4. Works offline except for font loading
+
+## 🌐 Domain
+
+Designed for: **apartments-dada.com**
+
+## 📞 Contact Information
+
+- **Email**: info@apartments-dada.com  
+- **Phone**: +385 49 123 456
+- **Location**: Krapinske Toplice, Croatia
 
 ---
 
-Built with semantic HTML, modern CSS, and vanilla JS.
+*Built with modern web standards and Croatian hospitality in mind.* 🇭🇷 

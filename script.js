@@ -413,22 +413,19 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Smooth scrolling with fixed header offset
-    function smoothScrollToTarget(selector) {
-        const target = document.querySelector(selector);
-        if (!target) return;
-        const headerEl = document.querySelector('.header');
-        const headerHeight = headerEl ? headerEl.offsetHeight + 12 : 20;
-        const top = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-        window.scrollTo({ top, behavior: 'smooth' });
-    }
-
+    // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            const href = this.getAttribute('href');
-            if (!href || href === '#') return;
             e.preventDefault();
-            smoothScrollToTarget(href);
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const headerHeight = 20;
+                const targetPosition = target.offsetTop - headerHeight;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
         });
     });
 
@@ -436,8 +433,15 @@ document.addEventListener('DOMContentLoaded', function() {
     const exploreBtn = document.querySelector('.explore-btn');
     if (exploreBtn) {
         exploreBtn.addEventListener('click', function() {
-            const targetSelector = this.getAttribute('data-scroll-target') || '#moj-opg';
-            smoothScrollToTarget(targetSelector);
+            const target = document.getElementById('apartments');
+            if (target) {
+                const headerHeight = 20;
+                const targetPosition = target.offsetTop - headerHeight;
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+            }
         });
     }
 
@@ -714,169 +718,4 @@ document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
       document.querySelectorAll('.flatpickr-input').forEach(input => input.tabIndex = 0);
     }, 500);
-
-    // Moj OPG Gallery Lightbox Functionality
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const lightboxClose = document.querySelector('.lightbox-close');
-    const lightboxCaption = document.querySelector('.lightbox-caption');
-    const lightboxPrev = document.querySelector('.lightbox-prev');
-    const lightboxNext = document.querySelector('.lightbox-next');
-    let currentIndex = -1;
-
-    // Open lightbox when clicking on a gallery item
-    function openLightbox(index) {
-        const item = galleryItems[index];
-        if (!item) return;
-        const img = item.querySelector('img');
-        currentIndex = index;
-        lightbox.style.display = 'block';
-        lightboxImg.src = img.src;
-        lightboxCaption.textContent = img.alt || '';
-    }
-
-    function closeLightbox() {
-        lightbox.style.display = 'none';
-        currentIndex = -1;
-    }
-
-    function showNext(delta) {
-        if (currentIndex === -1) return;
-        const total = galleryItems.length;
-        currentIndex = (currentIndex + delta + total) % total;
-        const img = galleryItems[currentIndex].querySelector('img');
-        lightboxImg.src = img.src;
-        lightboxCaption.textContent = img.alt || '';
-    }
-
-    galleryItems.forEach((item, index) => {
-        item.addEventListener('click', function() { openLightbox(index); });
-    });
-
-    // Close lightbox when clicking the close button
-    if (lightboxClose) {
-        lightboxClose.addEventListener('click', closeLightbox);
-    }
-
-    // Close lightbox when clicking outside the image
-    lightbox.addEventListener('click', function(event) {
-        if (event.target === lightbox) closeLightbox();
-    });
-
-    // Close lightbox with Escape key
-    document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape' && lightbox.style.display === 'block') closeLightbox();
-        if ((event.key === 'ArrowRight' || event.key === 'd') && lightbox.style.display === 'block') showNext(1);
-        if ((event.key === 'ArrowLeft' || event.key === 'a') && lightbox.style.display === 'block') showNext(-1);
-    });
-
-    // Prev/Next buttons
-    if (lightboxPrev) lightboxPrev.addEventListener('click', () => showNext(-1));
-    if (lightboxNext) lightboxNext.addEventListener('click', () => showNext(1));
-
-    // Zoomable Wallplay Frame
-    const frameImgInline = document.querySelector('.scroll-image-container img');
-    const allScrollablePreviews = document.querySelectorAll('.scroll-image-container img');
-    const frameModal = document.getElementById('frameModal');
-    const frameModalImg = document.getElementById('frameModalImg');
-    const frameViewport = document.getElementById('frameViewport');
-    const frameClose = document.querySelector('.frame-modal-close');
-    const zoomInBtn = document.querySelector('.frame-zoom-in');
-    const zoomOutBtn = document.querySelector('.frame-zoom-out');
-    const zoomResetBtn = document.querySelector('.frame-zoom-reset');
-    let zoomScale = 1;
-
-    function openFrameModal() {
-        if (!frameImgInline) return;
-        frameModalImg.src = frameImgInline.src;
-        frameModal.setAttribute('aria-hidden', 'false');
-        // Fit-to-width and start at top on open
-        requestAnimationFrame(() => {
-            const img = frameModalImg;
-            const vw = frameViewport.clientWidth;
-            const vh = frameViewport.clientHeight;
-            const iw = img.naturalWidth || img.width;
-            const ih = img.naturalHeight || img.height;
-            const scale = vw / iw; // fit width
-            zoomScale = scale;
-            img.style.transform = `scale(${zoomScale})`;
-            // start at top-left
-            frameViewport.scrollLeft = 0;
-            frameViewport.scrollTop = 0;
-        });
-    }
-
-    function closeFrameModal() {
-        frameModal.setAttribute('aria-hidden', 'true');
-    }
-
-    function applyZoom(newScale) {
-        zoomScale = Math.min(5, Math.max(0.25, newScale));
-        const img = frameModalImg;
-        const prevScale = getCurrentScale();
-        const vw = frameViewport.clientWidth;
-        const vh = frameViewport.clientHeight;
-        const iw = img.naturalWidth || img.width;
-        const ih = img.naturalHeight || img.height;
-        const contentWPrev = iw * prevScale;
-        const contentHPrev = ih * prevScale;
-        const centerX = frameViewport.scrollLeft + vw / 2;
-        const centerY = frameViewport.scrollTop + vh / 2;
-        const relX = contentWPrev === 0 ? 0.5 : centerX / contentWPrev;
-        const relY = contentHPrev === 0 ? 0.5 : centerY / contentHPrev;
-
-        img.style.transform = `scale(${zoomScale})`;
-
-        const contentW = iw * zoomScale;
-        const contentH = ih * zoomScale;
-        frameViewport.scrollLeft = Math.max(0, relX * contentW - vw / 2);
-        frameViewport.scrollTop = Math.max(0, relY * contentH - vh / 2);
-    }
-
-    function getCurrentScale() {
-        const match = /scale\(([^)]+)\)/.exec(frameModalImg.style.transform || '');
-        return match ? parseFloat(match[1]) || 1 : 1;
-    }
-
-    // Attach to all previews (Wallplay, CallApp, etc.)
-    allScrollablePreviews.forEach(img => {
-        img.addEventListener('click', () => {
-            // If a different image is clicked, swap src and open
-            frameModalImg.src = img.src;
-            frameModal.setAttribute('aria-hidden', 'false');
-            // Fit-to-width and start at top-left
-            requestAnimationFrame(() => {
-                const vw = frameViewport.clientWidth;
-                const iw = frameModalImg.naturalWidth || frameModalImg.width;
-                zoomScale = vw / iw;
-                frameModalImg.style.transform = `scale(${zoomScale})`;
-                frameViewport.scrollLeft = 0;
-                frameViewport.scrollTop = 0;
-            });
-        });
-    });
-    if (frameClose) frameClose.addEventListener('click', closeFrameModal);
-    if (zoomInBtn) zoomInBtn.addEventListener('click', () => applyZoom(zoomScale * 1.2));
-    if (zoomOutBtn) zoomOutBtn.addEventListener('click', () => applyZoom(zoomScale / 1.2));
-    if (zoomResetBtn) zoomResetBtn.addEventListener('click', () => applyZoom(1));
-
-    // Wheel zoom (Ctrl/Cmd + wheel) and pinch-zoom like behavior
-    frameViewport.addEventListener('wheel', (e) => {
-        if (e.ctrlKey || e.metaKey) {
-            e.preventDefault();
-            const delta = e.deltaY > 0 ? -0.1 : 0.1;
-            applyZoom(zoomScale + delta);
-        }
-    }, { passive: false });
-
-    // Keyboard support inside modal
-    document.addEventListener('keydown', (e) => {
-        const open = frameModal.getAttribute('aria-hidden') === 'false';
-        if (!open) return;
-        if (e.key === 'Escape') closeFrameModal();
-        if (e.key === '+' || e.key === '=') applyZoom(zoomScale * 1.2);
-        if (e.key === '-' || e.key === '_') applyZoom(zoomScale / 1.2);
-        if (e.key.toLowerCase() === '0') applyZoom(1);
-    });
 }); 
