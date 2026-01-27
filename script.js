@@ -4,8 +4,12 @@
 const translations = {
     hr: {
         // Page meta
-        'page-title': 'Apartmani Dada - Apartmani u Krapinskim Toplicama, Hrvatska',
-        'page-description': 'Moderni apartmani za odmor u Krapinskim Toplicama blizu Aquae Vivae parka. WiFi, parking, potpuno opremljeni smještaji u Hrvatskoj lječilišnoj destinaciji.',
+        'page-title': 'Apartmani Krapinske Toplice | Apartmani Dada',
+        'page-description': 'Apartmani Krapinske Toplice – smještaj, sobe i apartmani blizu Aquae Vivae. WiFi i parking. Rezervirajte Apartmani Dada u centru i mirnoj lokaciji.',
+        'landing-page-title': 'Apartmani Krapinske Toplice – smještaj, soba i apartmani | Apartmani Dada',
+        'landing-page-description': 'Apartmani Krapinske Toplice: smještaj, soba i apartmani blizu Aquae Vivae. WiFi i parking. Dvije lokacije (centar i mirna zona). Rezervirajte online.',
+        'landing-page-og-title': 'Apartmani Krapinske Toplice – smještaj, soba i apartmani | Apartmani Dada',
+        'landing-page-og-description': 'Smještaj u Krapinskim Toplicama: apartmani i soba blizu Aquae Vivae. WiFi i parking. Rezervirajte online.',
         
         // Navigation
         'nav-home': 'Početna',
@@ -15,9 +19,57 @@ const translations = {
         'nav-contact': 'Kontakt',
         
         // Hero section
-        'hero-headline': 'Apartmani u Krapinskim Toplicama',
-        'hero-subheadline': 'Moderni apartmani za odmor blizu Aquae Vivae vodenog parka. Potpuno opremljeni smještaji s WiFi-em, parkingom i prekrasnim pogledom u vodećoj lječilišnoj destinaciji Hrvatske.',
+        'hero-kicker': 'Lječilišni grad. Dvije lokacije. Miran boravak.',
+        'hero-headline': '<span class="hero-headline-line">Apartmani u</span><span class="hero-headline-line">Krapinskim Toplicama</span>',
+        'hero-subheadline': 'Apartmani Krapinske Toplice – čisto, moderno i ugodno uređeno. Smještaj blizu Aquae Vivae, s WiFi‑jem i parkingom.',
+        'hero-bullet-1': 'Aquae Vivae na par minuta hoda',
+        'hero-bullet-2': 'Čisto, moderno i ugodno uređeno',
+        'hero-bullet-3': 'Parking + WiFi uključeni',
         'explore-btn': 'Istražite apartmane',
+
+        // Landing page (apartmani-krapinske-toplice)
+        'landing-kicker': 'Smještaj u Krapinskim Toplicama',
+        'landing-headline': 'Apartmani Krapinske Toplice – smještaj; soba i apartmani',
+        'landing-intro': 'Ako tražite smještaj u Krapinskim Toplicama, apartman ili sobu, ovdje su najvažnije informacije na jednom mjestu – lokacije, vrste smještaja i kako brzo rezervirati.',
+        'landing-card1-title': 'Smještaj u centru',
+        'landing-card1-text': 'Za goste koji žele biti bliže Aquae Vivae.',
+        'landing-card2-title': 'Lokacija blizu bolnice',
+        'landing-card2-text': 'Praktično za rehabilitaciju i klinike; mirniji boravak i odličan odabir za duže termine.',
+        'landing-card3-title': 'Soba i studio opcije',
+        'landing-card3-text': 'Birajte između većih apartmana te studio opcije i sobe – ovisno o broju gostiju i planu putovanja.',
+        'landing-location-title': 'Lokacija i udaljenosti',
+        'landing-location-intro': 'Krapinske Toplice su poznate po termalnom wellnessu i rehabilitaciji. Naše dvije lokacije pokrivaju i centar mjesta i mirniju zonu u blizini zdravstvenih sadržaja.',
+        'landing-location1-title': 'Aquae Vivae',
+        'landing-location1-text': 'Termalni vodeni park – <strong>nekoliko minuta hoda</strong> (ovisno o odabranoj lokaciji smještaja).',
+        'landing-location2-title': 'Bolnica za medicinsku rehabilitaciju',
+        'landing-location2-text': 'Praktično za goste koji dolaze na terapije ili u posjet – <strong>u blizini</strong> bolnice.',
+        'landing-location3-title': 'Klinika Magdalena',
+        'landing-location3-text': 'Kardiovaskularna klinika – <strong>u blizini</strong>; odličan izbor za smještaj tijekom pregleda i oporavka.',
+        'landing-faq-title': 'Česta pitanja (FAQ)',
+        'landing-faq-q1': 'Je li ovo dobar izbor ako tražim smještaj u Krapinskim Toplicama?',
+        'landing-faq-a1': 'Da — nudimo više tipova smještaja (apartmani i soba) na dvije lokacije, pa se lako prilagodimo svrsi putovanja.',
+        'landing-faq-q2': 'Kako najbrže rezervirati?',
+        'landing-faq-a2': 'Najbrže je preko online rezervacije: <a href="book-now/">Rezervirajte online</a> ili na broj <a href="tel:+385989982059">+385 98 998 2059</a>.',
+        'landing-faq-q3': 'Mogu li vidjeti sve apartmane i fotografije?',
+        'landing-faq-a3': 'Da — pogledajte popis i fotografije na početnoj stranici: <a href="./index.html#apartments">Apartmani</a>.',
+
+        // Homepage SEO section
+        'seo-section-title': 'Apartmani Krapinske Toplice; smještaj, soba i apartmani',
+        'seo-section-subheadline': 'Tražite <strong>smještaj u Krapinskim Toplicama</strong>, apartman ili sobu? Apartmani Dada nude više opcija – od prostranih apartmana do udobne sobe – na dvije lokacije u Krapinskim Toplicama.',
+        'seo-card1-title': 'Apartmani u centru',
+        'seo-card1-text': 'Idealno ako želite sve “na dohvat ruke” – šetnja, restorani, trgovine i Aquae Vivae u blizini.',
+        'seo-card2-title': 'Smještaj blizu bolnice',
+        'seo-card2-text': 'Mirna zona, praktično za posjetitelje klinika i rehabilitacije; odličan izbor za duži boravak.',
+        'seo-card3-title': 'Soba i studio opcije',
+        'seo-card3-text': 'Za solo putnike i parove: studio apartman i soba – jednostavno, čisto i udobno.',
+        'seo-link-detail': 'Detaljno: Apartmani Krapinske Toplice',
+        'seo-faq-title': 'FAQ – apartmani i smještaj u Krapinskim Toplicama',
+        'seo-faq-q1': 'Gdje pronaći smještaj u Krapinskim Toplicama blizu Aquae Vivae?',
+        'seo-faq-a1': 'Apartmani Dada nude dvije lokacije, s praktičnim pristupom Aquae Vivae i blizinom bolnice (ovisno o lokaciji smještaja).',
+        'seo-faq-q2': 'Imate li sobu u ponudi?',
+        'seo-faq-a2': 'Da — uz apartmane nudimo i sobu s kupaonicom kao jednostavniju opciju smještaja.',
+        'seo-faq-q3': 'Što je uključeno u smještaj?',
+        'seo-faq-a3': 'Standardno nudimo WiFi, klimu i parking, a detalji ovise o odabranom apartmanu ili sobi.',
         
         // About section
         'about-headline': 'Otkrijte Krapinske Toplice',
@@ -103,12 +155,16 @@ const translations = {
         
         // Footer
         'footer-text': 'Doživite najbolje od Krapinskih Toplica uz naše apartmane.',
-        'footer-copyright': '© 2025 Apartmani Dada. Sva prava pridržana. | apartments-dada.com'
+        'footer-copyright': '© 2026 Apartmani Dada. Sva prava pridržana. | apartments-dada.com'
     },
     en: {
         // Page meta
-        'page-title': 'Apartmani Dada - Apartments in Krapinske Toplice',
-        'page-description': 'Modern vacation rentals in Krapinske Toplice near Aquae Vivae Water Park. WiFi, parking, fully equipped apartments in Croatia\'s spa destination.',
+        'page-title': 'Apartments Krapinske Toplice | Apartmani Dada',
+        'page-description': 'Apartments in Krapinske Toplice near Aquae Vivae. WiFi and parking. Book Apartmani Dada in a central and peaceful location.',
+        'landing-page-title': 'Krapinske Toplice apartments – accommodation, a room & apartments | Apartmani Dada',
+        'landing-page-description': 'Krapinske Toplice apartments: accommodation, a room, and apartments near Aquae Vivae. WiFi and parking. Two locations (center and quiet area). Book online.',
+        'landing-page-og-title': 'Krapinske Toplice apartments – accommodation, a room & apartments | Apartmani Dada',
+        'landing-page-og-description': 'Accommodation in Krapinske Toplice: apartments and a room near Aquae Vivae. WiFi and parking. Book online.',
         
         // Navigation
         'nav-home': 'Homepage',
@@ -118,9 +174,57 @@ const translations = {
         'nav-contact': 'Contact',
         
         // Hero section
-        'hero-headline': 'Apartments in Krapinske Toplice',
+        'hero-kicker': 'Spa town. Two locations. A calm stay.',
+        'hero-headline': '<span class="hero-headline-line">Apartments in</span><span class="hero-headline-line">Krapinske Toplice</span>',
         'hero-subheadline': 'Modern vacation rentals near Aquae Vivae Water Park. Fully equipped apartments with WiFi, parking, and stunning views in Croatia\'s premier spa destination.',
+        'hero-bullet-1': 'Aquae Vivae minutes away on foot',
+        'hero-bullet-2': 'Clean, modern, and comfortably designed',
+        'hero-bullet-3': 'Parking + WiFi included',
         'explore-btn': 'Explore Apartments',
+
+        // Landing page (apartmani-krapinske-toplice)
+        'landing-kicker': 'Stay in Krapinske Toplice',
+        'landing-headline': 'Krapinske Toplice apartments — accommodation, a room & apartments',
+        'landing-intro': 'If you are looking for accommodation in Krapinske Toplice, an apartment or a room, here are the key details in one place — locations, accommodation types, and how to book quickly.',
+        'landing-card1-title': 'Central location',
+        'landing-card1-text': 'For guests who want to be closer to Aquae Vivae.',
+        'landing-card2-title': 'Near the hospital',
+        'landing-card2-text': 'Practical for rehab and clinics; a calmer stay and a great choice for longer visits.',
+        'landing-card3-title': 'Room & studio options',
+        'landing-card3-text': 'Choose between larger apartments and studio/room options — depending on your group size and travel plan.',
+        'landing-location-title': 'Location & distances',
+        'landing-location-intro': 'Krapinske Toplice is known for thermal wellness and rehabilitation. Our two locations cover both the center and a quieter area near healthcare facilities.',
+        'landing-location1-title': 'Aquae Vivae',
+        'landing-location1-text': 'Thermal water park — <strong>a few minutes on foot</strong> (depending on the selected location).',
+        'landing-location2-title': 'Medical Rehabilitation Hospital',
+        'landing-location2-text': 'Convenient for therapy visits — <strong>nearby</strong> the hospital.',
+        'landing-location3-title': 'Magdalena Clinic',
+        'landing-location3-text': 'Cardiovascular clinic — <strong>nearby</strong>; a great choice for checkups and recovery stays.',
+        'landing-faq-title': 'Frequently Asked Questions',
+        'landing-faq-q1': 'Is this a good choice if I need accommodation in Krapinske Toplice?',
+        'landing-faq-a1': 'Yes — we offer multiple accommodation types (apartments and a room) across two locations, so it is easy to match your trip.',
+        'landing-faq-q2': 'What is the fastest way to book?',
+        'landing-faq-a2': 'The fastest way is to book online: <a href="book-now/">Book online</a> or call <a href="tel:+385989982059">+385 98 998 2059</a>.',
+        'landing-faq-q3': 'Can I see all apartments and photos?',
+        'landing-faq-a3': 'Yes — see the list and photos on the homepage: <a href="./index.html#apartments">Apartments</a>.',
+
+        // Homepage SEO section
+        'seo-section-title': 'Krapinske Toplice apartments; accommodation, a room & apartments',
+        'seo-section-subheadline': 'Looking for <strong>accommodation in Krapinske Toplice</strong>, an apartment, or a room? Apartmani Dada offers multiple options — from spacious apartments to a comfortable room — across two locations in Krapinske Toplice.',
+        'seo-card1-title': 'Central apartments',
+        'seo-card1-text': 'Ideal if you want everything close by — walks, restaurants, shops, and Aquae Vivae nearby.',
+        'seo-card2-title': 'Near the hospital',
+        'seo-card2-text': 'A quiet area, practical for clinic and rehab visits; a great choice for longer stays.',
+        'seo-card3-title': 'Room & studio options',
+        'seo-card3-text': 'For solo travelers and couples: a studio apartment and a room — simple, clean, and comfortable.',
+        'seo-link-detail': 'Details: Krapinske Toplice apartments',
+        'seo-faq-title': 'FAQ – apartments and accommodation in Krapinske Toplice',
+        'seo-faq-q1': 'Where can I find accommodation in Krapinske Toplice near Aquae Vivae?',
+        'seo-faq-a1': 'Apartmani Dada offers two locations with convenient access to Aquae Vivae and proximity to the hospital (depending on the selected location).',
+        'seo-faq-q2': 'Do you offer a room?',
+        'seo-faq-a2': 'Yes — alongside apartments we also offer a room with a private bathroom as a simpler accommodation option.',
+        'seo-faq-q3': 'What is included in the accommodation?',
+        'seo-faq-a3': 'WiFi, AC, and parking are standard; details depend on the selected apartment or room.',
         
         // About section
         'about-headline': 'Discover Krapinske Toplice',
@@ -206,7 +310,7 @@ const translations = {
         
         // Footer
         'footer-text': 'Experience the best of Krapinske Toplice with our premium apartment rentals. Your comfort is our priority.',
-        'footer-copyright': '© 2025 Apartmani Dada. All rights reserved. | apartments-dada.com'
+        'footer-copyright': '© 2026 Apartmani Dada. All rights reserved. | apartments-dada.com'
     }
 };
 
@@ -286,11 +390,13 @@ function updateLanguage(lang) {
         }
     });
     
-    // Update meta description
-    const metaDescription = document.querySelector('meta[data-translate="page-description"]');
-    if (metaDescription && translations[lang]['page-description']) {
-        metaDescription.setAttribute('content', translations[lang]['page-description']);
-    }
+    // Update meta tags with translations
+    document.querySelectorAll('meta[data-translate]').forEach(meta => {
+        const key = meta.getAttribute('data-translate');
+        if (translations[lang] && translations[lang][key]) {
+            meta.setAttribute('content', translations[lang][key]);
+        }
+    });
     
     // Update language toggle button
     const languageToggle = document.getElementById('languageToggle');
@@ -382,6 +488,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Make body visible after initial language update
     document.body.style.opacity = '1';
+    document.body.classList.add('is-ready');
     
     // Set up language toggle
     const languageToggle = document.getElementById('languageToggle');
@@ -628,20 +735,12 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Header scroll effect
     const header = document.querySelector('.header');
-    let lastScrollTop = 0;
     
     window.addEventListener('scroll', function() {
         const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
-        if (scrollTop > 100) {
-            header.style.background = 'rgba(58, 74, 92, 0.98)';
-            header.style.backdropFilter = 'blur(25px)';
-        } else {
-            header.style.background = 'rgba(58, 74, 92, 0.95)';
-            header.style.backdropFilter = 'blur(20px)';
+        if (header) {
+            header.classList.toggle('is-scrolled', scrollTop > 24);
         }
-        
-        lastScrollTop = scrollTop;
     });
 
     // Add loading animation for images

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hr">
+<html lang="hr" class="booking-page">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -26,19 +26,22 @@
   <meta name="twitter:title" content="Rezervacije – Apartments Dada">
   <meta name="twitter:description" content="Rezervirajte smještaj u Krapinskim Toplicama – Apartments Dada.">
   <meta name="twitter:image" content="https://apartments-dada.com/images/dada-apartments-krapinske-toplice-hero.webp">
-  <link rel="icon" type="image/svg+xml" href="/icon.svg">
-  <link rel="manifest" href="/site.webmanifest">
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="icon" type="image/svg+xml" href="../icon.svg">
+  <link rel="manifest" href="../site.webmanifest">
+  <link rel="stylesheet" href="../styles.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css">
   <link rel="preload" as="image" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/flags/4x3/gb.svg">
   <link rel="preload" as="image" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/flags/1x1/gb.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="booking-page">
   <noscript><style>body{opacity:1 !important}</style></noscript>
   <header class="header">
     <div class="container">
       <div class="header-content">
-        <div class="logo"><a href="/" aria-label="Go to homepage"><h1 lang="hr">Apartmani Dada</h1></a></div>
+        <div class="logo"><a href="/" aria-label="Go to homepage"><span class="logo-title" lang="hr">Apartmani Dada</span></a></div>
         <nav class="navigation">
           <div class="nav-desktop">
             <a href="/" class="nav-link" data-translate="nav-home">Homepage</a>
@@ -79,12 +82,16 @@
     </div>
   </header>
 
-  <main style="padding-top: 120px; padding-bottom: 60px;">
+  <main class="booking-main">
     <div class="container">
-      <h2 class="section-headline" data-translate="nav-book">Rezervirajte online</h2>
-      <p class="section-subheadline" data-translate="book-intro">Odaberite datume i rezervirajte svoj boravak.</p>
+      <div class="booking-shell">
+        <h1 class="section-headline" data-translate="nav-book">Rezervirajte online</h1>
+        <p class="section-subheadline" data-translate="book-intro">Odaberite datume i rezervirajte svoj boravak.</p>
 
-      <div id="wbproot" class="notranslate" style="min-height: 70vh;"></div>
+        <div class="booking-widget">
+          <div id="wbproot" class="notranslate" style="min-height: 70vh;"></div>
+        </div>
+      </div>
     </div>
   </main>
 
@@ -104,7 +111,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p data-translate="footer-copyright">&copy; 2025 Apartments Dada. All rights reserved. | apartments-dada.com</p>
+        <p data-translate="footer-copyright">&copy; 2026 Apartments Dada. All rights reserved. | apartments-dada.com</p>
       </div>
     </div>
   </footer>
@@ -145,7 +152,7 @@
   </script>
 
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
-  <script src="/script.js" defer></script>
+  <script src="../script.js" defer></script>
 </body>
 </html>
 
