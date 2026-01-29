@@ -945,10 +945,11 @@ window.addEventListener('load', () => {
             return;
         }
         loadAnalytics();
+        window.removeEventListener('pointerdown', startAnalytics);
+        window.removeEventListener('keydown', startAnalytics);
+        window.removeEventListener('scroll', startAnalytics);
     };
-    if ('requestIdleCallback' in window) {
-        requestIdleCallback(startAnalytics, { timeout: 3000 });
-    } else {
-        setTimeout(startAnalytics, 2000);
-    }
+    window.addEventListener('pointerdown', startAnalytics, { once: true, passive: true });
+    window.addEventListener('keydown', startAnalytics, { once: true, passive: true });
+    window.addEventListener('scroll', startAnalytics, { once: true, passive: true });
 });

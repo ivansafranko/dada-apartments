@@ -195,7 +195,7 @@
                 </div>
                 <nav class="navigation">
                     <div class="nav-desktop">
-                        <a href="#home" class="nav-link" data-translate="nav-home">Homepage</a>
+                        <a href="/" class="nav-link" data-translate="nav-home">Homepage</a>
                         <a href="#about-title" class="nav-link" data-translate="nav-about">About</a>
                         <a href="#apartments-title" class="nav-link" data-translate="nav-apartments">Apartments</a>
                         <a href="/book-now" class="nav-link nav-book" data-translate="nav-book">Rezervirajte online</a>
@@ -224,7 +224,7 @@
                     </div>
                     
                     <div class="mobile-menu" id="mobileMenu">
-                        <a href="#home" class="mobile-nav-link" data-translate="nav-home">Homepage</a>
+                        <a href="/" class="mobile-nav-link" data-translate="nav-home">Homepage</a>
                         <a href="#about-title" class="mobile-nav-link" data-translate="nav-about">About</a>
                         <a href="#apartments-title" class="mobile-nav-link" data-translate="nav-apartments">Apartments</a>
                         <a href="/book-now" class="mobile-nav-link mobile-nav-book" data-translate="nav-book">Rezervirajte online</a>
@@ -235,6 +235,7 @@
         </div>
     </header>
 
+    <main id="main-content">
     <!-- Hero Section -->
     <section id="home" class="hero-section">
         <div class="container">
@@ -622,12 +623,12 @@
                     <input type="hidden" name="bot-field">
                     <div class="form-group">
                         <div class="form-field">
-                            <label data-translate="form-name">Vaše ime</label>
-                            <input type="text" name="name" data-translate-placeholder="form-name" required>
+                            <label for="contact-name" data-translate="form-name">Vaše ime</label>
+                            <input type="text" name="name" id="contact-name" data-translate-placeholder="form-name" required>
                         </div>
                         <div class="form-field">
-                            <label data-translate="form-email">Vaš email</label>
-                            <input type="email" name="email" data-translate-placeholder="form-email" required>
+                            <label for="contact-email" data-translate="form-email">Vaš email</label>
+                            <input type="email" name="email" id="contact-email" data-translate-placeholder="form-email" required>
                         </div>
                     </div>
                     <div class="form-group">
@@ -641,8 +642,8 @@
                         </div>
                     </div>
                     <div class="form-field">
-                        <label data-translate="form-message">Poruka (preferenca apartmana, posebni zahtjevi...)</label>
-                        <textarea name="message" data-translate-placeholder="form-message" required></textarea>
+                        <label for="contact-message" data-translate="form-message">Poruka (preferenca apartmana, posebni zahtjevi...)</label>
+                        <textarea name="message" id="contact-message" data-translate-placeholder="form-message" required></textarea>
                     </div>
                     <button type="submit" class="contact-submit" data-translate="form-submit">Send Message</button>
                 </form>
@@ -682,6 +683,7 @@
             </div>
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer class="footer">

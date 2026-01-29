@@ -663,7 +663,7 @@ body {
 
 .apartment-location {
     font-size: var(--font-xs);
-    color: var(--neutral-light-text);
+    color: #4a4f63;
     margin-bottom: var(--spacing-sm);
 }
 
@@ -827,7 +827,7 @@ body {
 
 .location-info p {
     font-size: var(--font-sm);
-    color: var(--neutral-light-text);
+    color: #4a4f63;
     line-height: var(--line-height-relaxed);
 }
 
