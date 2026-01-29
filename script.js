@@ -318,10 +318,8 @@ const translations = {
 const pathIsEnglish = window.location.pathname.startsWith('/en');
 const forcedLanguage = document.documentElement.getAttribute('data-force-lang') || (pathIsEnglish ? 'en' : null);
 let currentLanguage = 'hr';
-let datePickerInstances = []; // Store flatpickr instances
 const ANALYTICS_ID = 'G-8QBRR4GF05';
 let analyticsLoaded = false;
-let flatpickrPromise = null;
 
 function loadScriptOnce(src, id) {
     return new Promise((resolve, reject) => {
@@ -341,23 +339,6 @@ function loadScriptOnce(src, id) {
     });
 }
 
-function loadStylesheetOnce(href, id) {
-    if (id && document.getElementById(id)) {
-        return;
-    }
-    const link = document.createElement('link');
-    if (id) {
-        link.id = id;
-    }
-    link.rel = 'stylesheet';
-    link.href = href;
-    link.media = 'print';
-    link.onload = () => {
-        link.media = 'all';
-    };
-    document.head.appendChild(link);
-}
-
 function loadAnalytics() {
     if (analyticsLoaded) {
         return;
@@ -368,79 +349,6 @@ function loadAnalytics() {
     window.gtag('js', new Date());
     window.gtag('config', ANALYTICS_ID);
     loadScriptOnce(`https://www.googletagmanager.com/gtag/js?id=${ANALYTICS_ID}`, 'gtag-js');
-}
-
-function ensureFlatpickr(language) {
-    const hasDateInputs = document.querySelector('input[type="date"]');
-    if (!hasDateInputs) {
-        return Promise.resolve();
-    }
-    if (typeof flatpickr !== 'undefined') {
-        initializeDatePickers(language);
-        return Promise.resolve();
-    }
-    if (!flatpickrPromise) {
-        loadStylesheetOnce('https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css', 'flatpickr-css');
-        flatpickrPromise = loadScriptOnce('https://cdn.jsdelivr.net/npm/flatpickr', 'flatpickr-js')
-            .then(() => {
-                if (language === 'hr') {
-                    return loadScriptOnce('https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/hr.js', 'flatpickr-hr-js');
-                }
-            })
-            .then(() => {
-                initializeDatePickers(language);
-            });
-    }
-    return flatpickrPromise;
-}
-
-// Function to initialize date pickers only once
-function initializeDatePickers(language) {
-    // Only initialize if we haven't already
-    if (datePickerInstances.length === 0) {
-        const dateInputs = document.querySelectorAll('input[type="date"]');
-        
-        dateInputs.forEach((input, index) => {
-            const config = {
-                altInput: true,
-                allowInput: true
-            };
-            
-            if (language === 'hr') {
-                config.locale = window.flatpickr.l10ns.hr;
-                config.dateFormat = "d.m.Y";
-                config.altFormat = "d.m.Y";
-            } else {
-                config.dateFormat = "d/m/Y";
-                config.altFormat = "d/m/Y";
-            }
-            
-            const instance = flatpickr(input, config);
-            datePickerInstances.push(instance);
-        });
-    }
-}
-
-// Function to change locale of existing date pickers
-function changeDatePickerLocale(language) {
-    datePickerInstances.forEach((instance, index) => {
-        if (instance) {
-            if (language === 'hr') {
-                // Set Croatian locale
-                instance.set('locale', window.flatpickr.l10ns.hr);
-                instance.set('dateFormat', 'd.m.Y');
-                instance.set('altFormat', 'd.m.Y');
-            } else {
-                // Set English locale (default)
-                instance.set('locale', 'default');
-                instance.set('dateFormat', 'd/m/Y');
-                instance.set('altFormat', 'd/m/Y');
-            }
-            
-            // Force redraw
-            instance.redraw();
-        }
-    });
 } // Default to Croatian
 
 function updateLanguage(lang) {
@@ -518,7 +426,6 @@ function updateLanguage(lang) {
         langTextMobile.textContent = lang === 'hr' ? 'HR' : 'EN';
     }
     
-    ensureFlatpickr(lang);
     
     // Reinitialize Lucide icons after DOM changes
     setTimeout(() => {
@@ -613,9 +520,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 100);
     
-    // Initialize date pickers only when needed
-    ensureFlatpickr(savedLanguage);
-    
     // Then set language (without trying to change date pickers)
     updateLanguage(savedLanguage);
 
@@ -659,11 +563,7 @@ document.addEventListener('DOMContentLoaded', function() {
             
             updateLanguage(newLang);
             
-            ensureFlatpickr(newLang).then(() => {
-                if (datePickerInstances.length > 0) {
-                    changeDatePickerLocale(newLang);
-                }
-            });
+            
             
             // Force refresh Lucide icons after language change
             setTimeout(() => {
@@ -1036,10 +936,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Set tabindex=0 for all .flatpickr-input elements for accessibility
-    setTimeout(() => {
-      document.querySelectorAll('.flatpickr-input').forEach(input => input.tabIndex = 0);
-    }, 500);
+    
 }); 
 
 window.addEventListener('load', () => {
