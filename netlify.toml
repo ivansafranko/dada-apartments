@@ -57,21 +57,6 @@
   status = 301
 
 [[redirects]]
-  from = "/en/"
-  to = "/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/en/book-now"
-  to = "/book-now.html"
-  status = 200
-
-[[redirects]]
-  from = "/en/apartmani-krapinske-toplice"
-  to = "/apartmani-krapinske-toplice.html"
-  status = 200
-
-[[redirects]]
   from = "/book-now"
   to = "/book-now.html"
   status = 200
