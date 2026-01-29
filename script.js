@@ -51,7 +51,7 @@ const translations = {
         'landing-faq-q2': 'Kako najbrže rezervirati?',
         'landing-faq-a2': 'Najbrže je preko online rezervacije: <a href="/book-now">Rezervirajte online</a> ili na broj <a href="tel:+385989982059">+385 98 998 2059</a>.',
         'landing-faq-q3': 'Mogu li vidjeti sve apartmane i fotografije?',
-        'landing-faq-a3': 'Da — pogledajte popis i fotografije na početnoj stranici: <a href="/#apartments">Apartmani</a>.',
+        'landing-faq-a3': 'Da — pogledajte popis i fotografije na početnoj stranici: <a href="/#apartments-title">Apartmani</a>.',
 
         // Homepage SEO section
         'seo-section-title': 'Apartmani Krapinske Toplice; smještaj, soba i apartmani',
@@ -206,7 +206,7 @@ const translations = {
         'landing-faq-q2': 'What is the fastest way to book?',
         'landing-faq-a2': 'The fastest way is to book online: <a href="/book-now">Book online</a> or call <a href="tel:+385989982059">+385 98 998 2059</a>.',
         'landing-faq-q3': 'Can I see all apartments and photos?',
-        'landing-faq-a3': 'Yes — see the list and photos on the homepage: <a href="/#apartments">Apartments</a>.',
+        'landing-faq-a3': 'Yes — see the list and photos on the homepage: <a href="/#apartments-title">Apartments</a>.',
 
         // Homepage SEO section
         'seo-section-title': 'Krapinske Toplice apartments; accommodation, a room & apartments',
@@ -319,6 +319,80 @@ const pathIsEnglish = window.location.pathname.startsWith('/en');
 const forcedLanguage = document.documentElement.getAttribute('data-force-lang') || (pathIsEnglish ? 'en' : null);
 let currentLanguage = 'hr';
 let datePickerInstances = []; // Store flatpickr instances
+const ANALYTICS_ID = 'G-8QBRR4GF05';
+let analyticsLoaded = false;
+let flatpickrPromise = null;
+
+function loadScriptOnce(src, id) {
+    return new Promise((resolve, reject) => {
+        if (id && document.getElementById(id)) {
+            resolve();
+            return;
+        }
+        const script = document.createElement('script');
+        if (id) {
+            script.id = id;
+        }
+        script.src = src;
+        script.async = true;
+        script.onload = () => resolve();
+        script.onerror = () => reject(new Error(`Failed to load ${src}`));
+        document.head.appendChild(script);
+    });
+}
+
+function loadStylesheetOnce(href, id) {
+    if (id && document.getElementById(id)) {
+        return;
+    }
+    const link = document.createElement('link');
+    if (id) {
+        link.id = id;
+    }
+    link.rel = 'stylesheet';
+    link.href = href;
+    link.media = 'print';
+    link.onload = () => {
+        link.media = 'all';
+    };
+    document.head.appendChild(link);
+}
+
+function loadAnalytics() {
+    if (analyticsLoaded) {
+        return;
+    }
+    analyticsLoaded = true;
+    window.dataLayer = window.dataLayer || [];
+    window.gtag = window.gtag || function gtag(){dataLayer.push(arguments);};
+    window.gtag('js', new Date());
+    window.gtag('config', ANALYTICS_ID);
+    loadScriptOnce(`https://www.googletagmanager.com/gtag/js?id=${ANALYTICS_ID}`, 'gtag-js');
+}
+
+function ensureFlatpickr(language) {
+    const hasDateInputs = document.querySelector('input[type="date"]');
+    if (!hasDateInputs) {
+        return Promise.resolve();
+    }
+    if (typeof flatpickr !== 'undefined') {
+        initializeDatePickers(language);
+        return Promise.resolve();
+    }
+    if (!flatpickrPromise) {
+        loadStylesheetOnce('https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css', 'flatpickr-css');
+        flatpickrPromise = loadScriptOnce('https://cdn.jsdelivr.net/npm/flatpickr', 'flatpickr-js')
+            .then(() => {
+                if (language === 'hr') {
+                    return loadScriptOnce('https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/hr.js', 'flatpickr-hr-js');
+                }
+            })
+            .then(() => {
+                initializeDatePickers(language);
+            });
+    }
+    return flatpickrPromise;
+}
 
 // Function to initialize date pickers only once
 function initializeDatePickers(language) {
@@ -444,8 +518,7 @@ function updateLanguage(lang) {
         langTextMobile.textContent = lang === 'hr' ? 'HR' : 'EN';
     }
     
-    // Don't change date picker locale during initial page load - only during manual switches
-    // (The date pickers are initialized with the correct language already)
+    ensureFlatpickr(lang);
     
     // Reinitialize Lucide icons after DOM changes
     setTimeout(() => {
@@ -540,10 +613,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 100);
     
-    // First initialize date pickers
-    if (typeof flatpickr !== 'undefined') {
-        initializeDatePickers(savedLanguage);
-    }
+    // Initialize date pickers only when needed
+    ensureFlatpickr(savedLanguage);
     
     // Then set language (without trying to change date pickers)
     updateLanguage(savedLanguage);
@@ -588,10 +659,11 @@ document.addEventListener('DOMContentLoaded', function() {
             
             updateLanguage(newLang);
             
-            // Change locale of existing date pickers
-            if (typeof flatpickr !== 'undefined' && datePickerInstances.length > 0) {
-                changeDatePickerLocale(newLang);
-            }
+            ensureFlatpickr(newLang).then(() => {
+                if (datePickerInstances.length > 0) {
+                    changeDatePickerLocale(newLang);
+                }
+            });
             
             // Force refresh Lucide icons after language change
             setTimeout(() => {
@@ -609,36 +681,98 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Smooth scrolling for navigation links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    const anchorMap = {
+        '#about': '#about-title',
+        '#apartments': '#apartments-title',
+        '#contact': '#contact-title'
+    };
+
+    function normalizeHash(hash) {
+        return anchorMap[hash] || hash;
+    }
+
+    function scrollToElement(target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    function clearHash() {
+        if (window.location.hash) {
+            history.replaceState(null, '', window.location.pathname + window.location.search);
+        }
+    }
+
+    // Smooth scrolling for navigation links (keeps URL clean)
+    document.querySelectorAll('a[href*="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                const headerHeight = 20;
-                const targetPosition = target.offsetTop - headerHeight;
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
+            const href = this.getAttribute('href');
+            if (!href || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) {
+                return;
             }
+            let url;
+            try {
+                url = new URL(href, window.location.href);
+            } catch (err) {
+                return;
+            }
+            if (url.origin !== window.location.origin || !url.hash) {
+                return;
+            }
+            const normalized = normalizeHash(url.hash);
+            const target = document.querySelector(normalized);
+            if (!target) {
+                return;
+            }
+            if (url.pathname !== window.location.pathname) {
+                return;
+            }
+            e.preventDefault();
+            scrollToElement(target);
+            clearHash();
         });
     });
+
+    // Handle incoming hashes (from other pages) and remove them after scrolling
+    if (window.location.hash) {
+        const normalized = normalizeHash(window.location.hash);
+        const target = document.querySelector(normalized);
+        if (target) {
+            setTimeout(() => {
+                scrollToElement(target);
+                clearHash();
+            }, 0);
+        }
+    }
 
     // Hero explore button functionality
     const exploreBtn = document.querySelector('.explore-btn');
     if (exploreBtn) {
         exploreBtn.addEventListener('click', function() {
-            const target = document.getElementById('apartments');
+            const target = document.getElementById('apartments-title') || document.getElementById('apartments');
             if (target) {
-                const headerHeight = 20;
-                const targetPosition = target.offsetTop - headerHeight;
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
+                scrollToElement(target);
+                clearHash();
             }
         });
+    }
+
+    const lazyMaps = document.querySelectorAll('iframe[data-src]');
+    if (lazyMaps.length) {
+        const observer = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                }
+                const iframe = entry.target;
+                const src = iframe.getAttribute('data-src');
+                if (src) {
+                    iframe.setAttribute('src', src);
+                    iframe.removeAttribute('data-src');
+                }
+                obs.unobserve(iframe);
+            });
+        }, { rootMargin: '200px 0px' });
+
+        lazyMaps.forEach(iframe => observer.observe(iframe));
     }
 
         // Image gallery functionality for apartments
@@ -907,3 +1041,17 @@ document.addEventListener('DOMContentLoaded', function() {
       document.querySelectorAll('.flatpickr-input').forEach(input => input.tabIndex = 0);
     }, 500);
 }); 
+
+window.addEventListener('load', () => {
+    const startAnalytics = () => {
+        if (navigator.connection && navigator.connection.saveData) {
+            return;
+        }
+        loadAnalytics();
+    };
+    if ('requestIdleCallback' in window) {
+        requestIdleCallback(startAnalytics, { timeout: 3000 });
+    } else {
+        setTimeout(startAnalytics, 2000);
+    }
+});
