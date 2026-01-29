@@ -434,6 +434,12 @@ body {
     text-align: center;
 }
 
+#about-title,
+#apartments-title,
+#contact-title {
+    scroll-margin-top: 120px;
+}
+
 /* About Section */
 .about-section {
     scroll-margin-top: 120px;

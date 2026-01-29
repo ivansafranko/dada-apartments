@@ -37,14 +37,21 @@
     <meta name="msapplication-TileColor" content="#0f6a60">
     
     <link rel="stylesheet" href="/styles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css"></noscript>
     <link rel="preload" as="image" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/flags/4x3/gb.svg">
     <link rel="preload" as="image" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/flags/1x1/gb.svg">
+    <link rel="preload" as="style" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css"></noscript>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
     
     <!-- Preload critical resources -->
     <link rel="preload" as="image" href="/images/dada-apartments-krapinske-toplice-hero.avif" fetchpriority="high">
@@ -110,7 +117,7 @@
     "name": "Studio & Soba Šafranko - Residential Area",
     "url": "https://apartments-dada.com/",
     "logo": "https://apartments-dada.com/icon.svg",
-    "image": "https://apartments-dada.com/images/apartments/apartment-3/studio-safranko-bedroom-001.webp",
+    "image": "https://apartments-dada.com/images/apartments/apartment-3/studio-safranko-bedroom-001.avif",
     "description": "Quiet accommodation near the hospital and Magdalena Clinic. WiFi and parking. Near Aquae Vivae.",
     "address": {
       "@type": "PostalAddress",
@@ -155,10 +162,10 @@
                 <nav class="navigation">
                     <div class="nav-desktop">
                         <a href="/en/#home" class="nav-link">Homepage</a>
-                        <a href="/en/#about" class="nav-link">About</a>
-                        <a href="/en/#apartments" class="nav-link">Apartments</a>
+                        <a href="/en/#about-title" class="nav-link">About</a>
+                        <a href="/en/#apartments-title" class="nav-link">Apartments</a>
                         <a href="/en/book-now" class="nav-link nav-book">Book now</a>
-                        <a href="/en/#contact" class="nav-link nav-cta">Contact</a>
+                        <a href="/en/#contact-title" class="nav-link nav-cta">Contact</a>
                         <button class="language-toggle" id="languageToggle">
                             <span class="fi fi-gb flag-display"></span>
                             <span class="lang-text">EN</span>
@@ -184,10 +191,10 @@
                     
                     <div class="mobile-menu" id="mobileMenu">
                         <a href="/en/#home" class="mobile-nav-link">Homepage</a>
-                        <a href="/en/#about" class="mobile-nav-link">About</a>
-                        <a href="/en/#apartments" class="mobile-nav-link">Apartments</a>
+                        <a href="/en/#about-title" class="mobile-nav-link">About</a>
+                        <a href="/en/#apartments-title" class="mobile-nav-link">Apartments</a>
                         <a href="/en/book-now" class="mobile-nav-link mobile-nav-book">Book now</a>
-                        <a href="/en/#contact" class="mobile-nav-link">Contact</a>
+                        <a href="/en/#contact-title" class="mobile-nav-link">Contact</a>
                     </div>
                 </nav>
             </div>
@@ -282,7 +289,7 @@
     <!-- Apartments Section 1 -->
     <section id="apartments" class="apartments-section">
         <div class="container">
-            <h2 class="section-headline" data-translate="apartments-headline">Premium Apartments</h2>
+            <h2 class="section-headline" id="apartments-title" data-translate="apartments-headline">Premium Apartments</h2>
             <p class="section-subheadline" data-translate="apartments-subheadline">Choose from our selection of beautifully appointed accommodations</p>
 
             <!-- Location 1 Apartments -->
@@ -292,11 +299,11 @@
                     <div class="apartment-card">
                         <div class="apartment-gallery" data-apartment="1">
                             <div class="gallery-images">
-                                <img src="images/apartments/apartment-1/dada-apartment-1-bedroom-001.webp" alt="Luxurious bedroom in Dada Apartment 1" class="gallery-image active" width="420" height="280">
-                                <img src="images/apartments/apartment-1/dada-apartment-1-interior-overview-001.webp" alt="Spacious interior overview of Dada Apartment 1" class="gallery-image" width="420" height="280">
-                                <img src="images/apartments/apartment-1/dada-apartment-1-living-room-001.webp" alt="Comfortable living room in Dada Apartment 1" class="gallery-image" width="420" height="280">
-                                <img src="images/apartments/apartment-1/dada-apartment-1-balcony-001.webp" alt="Balcony with scenic view in Dada Apartment 1" class="gallery-image" width="420" height="280">
-                                <img src="images/apartments/apartment-1/dada-apartment-1-bathroom-001.webp" alt="Modern bathroom in Dada Apartment 1" class="gallery-image" width="420" height="280">
+                                <img src="images/apartments/apartment-1/dada-apartment-1-bedroom-001.avif" alt="Luxurious bedroom in Dada Apartment 1" class="gallery-image active" width="420" height="280">
+                                <img src="images/apartments/apartment-1/dada-apartment-1-interior-overview-001.avif" alt="Spacious interior overview of Dada Apartment 1" class="gallery-image" width="420" height="280">
+                                <img src="images/apartments/apartment-1/dada-apartment-1-living-room-001.avif" alt="Comfortable living room in Dada Apartment 1" class="gallery-image" width="420" height="280">
+                                <img src="images/apartments/apartment-1/dada-apartment-1-balcony-001.avif" alt="Balcony with scenic view in Dada Apartment 1" class="gallery-image" width="420" height="280">
+                                <img src="images/apartments/apartment-1/dada-apartment-1-bathroom-001.avif" alt="Modern bathroom in Dada Apartment 1" class="gallery-image" width="420" height="280">
                             </div>
                             <button class="gallery-prev" aria-label="Previous image">&lt;</button>
                             <button class="gallery-next" aria-label="Next image">&gt;</button>
@@ -342,11 +349,11 @@
                     <div class="apartment-card">
                         <div class="apartment-gallery" data-apartment="2">
                             <div class="gallery-images">
-                                <img src="images/apartments/apartment-2/dada-apartment-2-living-room-001.webp" alt="Spacious living and dining area in Dada Apartment 2" class="gallery-image active">
-                                <img src="images/apartments/apartment-2/dada-apartment-2-bunk-beds-001.webp" alt="Cozy bunk beds room in Dada Apartment 2" class="gallery-image">
-                                <img src="images/apartments/apartment-2/dada-apartment-2-balcony-001.webp" alt="Balcony with nature view in Dada Apartment 2" class="gallery-image">
-                                <img src="images/apartments/apartment-2/dada-apartment-2-bathroom-001.webp" alt="Well-equipped bathroom in Dada Apartment 2" class="gallery-image">
-                                <img src="images/apartments/apartment-2/dada-apartment-2-bedroom-001.webp" alt="Master bedroom in Dada Apartment 2" class="gallery-image">
+                                <img src="images/apartments/apartment-2/dada-apartment-2-living-room-001.avif" alt="Spacious living and dining area in Dada Apartment 2" class="gallery-image active">
+                                <img src="images/apartments/apartment-2/dada-apartment-2-bunk-beds-001.avif" alt="Cozy bunk beds room in Dada Apartment 2" class="gallery-image">
+                                <img src="images/apartments/apartment-2/dada-apartment-2-balcony-001.avif" alt="Balcony with nature view in Dada Apartment 2" class="gallery-image">
+                                <img src="images/apartments/apartment-2/dada-apartment-2-bathroom-001.avif" alt="Well-equipped bathroom in Dada Apartment 2" class="gallery-image">
+                                <img src="images/apartments/apartment-2/dada-apartment-2-bedroom-001.avif" alt="Master bedroom in Dada Apartment 2" class="gallery-image">
                             </div>
                             <button class="gallery-prev" aria-label="Previous image">&lt;</button>
                             <button class="gallery-next" aria-label="Next image">&gt;</button>
@@ -406,11 +413,11 @@
                     <div class="apartment-card">
                         <div class="apartment-gallery" data-apartment="3">
                             <div class="gallery-images">
-                                <img src="images/apartments/apartment-3/studio-safranko-bedroom-001.webp" alt="Comfortable bedroom in Studio Šafranko" class="gallery-image active">
-                                <img src="images/apartments/apartment-3/studio-safranko-living-room-001.webp" alt="Inviting living room in Studio Šafranko" class="gallery-image">
-                                <img src="images/apartments/apartment-3/studio-safranko-bathroom-001.webp" alt="Clean bathroom in Studio Šafranko" class="gallery-image">
-                                <img src="images/apartments/apartment-3/studio-safranko-kitchen-001.webp" alt="Compact kitchen and dining area in Studio Šafranko" class="gallery-image">
-                                <img src="images/apartments/apartment-3/studio-safranko-balcony-001.webp" alt="Private balcony in Studio Šafranko" class="gallery-image">
+                                <img src="images/apartments/apartment-3/studio-safranko-bedroom-001.avif" alt="Comfortable bedroom in Studio Šafranko" class="gallery-image active">
+                                <img src="images/apartments/apartment-3/studio-safranko-living-room-001.avif" alt="Inviting living room in Studio Šafranko" class="gallery-image">
+                                <img src="images/apartments/apartment-3/studio-safranko-bathroom-001.avif" alt="Clean bathroom in Studio Šafranko" class="gallery-image">
+                                <img src="images/apartments/apartment-3/studio-safranko-kitchen-001.avif" alt="Compact kitchen and dining area in Studio Šafranko" class="gallery-image">
+                                <img src="images/apartments/apartment-3/studio-safranko-balcony-001.avif" alt="Private balcony in Studio Šafranko" class="gallery-image">
                             </div>
                             <button class="gallery-prev" aria-label="Previous image">&lt;</button>
                             <button class="gallery-next" aria-label="Next image">&gt;</button>
@@ -455,10 +462,10 @@
                     <div class="apartment-card">
                         <div class="apartment-gallery" data-apartment="4">
                             <div class="gallery-images">
-                                <img src="images/apartments/apartment-4/soba-safranko-bedroom-001.webp" alt="Comfortable bedroom in Soba Šafranko" class="gallery-image active">
-                                <img src="images/apartments/apartment-4/soba-safranko-living-area-001.webp" alt="Cozy living area in Soba Šafranko" class="gallery-image">
-                                <img src="images/apartments/apartment-4/soba-safranko-bathroom-entrance-001.webp" alt="Bathroom entrance in Soba Šafranko" class="gallery-image">
-                                <img src="images/apartments/apartment-4/soba-safranko-bathroom-001.webp" alt="Compact bathroom in Soba Šafranko" class="gallery-image">
+                                <img src="images/apartments/apartment-4/soba-safranko-bedroom-001.avif" alt="Comfortable bedroom in Soba Šafranko" class="gallery-image active">
+                                <img src="images/apartments/apartment-4/soba-safranko-living-area-001.avif" alt="Cozy living area in Soba Šafranko" class="gallery-image">
+                                <img src="images/apartments/apartment-4/soba-safranko-bathroom-entrance-001.avif" alt="Bathroom entrance in Soba Šafranko" class="gallery-image">
+                                <img src="images/apartments/apartment-4/soba-safranko-bathroom-001.avif" alt="Compact bathroom in Soba Šafranko" class="gallery-image">
                             </div>
                             <button class="gallery-prev" aria-label="Previous image">&lt;</button>
                             <button class="gallery-next" aria-label="Next image">&gt;</button>
@@ -513,7 +520,7 @@
     <section id="about" class="about-section">
         <div class="container">
             <div class="about-content">
-                <h2 class="section-headline" data-translate="about-headline">Discover Krapinske Toplice</h2>
+                <h2 class="section-headline" id="about-title" data-translate="about-headline">Discover Krapinske Toplice</h2>
                 <p class="section-subheadline" data-translate="about-subheadline">A peaceful spa town in the heart of Croatia, perfect for relaxation and rejuvenation.</p>
                 
                 <div class="about-grid">
@@ -572,7 +579,7 @@
     <!-- Contact Section -->
     <section id="contact" class="contact-section">
         <div class="container">
-            <h2 class="section-headline" data-translate="contact-headline">Get in Touch</h2>
+            <h2 class="section-headline" id="contact-title" data-translate="contact-headline">Get in Touch</h2>
             <p class="section-subheadline" data-translate="contact-subheadline">Ready to book your stay? We're here to help make it perfect.</p>
             
             <div class="contact-content">

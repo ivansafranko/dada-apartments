@@ -20,10 +20,15 @@
   <meta name="theme-color" content="#0f6a60">
 
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preload" as="style" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css"></noscript>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -75,7 +80,7 @@
       "@type": "LodgingBusiness",
       "name": "Studio & Soba Šafranko - Residential Area",
       "url": "https://apartments-dada.com/",
-      "image": "https://apartments-dada.com/images/apartments/apartment-3/studio-safranko-bedroom-001.webp",
+      "image": "https://apartments-dada.com/images/apartments/apartment-3/studio-safranko-bedroom-001.avif",
       "description": "Smještaj Krapinske Toplice – studio apartman i soba u mirnoj lokaciji blizu bolnice. WiFi i parking.",
       "telephone": "+385 98 998 2059",
       "email": "dragutin.safranko@gmail.com",
@@ -143,10 +148,10 @@
         <nav class="navigation">
           <div class="nav-desktop">
             <a href="/" class="nav-link" data-translate="nav-home">Početna</a>
-            <a href="/#about" class="nav-link" data-translate="nav-about">O nama</a>
-            <a href="/#apartments" class="nav-link" data-translate="nav-apartments">Apartmani</a>
+            <a href="/#about-title" class="nav-link" data-translate="nav-about">O nama</a>
+            <a href="/#apartments-title" class="nav-link" data-translate="nav-apartments">Apartmani</a>
             <a href="/book-now" class="nav-link nav-book" data-translate="nav-book">Rezervirajte online</a>
-            <a href="/#contact" class="nav-link nav-cta" data-translate="nav-contact">Kontakt</a>
+            <a href="/#contact-title" class="nav-link nav-cta" data-translate="nav-contact">Kontakt</a>
             <button class="language-toggle" id="languageToggle" type="button">
               <span class="fi fi-hr flag-display"></span>
               <span class="lang-text">HR</span>
@@ -215,7 +220,7 @@
           </details>
           <details class="faq-item">
             <summary data-translate="landing-faq-q3">Mogu li vidjeti sve apartmane i fotografije?</summary>
-            <p data-translate="landing-faq-a3">Da — pogledajte popis i fotografije na početnoj stranici: <a href="/#apartments">Apartmani</a>.</p>
+            <p data-translate="landing-faq-a3">Da — pogledajte popis i fotografije na početnoj stranici: <a href="/#apartments-title">Apartmani</a>.</p>
           </details>
         </div>
       </div>
