@@ -547,6 +547,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Then set language (without trying to change date pickers)
     updateLanguage(savedLanguage);
+
+    // Extra safety: ensure /en routes always render in English
+    if (pathIsEnglish) {
+        setTimeout(() => updateLanguage('en'), 0);
+        setTimeout(() => updateLanguage('en'), 200);
+    }
     
     // Make body visible after initial language update
     document.body.style.opacity = '1';
