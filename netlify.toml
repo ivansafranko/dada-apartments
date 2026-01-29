@@ -2,6 +2,76 @@
   publish = "."
 
 [[redirects]]
+  from = "/index.html"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/book-now.html"
+  to = "/book-now"
+  status = 301
+
+[[redirects]]
+  from = "/book-now/"
+  to = "/book-now"
+  status = 301
+
+[[redirects]]
+  from = "/apartmani-krapinske-toplice.html"
+  to = "/apartmani-krapinske-toplice"
+  status = 301
+
+[[redirects]]
+  from = "/apartmani-krapinske-toplice/"
+  to = "/apartmani-krapinske-toplice"
+  status = 301
+
+[[redirects]]
+  from = "/en/index.html"
+  to = "/en/"
+  status = 301
+
+[[redirects]]
+  from = "/en"
+  to = "/en/"
+  status = 301
+
+[[redirects]]
+  from = "/en/book-now.html"
+  to = "/en/book-now"
+  status = 301
+
+[[redirects]]
+  from = "/en/book-now/"
+  to = "/en/book-now"
+  status = 301
+
+[[redirects]]
+  from = "/en/apartmani-krapinske-toplice.html"
+  to = "/en/apartmani-krapinske-toplice"
+  status = 301
+
+[[redirects]]
+  from = "/en/apartmani-krapinske-toplice/"
+  to = "/en/apartmani-krapinske-toplice"
+  status = 301
+
+[[redirects]]
+  from = "/en/"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/en/book-now"
+  to = "/book-now.html"
+  status = 200
+
+[[redirects]]
+  from = "/en/apartmani-krapinske-toplice"
+  to = "/apartmani-krapinske-toplice.html"
+  status = 200
+
+[[redirects]]
   from = "/book-now"
   to = "/book-now.html"
   status = 200

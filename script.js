@@ -49,9 +49,9 @@ const translations = {
         'landing-faq-q1': 'Je li ovo dobar izbor ako tražim smještaj u Krapinskim Toplicama?',
         'landing-faq-a1': 'Da — nudimo više tipova smještaja (apartmani i soba) na dvije lokacije, pa se lako prilagodimo svrsi putovanja.',
         'landing-faq-q2': 'Kako najbrže rezervirati?',
-        'landing-faq-a2': 'Najbrže je preko online rezervacije: <a href="book-now/">Rezervirajte online</a> ili na broj <a href="tel:+385989982059">+385 98 998 2059</a>.',
+        'landing-faq-a2': 'Najbrže je preko online rezervacije: <a href="/book-now">Rezervirajte online</a> ili na broj <a href="tel:+385989982059">+385 98 998 2059</a>.',
         'landing-faq-q3': 'Mogu li vidjeti sve apartmane i fotografije?',
-        'landing-faq-a3': 'Da — pogledajte popis i fotografije na početnoj stranici: <a href="./index.html#apartments">Apartmani</a>.',
+        'landing-faq-a3': 'Da — pogledajte popis i fotografije na početnoj stranici: <a href="/#apartments">Apartmani</a>.',
 
         // Homepage SEO section
         'seo-section-title': 'Apartmani Krapinske Toplice; smještaj, soba i apartmani',
@@ -204,9 +204,9 @@ const translations = {
         'landing-faq-q1': 'Is this a good choice if I need accommodation in Krapinske Toplice?',
         'landing-faq-a1': 'Yes — we offer multiple accommodation types (apartments and a room) across two locations, so it is easy to match your trip.',
         'landing-faq-q2': 'What is the fastest way to book?',
-        'landing-faq-a2': 'The fastest way is to book online: <a href="book-now/">Book online</a> or call <a href="tel:+385989982059">+385 98 998 2059</a>.',
+        'landing-faq-a2': 'The fastest way is to book online: <a href="/book-now">Book online</a> or call <a href="tel:+385989982059">+385 98 998 2059</a>.',
         'landing-faq-q3': 'Can I see all apartments and photos?',
-        'landing-faq-a3': 'Yes — see the list and photos on the homepage: <a href="./index.html#apartments">Apartments</a>.',
+        'landing-faq-a3': 'Yes — see the list and photos on the homepage: <a href="/#apartments">Apartments</a>.',
 
         // Homepage SEO section
         'seo-section-title': 'Krapinske Toplice apartments; accommodation, a room & apartments',
@@ -315,6 +315,8 @@ const translations = {
 };
 
 // Language functionality
+const pathIsEnglish = window.location.pathname.startsWith('/en');
+const forcedLanguage = document.documentElement.getAttribute('data-force-lang') || (pathIsEnglish ? 'en' : null);
 let currentLanguage = 'hr';
 let datePickerInstances = []; // Store flatpickr instances
 
@@ -453,14 +455,34 @@ function updateLanguage(lang) {
         }
     }, 50);
     
-    // Save preference
-    localStorage.setItem('preferredLanguage', lang);
+    // Save preference unless a page forces language
+    if (!forcedLanguage) {
+        localStorage.setItem('preferredLanguage', lang);
+    }
 }
 
 // Initialize language on page load
 document.addEventListener('DOMContentLoaded', function() {
     // Check for saved language preference, default to Croatian
-    const savedLanguage = localStorage.getItem('preferredLanguage') || 'hr';
+    const savedLanguage = forcedLanguage || localStorage.getItem('preferredLanguage') || 'hr';
+
+    // Normalize canonical/og URLs for /en routes (Netlify rewrites)
+    if (pathIsEnglish) {
+        const pathname = window.location.pathname === '/en' ? '/en/' : window.location.pathname;
+        const canonicalHref = `https://apartments-dada.com${pathname}`;
+        const canonical = document.querySelector('link[rel="canonical"]');
+        if (canonical) {
+            canonical.setAttribute('href', canonicalHref);
+        }
+        const ogUrl = document.querySelector('meta[property="og:url"]');
+        if (ogUrl) {
+            ogUrl.setAttribute('content', canonicalHref);
+        }
+        const twitterUrl = document.querySelector('meta[property="twitter:url"]');
+        if (twitterUrl) {
+            twitterUrl.setAttribute('content', canonicalHref);
+        }
+    }
     
     // Initialize Lucide icons with debugging
     setTimeout(() => {
@@ -495,6 +517,27 @@ document.addEventListener('DOMContentLoaded', function() {
     if (languageToggle) {
         languageToggle.addEventListener('click', function(e) {
             e.preventDefault();
+            const target = this.getAttribute('data-lang-target');
+            if (target) {
+                window.location.href = target;
+                return;
+            }
+
+            const path = window.location.pathname;
+            const hash = window.location.hash || '';
+            if (path.startsWith('/en')) {
+                let hrPath = path.replace(/^\/en/, '');
+                if (hrPath === '' || hrPath === '/') {
+                    hrPath = '/';
+                }
+                window.location.href = `${hrPath}${hash}`;
+                return;
+            }
+
+            const enPath = path === '/' ? '/en/' : `/en${path}`;
+            window.location.href = `${enPath}${hash}`;
+            return;
+
             const newLang = currentLanguage === 'hr' ? 'en' : 'hr';
             
             updateLanguage(newLang);
