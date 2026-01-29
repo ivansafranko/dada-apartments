@@ -482,6 +482,46 @@ document.addEventListener('DOMContentLoaded', function() {
         if (twitterUrl) {
             twitterUrl.setAttribute('content', canonicalHref);
         }
+
+        // Ensure internal links keep /en/ context
+        const linkMappings = [
+            { test: /^\/$/, replace: '/en/' },
+            { test: /^index\.html$/, replace: '/en/' },
+            { test: /^\/index\.html(#.*)?$/, replace: '/en/$1' },
+            { test: /^\.\/index\.html(#.*)?$/, replace: '/en/$1' },
+            { test: /^book-now\/?$/, replace: '/en/book-now' },
+            { test: /^\.\/book-now\/?$/, replace: '/en/book-now' },
+            { test: /^\/book-now\/?$/, replace: '/en/book-now' },
+            { test: /^apartmani-krapinske-toplice\/?$/, replace: '/en/apartmani-krapinske-toplice' },
+            { test: /^\.\/apartmani-krapinske-toplice\/?$/, replace: '/en/apartmani-krapinske-toplice' },
+            { test: /^\/apartmani-krapinske-toplice\/?$/, replace: '/en/apartmani-krapinske-toplice' }
+        ];
+
+        document.querySelectorAll('a[href]').forEach(link => {
+            const href = link.getAttribute('href');
+            if (!href || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:') || href.startsWith('javascript:')) {
+                return;
+            }
+            if (href.startsWith('/#')) {
+                link.setAttribute('href', `/en${href}`);
+                return;
+            }
+            if (href.startsWith('#')) {
+                link.setAttribute('href', `/en/${href}`);
+                return;
+            }
+            for (const { test, replace } of linkMappings) {
+                if (test.test(href)) {
+                    const match = href.match(test);
+                    if (match && match[1]) {
+                        link.setAttribute('href', replace.replace('$1', match[1]));
+                    } else {
+                        link.setAttribute('href', replace);
+                    }
+                    break;
+                }
+            }
+        });
     }
     
     // Initialize Lucide icons with debugging
