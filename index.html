@@ -38,9 +38,9 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"></noscript>
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=IBM+Plex+Sans:wght@300;400;500;600&display=optional">
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=IBM+Plex+Sans:wght@300;400;500;600&display=optional" rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=IBM+Plex+Sans:wght@300;400;500;600&display=optional" rel="stylesheet"></noscript>
     
     <!-- Preload critical resources -->
     <link rel="preload" as="image" href="/images/dada-apartments-krapinske-toplice-hero.avif" fetchpriority="high">
@@ -263,7 +263,8 @@
                     </div>
                 </div>
                 <div class="hero-image">
-                    <div class="hero-building" fetchpriority="high" data-reveal style="--delay: 260ms">
+                    <div class="hero-building" data-reveal style="--delay: 260ms">
+                        <img src="images/dada-apartments-krapinske-toplice-hero.avif" alt="Apartmani Dada in Krapinske Toplice" width="1000" height="600" fetchpriority="high" decoding="async">
                     </div>
                 </div>
             </div>

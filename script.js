@@ -530,7 +530,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Make body visible after initial language update
-    document.body.style.opacity = '1';
     document.body.classList.add('is-ready');
     
     // Set up language toggle
@@ -856,15 +855,29 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Header scroll effect
+    // Scroll-driven UI updates (throttled)
     const header = document.querySelector('.header');
-    
-    window.addEventListener('scroll', function() {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const backToTopButton = document.getElementById('backToTop');
+    let isTicking = false;
+
+    function handleScrollState() {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
         if (header) {
             header.classList.toggle('is-scrolled', scrollTop > 24);
         }
-    });
+        if (backToTopButton) {
+            backToTopButton.classList.toggle('visible', scrollTop > 300);
+        }
+        isTicking = false;
+    }
+
+    window.addEventListener('scroll', function() {
+        if (isTicking) {
+            return;
+        }
+        isTicking = true;
+        requestAnimationFrame(handleScrollState);
+    }, { passive: true });
 
     // Add loading animation for images
     const apartmentImages = document.querySelectorAll('.apartment-image');
@@ -878,25 +891,12 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Back to top functionality
-    const backToTopButton = document.getElementById('backToTop');
     if (backToTopButton) {
-        // Click handler
         backToTopButton.addEventListener('click', function() {
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
-        });
-
-        // Scroll handler to show/hide button
-        window.addEventListener('scroll', function() {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > 300) {
-                backToTopButton.classList.add('visible');
-            } else {
-                backToTopButton.classList.remove('visible');
-            }
         });
     }
 
