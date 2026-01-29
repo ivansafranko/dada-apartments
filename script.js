@@ -504,21 +504,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Initialize Lucide icons with debugging
+    // Initialize Lucide icons
     setTimeout(() => {
         if (typeof lucide !== 'undefined') {
-            console.log('Lucide is available, creating icons...');
             lucide.createIcons();
-            console.log('Lucide icons initialized successfully');
-            
-            // Check if icons were created
-            const icons = document.querySelectorAll('[data-lucide]');
-            console.log('Found', icons.length, 'data-lucide elements');
-        } else {
-            console.error('Lucide is not available!');
-            alert('Lucide icons failed to load!');
         }
-    }, 100);
+    }, 0);
     
     // Then set language (without trying to change date pickers)
     updateLanguage(savedLanguage);
@@ -529,7 +520,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => updateLanguage('en'), 200);
     }
     
-    // Make body visible after initial language update
+    // Make body ready for reveal animations (content is already visible)
     document.body.classList.add('is-ready');
     
     // Set up language toggle
