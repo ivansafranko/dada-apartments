@@ -1,3 +1,233 @@
+ (function () {
+     const header = document.querySelector("nav");
+     const menuToggle = document.querySelector("[data-menu-toggle]");
+     const mobileMenu = document.querySelector("[data-mobile-menu]");
+     const mobileLinks = mobileMenu ? mobileMenu.querySelectorAll("a[href^='#']") : [];
+ 
+     if (menuToggle && mobileMenu) {
+         const closeMenu = () => {
+             mobileMenu.classList.remove("is-open");
+             menuToggle.setAttribute("aria-expanded", "false");
+         };
+ 
+         menuToggle.addEventListener("click", () => {
+             const isOpen = mobileMenu.classList.toggle("is-open");
+             menuToggle.setAttribute("aria-expanded", String(isOpen));
+         });
+ 
+         mobileLinks.forEach((link) => {
+             link.addEventListener("click", closeMenu);
+         });
+ 
+         document.addEventListener("click", (event) => {
+             if (!mobileMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                 closeMenu();
+             }
+         });
+ 
+         document.addEventListener("keydown", (event) => {
+             if (event.key === "Escape") {
+                 closeMenu();
+             }
+         });
+     }
+ 
+     const anchorLinks = document.querySelectorAll("a[href^='#']");
+     anchorLinks.forEach((anchor) => {
+         anchor.addEventListener("click", (event) => {
+             const targetId = anchor.getAttribute("href");
+             if (!targetId || targetId === "#") {
+                 return;
+             }
+ 
+             const target = document.querySelector(targetId);
+             if (!target) {
+                 return;
+             }
+ 
+             event.preventDefault();
+             const offset = header ? header.offsetHeight + 12 : 0;
+             const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+             window.scrollTo({ top, behavior: "smooth" });
+         });
+     });
+ 
+     const contactForm = document.querySelector(".contact-form");
+     if (contactForm) {
+         contactForm.addEventListener("submit", function (event) {
+             event.preventDefault();
+ 
+             const submitBtn = this.querySelector("button[type='submit']");
+             const originalText = submitBtn ? submitBtn.textContent : "";
+ 
+             if (submitBtn) {
+                 submitBtn.textContent = "Sending...";
+                 submitBtn.disabled = true;
+             }
+ 
+             const requiredInputs = this.querySelectorAll("input[required], textarea[required]");
+             let isValid = true;
+ 
+             requiredInputs.forEach((input) => {
+                 if (!input.value.trim()) {
+                     isValid = false;
+                     input.classList.add("ring-2", "ring-red-500");
+                 } else {
+                     input.classList.remove("ring-2", "ring-red-500");
+                 }
+             });
+ 
+             if (!isValid) {
+                 if (submitBtn) {
+                     submitBtn.textContent = originalText;
+                     submitBtn.disabled = false;
+                 }
+                 return;
+             }
+ 
+             const formData = new FormData(this);
+             fetch("/", {
+                 method: "POST",
+                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                 body: new URLSearchParams(formData).toString(),
+             })
+                 .then(() => {
+                     const successMessage = document.getElementById("form-success-message");
+                     if (successMessage) {
+                         contactForm.style.display = "none";
+                         successMessage.style.display = "block";
+                         successMessage.scrollIntoView({ behavior: "smooth", block: "center" });
+                     }
+                     contactForm.reset();
+                     if (submitBtn) {
+                         submitBtn.textContent = originalText;
+                         submitBtn.disabled = false;
+                     }
+                 })
+                 .catch(() => {
+                     if (submitBtn) {
+                         submitBtn.textContent = originalText;
+                         submitBtn.disabled = false;
+                     }
+                 });
+         });
+     }
+ })();
+ (function () {
+     const header = document.querySelector("nav");
+     const menuToggle = document.querySelector("[data-menu-toggle]");
+     const mobileMenu = document.querySelector("[data-mobile-menu]");
+     const mobileLinks = mobileMenu ? mobileMenu.querySelectorAll("a[href^='#']") : [];
+ 
+     if (menuToggle && mobileMenu) {
+         const closeMenu = () => {
+             mobileMenu.classList.remove("is-open");
+             menuToggle.setAttribute("aria-expanded", "false");
+         };
+ 
+         menuToggle.addEventListener("click", () => {
+             const isOpen = mobileMenu.classList.toggle("is-open");
+             menuToggle.setAttribute("aria-expanded", String(isOpen));
+         });
+ 
+         mobileLinks.forEach((link) => {
+             link.addEventListener("click", () => closeMenu());
+         });
+ 
+         document.addEventListener("click", (event) => {
+             if (!mobileMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+                 closeMenu();
+             }
+         });
+ 
+         document.addEventListener("keydown", (event) => {
+             if (event.key === "Escape") {
+                 closeMenu();
+             }
+         });
+     }
+ 
+     const anchorLinks = document.querySelectorAll("a[href^='#']");
+     anchorLinks.forEach((anchor) => {
+         anchor.addEventListener("click", (event) => {
+             const targetId = anchor.getAttribute("href");
+             if (!targetId || targetId === "#") {
+                 return;
+             }
+ 
+             const target = document.querySelector(targetId);
+             if (!target) {
+                 return;
+             }
+ 
+             event.preventDefault();
+             const offset = header ? header.offsetHeight + 12 : 0;
+             const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+             window.scrollTo({ top, behavior: "smooth" });
+         });
+     });
+ 
+     const contactForm = document.querySelector(".contact-form");
+     if (contactForm) {
+         contactForm.addEventListener("submit", function (event) {
+             event.preventDefault();
+ 
+             const submitBtn = this.querySelector("button[type='submit']");
+             const originalText = submitBtn ? submitBtn.textContent : "";
+ 
+             if (submitBtn) {
+                 submitBtn.textContent = "Sending...";
+                 submitBtn.disabled = true;
+             }
+ 
+             const requiredInputs = this.querySelectorAll("input[required], textarea[required]");
+             let isValid = true;
+ 
+             requiredInputs.forEach((input) => {
+                 if (!input.value.trim()) {
+                     isValid = false;
+                     input.classList.add("ring-2", "ring-red-500");
+                 } else {
+                     input.classList.remove("ring-2", "ring-red-500");
+                 }
+             });
+ 
+             if (!isValid) {
+                 if (submitBtn) {
+                     submitBtn.textContent = originalText;
+                     submitBtn.disabled = false;
+                 }
+                 return;
+             }
+ 
+             const formData = new FormData(this);
+            fetch("/", {
+                 method: "POST",
+                 headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                 body: new URLSearchParams(formData).toString(),
+             })
+                 .then(() => {
+                     const successMessage = document.getElementById("form-success-message");
+                     if (successMessage) {
+                         contactForm.style.display = "none";
+                         successMessage.style.display = "block";
+                         successMessage.scrollIntoView({ behavior: "smooth", block: "center" });
+                     }
+                     contactForm.reset();
+                    if (submitBtn) {
+                        submitBtn.textContent = originalText;
+                        submitBtn.disabled = false;
+                    }
+                 })
+                 .catch(() => {
+                     if (submitBtn) {
+                         submitBtn.textContent = originalText;
+                         submitBtn.disabled = false;
+                     }
+                 });
+         });
+     }
+ })();
 // Apartments Dada - Interactive JavaScript
 
 // Language translations

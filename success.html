@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Message Sent — Ivan Šafranko</title>
+    <meta name="description" content="Thanks for reaching out. Your message has been received.">
+    <link rel="icon" type="image/svg+xml" href="icon.svg?v=2">
+    <meta name="theme-color" content="#0D0D0D">
+    <link rel="canonical" href="https://franko-portfolio.netlify.app/success.html">
+    <link href="https://fonts.googleapis.com" rel="preconnect">
+    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        primary: "#CCFF00",
+                        "background-main": "#0D0D0D",
+                        surface: "#1E1E1E",
+                    },
+                    fontFamily: {
+                        serif: ["Playfair Display", "serif"],
+                        mono: ["Space Mono", "monospace"],
+                        sans: ["Inter", "sans-serif"],
+                    },
+                },
+            },
+        };
+    </script>
+</head>
+<body class="antialiased dark bg-background-main text-gray-300 min-h-screen flex items-center justify-center px-6">
+    <div class="max-w-lg text-center glass-card p-10 rounded-3xl">
+        <p class="font-mono text-primary text-xs uppercase tracking-widest mb-4">Thank You</p>
+        <h1 class="text-4xl md:text-5xl font-serif text-white mb-4">Message sent.</h1>
+        <p class="text-lg text-gray-400 mb-8">I’ll get back to you within 24 hours.</p>
+        <a class="inline-flex items-center justify-center px-10 py-4 bg-primary text-black font-mono text-sm font-bold uppercase tracking-wider rounded-full hover:bg-white transition-colors" href="/">
+            Back to portfolio
+        </a>
+    </div>
+    <script>
+        document.documentElement.classList.add("dark");
+    </script>
+</body>
+</html>

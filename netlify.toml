@@ -2,11 +2,6 @@
   publish = "."
 
 [[redirects]]
-  from = "/book-now"
-  to = "/book-now.html"
-  status = 200
-
-[[redirects]]
   from = "/success"
   to = "/success.html"
   status = 200
@@ -18,20 +13,8 @@
   status = 301
   force = true
 
-# Redirect www to non-www
-[[redirects]]
-  from = "https://www.apartments-dada.com/*"
-  to = "https://apartments-dada.com/:splat"
-  status = 301
-  force = true
-
 [context.production.environment]
   NODE_VERSION = "18"
-
-# Form handling - emails will be sent to the configured email
-# You'll need to configure this in Netlify admin panel:
-# Site Settings > Forms > Form notifications
-# Add espana.dsr@gmail.com as the notification email
 
 # Headers to prevent caching of script.js
 [[headers]]
