@@ -1,0 +1,93 @@
+---
+interface Props {
+  language: "hr" | "en";
+  hotelId: string;
+  currency: string;
+  frameTitle: string;
+  loadLabel: string;
+  fallbackBookingUrl: string;
+  fallbackCta: string;
+}
+
+const {
+  language,
+  hotelId,
+  currency,
+  frameTitle,
+  loadLabel,
+  fallbackBookingUrl,
+  fallbackCta
+} = Astro.props;
+
+const frameId = `booking-embed-${language}`;
+const src =
+  `/booking-widget-embed?lang=${language}` +
+  `&hotelId=${encodeURIComponent(hotelId)}` +
+  `&currency=${encodeURIComponent(currency)}` +
+  `&frameId=${encodeURIComponent(frameId)}`;
+---
+
+<div class="booking-frame-shell">
+  <p class="mb-3 text-sm text-muted-foreground">{loadLabel}</p>
+  <iframe
+    id={frameId}
+    src={src}
+    title={frameTitle}
+    class="booking-embed-frame"
+    loading="eager"
+  ></iframe>
+</div>
+
+<div class="mt-4 flex justify-center">
+  <a
+    href={fallbackBookingUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="btn-accent"
+  >
+    {fallbackCta}
+  </a>
+</div>
+
+<script is:inline data-frame-id={frameId}>
+  (() => {
+    const currentScript = document.currentScript;
+    if (!(currentScript instanceof HTMLScriptElement)) {
+      return;
+    }
+    const frameId = currentScript.getAttribute("data-frame-id");
+    if (!frameId) {
+      return;
+    }
+
+    const frame = document.getElementById(frameId);
+    if (!(frame instanceof HTMLIFrameElement)) {
+      return;
+    }
+
+    const fallbackHeight = () => {
+      if (window.innerWidth < 640) return 2300;
+      if (window.innerWidth < 1024) return 1900;
+      return 1600;
+    };
+
+    const setHeight = (height) => {
+      const safeHeight = Math.max(fallbackHeight(), Number(height) || 0);
+      frame.style.height = `${safeHeight}px`;
+      frame.style.minHeight = `${safeHeight}px`;
+    };
+
+    setHeight(fallbackHeight());
+
+    const handleMessage = (event) => {
+      if (event.origin !== window.location.origin) return;
+      const data = event.data;
+      if (!data || data.type !== "wbp-embed-height" || data.frameId !== frameId) return;
+      setHeight(data.height);
+    };
+
+    window.addEventListener("message", handleMessage);
+    window.addEventListener("resize", () => setHeight(fallbackHeight()), { passive: true });
+    frame.addEventListener("load", () => setHeight(fallbackHeight()), { passive: true });
+  })();
+</script>

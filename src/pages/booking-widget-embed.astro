@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="hr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Booking Embed</title>
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: #fff;
+        font-family: "IBM Plex Sans", "Segoe UI", Roboto, Arial, sans-serif;
+      }
+
+      #wbproot {
+        min-height: 1400px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wbproot" class="notranslate"></div>
+
+    <script is:inline>
+      (() => {
+        const root = document.getElementById("wbproot");
+        if (!root) return;
+
+        const params = new URLSearchParams(window.location.search);
+        const language = params.get("lang") === "en" ? "en" : "hr";
+        const hotelId = params.get("hotelId") || "33781";
+        const currency = params.get("currency") || "EUR";
+        const frameId = params.get("frameId") || "";
+        const origin = "https://booking.webbookingpro.com";
+
+        window.wbpSettings = {
+          hotelId,
+          language,
+          currency,
+          showLogo: "0",
+          showProperty: 0,
+          showFooter: "0",
+          darktheme: "0"
+        };
+
+        const preferredInnerHeight = () => {
+          if (window.innerWidth < 640) return 2200;
+          if (window.innerWidth < 1024) return 1900;
+          return 1600;
+        };
+
+        const sizeNestedFrame = () => {
+          const nestedFrame = root.querySelector("iframe");
+          if (!(nestedFrame instanceof HTMLIFrameElement)) return;
+          const minHeight = preferredInnerHeight();
+          nestedFrame.setAttribute("scrolling", "no");
+          nestedFrame.style.display = "block";
+          nestedFrame.style.width = "100%";
+          nestedFrame.style.maxWidth = "100%";
+          nestedFrame.style.border = "0";
+          nestedFrame.style.height = `${minHeight}px`;
+          nestedFrame.style.minHeight = `${minHeight}px`;
+        };
+
+        const sendHeight = () => {
+          sizeNestedFrame();
+          const height = Math.max(
+            document.body.scrollHeight,
+            document.documentElement.scrollHeight,
+            root.scrollHeight
+          );
+
+          window.parent?.postMessage(
+            {
+              type: "wbp-embed-height",
+              frameId,
+              height
+            },
+            window.location.origin
+          );
+        };
+
+        const startObservers = () => {
+          sendHeight();
+
+          const mutationObserver = new MutationObserver(sendHeight);
+          mutationObserver.observe(root, { childList: true, subtree: true });
+
+          const resizeObserver = new ResizeObserver(sendHeight);
+          resizeObserver.observe(document.body);
+          resizeObserver.observe(root);
+
+          window.setInterval(sendHeight, 1000);
+          window.addEventListener("resize", sendHeight, { passive: true });
+          window.addEventListener("load", sendHeight, { passive: true });
+        };
+
+        const loadAssets = async () => {
+          const response = await fetch(`${origin}/asset-manifest.json`);
+          if (!response.ok) throw new Error("Could not load booking manifest");
+          const data = await response.json();
+          const entrypoints = Array.isArray(data?.entrypoints) ? data.entrypoints : [];
+
+          for (const file of entrypoints) {
+            if (typeof file !== "string") continue;
+            const normalized = file.replace(/^\/+/, "");
+            const assetUrl = `${origin}/${normalized}`;
+
+            if (normalized.endsWith(".css")) {
+              const link = document.createElement("link");
+              link.rel = "stylesheet";
+              link.href = assetUrl;
+              document.head.appendChild(link);
+              continue;
+            }
+
+            if (normalized.endsWith(".js")) {
+              await new Promise((resolve, reject) => {
+                const script = document.createElement("script");
+                script.src = assetUrl;
+                script.async = false;
+                script.onload = () => resolve();
+                script.onerror = () => reject(new Error(`Failed to load ${assetUrl}`));
+                document.head.appendChild(script);
+              });
+            }
+          }
+        };
+
+        loadAssets()
+          .then(startObservers)
+          .catch(() => {
+            root.innerHTML = '<p style="margin: 0; padding: 12px 0; color: #7a1f1f; font-size: 14px;">Booking calendar could not be loaded.</p>';
+            sendHeight();
+          });
+      })();
+    </script>
+  </body>
+</html>

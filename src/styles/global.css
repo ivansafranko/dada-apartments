@@ -77,28 +77,28 @@
     transform: rotate(180deg);
   }
 
-  .booking-widget-host {
-    @apply w-full;
+  .book-now-shell {
+    @apply max-w-6xl mx-auto px-4 sm:px-6 lg:px-8;
   }
 
-  .booking-widget-root {
-    @apply w-full;
+  .booking-frame-shell {
+    @apply overflow-hidden rounded-2xl border border-border bg-card p-2 sm:p-4 shadow-sm;
   }
 
-  .booking-widget-root :where(iframe) {
-    width: 100% !important;
-    max-width: 100% !important;
-    border: 0 !important;
-    display: block !important;
+  .booking-embed-frame {
+    @apply block w-full rounded-xl border-0 bg-card;
+    min-height: 1600px;
   }
 
-  .booking-widget-root
-    :where(
-      [style*="overflow: auto"],
-      [style*="overflow:auto"],
-      [style*="overflow-y: auto"],
-      [style*="overflow-y:auto"]
-    ) {
-    overflow: visible !important;
+  @media (max-width: 1023px) {
+    .booking-embed-frame {
+      min-height: 1900px;
+    }
+  }
+
+  @media (max-width: 639px) {
+    .booking-embed-frame {
+      min-height: 2300px;
+    }
   }
 }

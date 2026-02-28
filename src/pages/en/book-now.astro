@@ -2,7 +2,7 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Header from "@/components/layout/Header.astro";
 import Footer from "@/components/layout/Footer.astro";
-import BookingWidget from "@/components/islands/BookingWidget";
+import BookingEmbedSection from "@/components/sections/BookingEmbedSection.astro";
 import { LOCALES } from "@/data/locales";
 import { BOOKING, SITE, SOCIALS } from "@/data/site";
 import { buildOrganizationSchema, buildWebsiteSchema } from "@/lib/structured-data";
@@ -59,19 +59,17 @@ const structuredData = [
   </Fragment>
 
   <section class="section-shell">
-    <div class="page-shell">
+    <div class="book-now-shell">
       <h1 class="section-title">{locale.book.title}</h1>
       <p class="section-subtitle">{locale.book.intro}</p>
       <div class="mt-8">
-        <BookingWidget
-          client:load
+        <BookingEmbedSection
           hotelId={BOOKING.hotelId}
           language="en"
           currency={BOOKING.currency}
+          frameTitle={locale.book.title}
           loadLabel={locale.book.loadWidget}
           fallbackBookingUrl={BOOKING.fallbackUrl}
-          fallbackTitle={locale.book.fallbackTitle}
-          fallbackText={locale.book.fallbackText}
           fallbackCta={locale.book.fallbackCta}
         />
       </div>
