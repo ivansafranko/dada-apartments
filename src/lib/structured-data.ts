@@ -30,8 +30,8 @@ export function buildWebsiteSchema(path: string) {
 export function buildLodgingSchema(locale: LocaleCode) {
   const description =
     locale === "hr"
-      ? "Apartmani i soba u Krapinskim Toplicama s WiFi-jem i parkingom."
-      : "Apartments and room in Krapinske Toplice with WiFi and parking.";
+      ? "Apartmani Krapinske Toplice i Apartman Krapinske Toplice s WiFi-jem i parkingom."
+      : "Apartments Krapinske Toplice and Apartment Krapinske Toplice with WiFi and parking.";
 
   return {
     "@context": "https://schema.org",

@@ -18,10 +18,36 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    background-color: var(--color-primary);
   }
 
   body {
-    @apply bg-background text-foreground font-sans antialiased;
+    @apply text-foreground font-sans antialiased;
+    background-color: var(--color-background);
+    position: relative;
+    z-index: 0;
+  }
+
+  body::before,
+  body::after {
+    content: "";
+    position: fixed;
+    left: 0;
+    right: 0;
+    pointer-events: none;
+    z-index: -1;
+  }
+
+  body::before {
+    top: 0;
+    height: 40vh;
+    background-color: var(--color-background);
+  }
+
+  body::after {
+    bottom: 0;
+    height: 45vh;
+    background-color: var(--color-primary);
   }
 
   h1,

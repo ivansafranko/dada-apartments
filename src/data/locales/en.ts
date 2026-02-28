@@ -109,9 +109,9 @@ export const en: LocaleStrings = {
   },
   landing: {
     kicker: "Accommodation in Krapinske Toplice",
-    title: "Krapinske Toplice apartments - accommodation, room, and apartments",
+    title: "Apartments Krapinske Toplice and Apartment Krapinske Toplice",
     intro:
-      "Everything important in one place: locations, accommodation types, and the fastest booking path.",
+      "Apartments Krapinske Toplice and Apartment Krapinske Toplice: everything important in one place, locations, accommodation types, and the fastest booking path.",
     cards: [
       {
         title: "Central location accommodation",
@@ -177,9 +177,9 @@ export const en: LocaleStrings = {
   },
   seo: {
     home: {
-      title: "Apartments Krapinske Toplice | Apartmani Dada",
+      title: "Apartments Krapinske Toplice | Apartment Krapinske Toplice",
       description:
-        "Apartments in Krapinske Toplice near Aquae Vivae. WiFi and parking included. Book your stay in central and quiet locations."
+        "Apartments Krapinske Toplice and Apartment Krapinske Toplice near Aquae Vivae. WiFi and parking included. Book your stay in central and quiet locations."
     },
     book: {
       title: "Bookings | Apartmani Dada",
@@ -187,9 +187,9 @@ export const en: LocaleStrings = {
         "Online booking for Apartmani Dada in Krapinske Toplice. Secure and fast reservation flow."
     },
     landing: {
-      title: "Krapinske Toplice apartments - accommodation | Apartmani Dada",
+      title: "Apartments Krapinske Toplice and Apartment Krapinske Toplice",
       description:
-        "Accommodation, room, and apartments in Krapinske Toplice near Aquae Vivae, the hospital, and Magdalena clinic."
+        "Apartments Krapinske Toplice and Apartment Krapinske Toplice with accommodation options near Aquae Vivae, the hospital, and Magdalena clinic."
     },
     thankYou: {
       title: "Thank you | Apartmani Dada",

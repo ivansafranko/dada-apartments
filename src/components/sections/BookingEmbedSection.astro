@@ -18,19 +18,24 @@ const {
   fallbackBookingUrl,
   fallbackCta
 } = Astro.props;
+
+const frameId = `booking-embed-${language}`;
 const src =
   `/booking-widget-embed?lang=${language}` +
   `&hotelId=${encodeURIComponent(hotelId)}` +
-  `&currency=${encodeURIComponent(currency)}`;
+  `&currency=${encodeURIComponent(currency)}` +
+  `&frameId=${encodeURIComponent(frameId)}`;
 ---
 
 <div class="booking-frame-shell">
   <p class="mb-3 text-sm text-muted-foreground">{loadLabel}</p>
   <iframe
+    id={frameId}
     src={src}
     title={frameTitle}
     class="booking-embed-frame"
     loading="eager"
+    scrolling="no"
   ></iframe>
 </div>
 
@@ -44,3 +49,75 @@ const src =
     {fallbackCta}
   </a>
 </div>
+
+<script is:inline data-frame-id={frameId}>
+  (() => {
+    const currentScript = document.currentScript;
+    if (!(currentScript instanceof HTMLScriptElement)) {
+      return;
+    }
+
+    const frameId = currentScript.getAttribute("data-frame-id");
+    if (!frameId) {
+      return;
+    }
+
+    const frame = document.getElementById(frameId);
+    if (!(frame instanceof HTMLIFrameElement)) {
+      return;
+    }
+
+    const minHeight = () => {
+      if (window.innerWidth < 640) return 2600;
+      if (window.innerWidth < 1024) return 2200;
+      return 1800;
+    };
+
+    let lastAppliedHeight = 0;
+    let resizeRaf = 0;
+
+    const setFrameHeight = (height) => {
+      const safeHeight = Math.max(minHeight(), Number(height) || 0);
+      if (Math.abs(safeHeight - lastAppliedHeight) < 4) {
+        return;
+      }
+
+      lastAppliedHeight = safeHeight;
+      frame.style.height = `${safeHeight}px`;
+      frame.style.minHeight = `${safeHeight}px`;
+    };
+
+    const scheduleMinHeightSync = () => {
+      if (resizeRaf !== 0) {
+        return;
+      }
+
+      resizeRaf = window.requestAnimationFrame(() => {
+        resizeRaf = 0;
+        setFrameHeight(minHeight());
+      });
+    };
+
+    setFrameHeight(minHeight());
+
+    window.addEventListener(
+      "message",
+      (event) => {
+        if (event.origin !== window.location.origin) {
+          return;
+        }
+
+        const data = event.data;
+        if (!data || data.type !== "wbp-embed-height" || data.frameId !== frameId) {
+          return;
+        }
+
+        setFrameHeight(data.height);
+      },
+      { passive: true }
+    );
+
+    window.addEventListener("resize", scheduleMinHeightSync, { passive: true });
+    frame.addEventListener("load", scheduleMinHeightSync, { passive: true });
+  })();
+</script>

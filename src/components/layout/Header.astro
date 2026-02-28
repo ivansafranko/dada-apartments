@@ -58,7 +58,7 @@ function linkClass(key: keyof NavLinks): string {
         </a>
       </nav>
 
-      <details class="mobile-nav-details relative md:hidden">
+      <details class="mobile-nav-details relative md:hidden" data-mobile-nav>
         <summary class="inline-flex min-h-11 items-center gap-2 rounded-md border border-border px-3 py-2 text-sm font-semibold text-primary list-none marker:content-['']">
           {nav.menu}
           <svg class="h-4 w-4 transition-transform" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
@@ -85,3 +85,49 @@ function linkClass(key: keyof NavLinks): string {
     </div>
   </div>
 </header>
+
+<script is:inline>
+  (() => {
+    const details = document.querySelector("[data-mobile-nav]");
+    if (!(details instanceof HTMLDetailsElement)) {
+      return;
+    }
+
+    const closeMenu = () => {
+      details.open = false;
+    };
+
+    details.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    document.addEventListener(
+      "pointerdown",
+      (event) => {
+        if (!details.open) {
+          return;
+        }
+
+        const target = event.target;
+        if (!(target instanceof Node)) {
+          return;
+        }
+
+        if (!details.contains(target)) {
+          closeMenu();
+        }
+      },
+      { passive: true }
+    );
+
+    document.addEventListener(
+      "scroll",
+      () => {
+        if (details.open) {
+          closeMenu();
+        }
+      },
+      { passive: true }
+    );
+  })();
+</script>

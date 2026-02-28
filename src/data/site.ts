@@ -23,5 +23,5 @@ export const SOCIALS = {
 export const BOOKING = {
   hotelId: "33781",
   currency: "EUR",
-  fallbackUrl: "https://www.booking.com/hotel/hr/apartmani-dada.en-gb.html"
+  fallbackUrl: "https://www.booking.com/Share-tyYI7S1"
 };
