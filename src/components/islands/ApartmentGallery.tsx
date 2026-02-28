@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export interface GalleryImage {
   src: string;
@@ -18,6 +18,7 @@ export default function ApartmentGallery({ images, prevLabel, nextLabel, gallery
   const [index, setIndex] = useState(0);
   const [loadedIndexes, setLoadedIndexes] = useState<Set<number>>(() => new Set([0]));
   const [isSwitching, setIsSwitching] = useState(false);
+  const preloadingIndexesRef = useRef<Set<number>>(new Set());
 
   useEffect(() => {
     if (!images.length) {
@@ -27,33 +28,67 @@ export default function ApartmentGallery({ images, prevLabel, nextLabel, gallery
     setIndex(0);
     setLoadedIndexes(new Set([0]));
     setIsSwitching(false);
-
-    const preloads = images.map((image, imageIndex) => {
-      const preload = new Image();
-      preload.src = image.src;
-
-      const markLoaded = () =>
-        setLoadedIndexes((previous) => {
-          if (previous.has(imageIndex)) {
-            return previous;
-          }
-          const next = new Set(previous);
-          next.add(imageIndex);
-          return next;
-        });
-
-      preload.onload = markLoaded;
-      preload.onerror = markLoaded;
-      return preload;
-    });
-
-    return () => {
-      preloads.forEach((preload) => {
-        preload.onload = null;
-        preload.onerror = null;
-      });
-    };
   }, [images]);
+
+  function markLoaded(imageIndex: number) {
+    setLoadedIndexes((previous) => {
+      if (previous.has(imageIndex)) {
+        return previous;
+      }
+      const next = new Set(previous);
+      next.add(imageIndex);
+      return next;
+    });
+  }
+
+  function preloadImage(targetIndex: number, onDone?: () => void) {
+    if (!images.length || targetIndex < 0 || targetIndex >= images.length) {
+      return;
+    }
+
+    if (loadedIndexes.has(targetIndex)) {
+      onDone?.();
+      return;
+    }
+
+    if (preloadingIndexesRef.current.has(targetIndex)) {
+      return;
+    }
+
+    preloadingIndexesRef.current.add(targetIndex);
+    const preload = new Image();
+    preload.decoding = "async";
+    preload.src = images[targetIndex].src;
+
+    const done = () => {
+      preloadingIndexesRef.current.delete(targetIndex);
+      markLoaded(targetIndex);
+      onDone?.();
+    };
+
+    preload.onload = done;
+    preload.onerror = done;
+  }
+
+  useEffect(() => {
+    if (!images.length || images.length === 1) {
+      return;
+    }
+
+    const nextIndex = (index + 1) % images.length;
+    const idleWindow = window as Window & {
+      requestIdleCallback?: (callback: () => void) => number;
+      cancelIdleCallback?: (handle: number) => void;
+    };
+
+    if (typeof idleWindow.requestIdleCallback === "function") {
+      const idleId = idleWindow.requestIdleCallback(() => preloadImage(nextIndex));
+      return () => idleWindow.cancelIdleCallback?.(idleId);
+    }
+
+    const timeoutId = window.setTimeout(() => preloadImage(nextIndex), 300);
+    return () => window.clearTimeout(timeoutId);
+  }, [index, images, loadedIndexes]);
 
   function goTo(targetIndex: number) {
     if (!images.length) {
@@ -71,25 +106,10 @@ export default function ApartmentGallery({ images, prevLabel, nextLabel, gallery
     }
 
     setIsSwitching(true);
-
-    const preload = new Image();
-    preload.src = images[targetIndex].src;
-
-    const done = () => {
-      setLoadedIndexes((previous) => {
-        if (previous.has(targetIndex)) {
-          return previous;
-        }
-        const next = new Set(previous);
-        next.add(targetIndex);
-        return next;
-      });
+    preloadImage(targetIndex, () => {
       setIndex(targetIndex);
       setIsSwitching(false);
-    };
-
-    preload.onload = done;
-    preload.onerror = done;
+    });
   }
 
   if (!images.length) {

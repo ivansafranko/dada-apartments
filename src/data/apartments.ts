@@ -10,6 +10,9 @@ const mapCenter =
 const mapQuiet =
   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d197.8715242868565!2d15.83724928014023!3d46.0959862113964!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4765eb9077ffbfdf%3A0xa4754b0be498c038!2sUl.%20Ksavera%20%C5%A0andora%20%C4%90alskog%202%2C%2049217%2C%20Krapinske%20Toplice!5e0!3m2!1shr!2shr!4v1751223581443!5m2!1shr!2shr";
 
+const mapCenterHref = "https://maps.google.com/?q=Ul.+Antuna+Mihanovi%C4%87a+3H,+Krapinske+Toplice";
+const mapQuietHref = "https://maps.google.com/?q=Ul.+Ksavera+%C5%A0andora+%C4%90alskog+2,+Krapinske+Toplice";
+
 export const HERO_IMAGE = {
   src: "/images/dada-apartments-krapinske-toplice-hero.avif",
   width: 1000,
@@ -322,6 +325,7 @@ export const APARTMENT_LOCATIONS: ApartmentLocationGroup[] = [
         en: "Map for city-center apartments"
       },
       src: mapCenter,
+      href: mapCenterHref,
       width: 600,
       height: 300
     },
@@ -343,6 +347,7 @@ export const APARTMENT_LOCATIONS: ApartmentLocationGroup[] = [
         en: "Map for studio and room location"
       },
       src: mapQuiet,
+      href: mapQuietHref,
       width: 600,
       height: 300
     },

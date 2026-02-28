@@ -37,6 +37,7 @@ export interface ApartmentLocationGroup {
   map: {
     title: LocalizedString;
     src: string;
+    href: string;
     width: number;
     height: number;
   };

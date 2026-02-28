@@ -60,17 +60,33 @@ const { locale, title, subtitle } = Astro.props;
               ))}
             </div>
 
-            <div class="surface-card p-3">
-              <iframe
-                src={location.map.src}
-                width="100%"
-                height={location.map.height}
-                title={getLocalizedText(location.map.title, locale)}
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-                class="w-full rounded-lg border-0"
-                allowfullscreen
-              ></iframe>
+            <div class="surface-card">
+              <div class="rounded-lg border border-border bg-muted p-4 sm:p-5">
+                <div class="flex items-start gap-3">
+                  <span class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-card text-primary" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11Z" />
+                      <circle cx="12" cy="10" r="2.5" />
+                    </svg>
+                  </span>
+                  <div>
+                    <p class="text-sm font-semibold uppercase tracking-wide text-primary/80">
+                      {locale === "hr" ? "Lokacija na karti" : "Map location"}
+                    </p>
+                    <p class="mt-1 text-sm text-muted-foreground">{getLocalizedText(location.map.title, locale)}</p>
+                  </div>
+                </div>
+                <div class="mt-4">
+                  <a
+                    href={location.map.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn-primary"
+                  >
+                    {locale === "hr" ? "Otvori u Google kartama" : "Open in Google Maps"}
+                  </a>
+                </div>
+              </div>
             </div>
           </section>
         );

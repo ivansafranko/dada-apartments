@@ -1,5 +1,5 @@
 # Dada Apartments Website - Execution Plans (ExecPlans)
-LAST UPDATED AT: 2026-02-25 14:04:00 UTC
+LAST UPDATED AT: 2026-02-28 13:00:00 UTC
 
 This document defines how execution plans are authored and executed in Astro web projects. The reader has only the current working tree and this plan - there is no memory of prior work.
 
@@ -24,7 +24,7 @@ This document defines how execution plans are authored and executed in Astro web
 
 4) **Graceful Failure:** Forms, API calls, and dynamic content handle errors without breaking the page. Show loading/error states where applicable.
 
-5) **Performance by Default:** Target 90+ Lighthouse scores. Use `astro-critters` for critical CSS, `@playform/compress` for minification, and optimized images.
+5) **Performance by Default:** Lighthouse 90+ is a release gate, not a nice-to-have. Every canonical route must hit **90+ on mobile** for Performance, Accessibility, Best Practices, and SEO before release. Use `astro-critters` for critical CSS, `@playform/compress` for minification, and optimized images.
 
 6) **Responsive First:** Layouts work at 320px, 768px, and 1280px+. Use Tailwind responsive prefixes (`sm:`, `md:`, `lg:`, `xl:`) consistently.
 
@@ -222,7 +222,7 @@ Run on production preview (Incognito mode) or:
 ```
 npx lighthouse http://localhost:4321 --form-factor=mobile
 ```
-Target: **90+** across Performance, Accessibility, Best Practices, SEO.
+Target: **90+ mobile** across Performance, Accessibility, Best Practices, SEO for each canonical route.
 
 ---
 
@@ -248,10 +248,10 @@ Target: **90+** across Performance, Accessibility, Best Practices, SEO.
 - [ ] Heading hierarchy checked
 
 ### Lighthouse Scores
-- [ ] Performance: 90+
-- [ ] Accessibility: 90+
-- [ ] Best Practices: 90+
-- [ ] SEO: 90+
+- [ ] Performance: 90+ (mobile, each canonical route)
+- [ ] Accessibility: 90+ (mobile, each canonical route)
+- [ ] Best Practices: 90+ (mobile, each canonical route)
+- [ ] SEO: 90+ (mobile, each canonical route)
 
 ### Pre-Deploy
 - [ ] `npm run build` succeeds, no errors
@@ -262,7 +262,7 @@ Target: **90+** across Performance, Accessibility, Best Practices, SEO.
 ### Post-Deploy
 - [ ] Live URL loads correctly
 - [ ] Forms/interactivity work in production
-- [ ] Lighthouse on live URL meets targets
+- [ ] Lighthouse on live URL meets 90+ mobile targets for every canonical route
 
 ---
 
@@ -317,3 +317,4 @@ Checkboxes with timestamps. Reference at least one file path per item. Split par
 - 2026-02-25: Created - adapted from Android/Kotlin ExecPlan for Astro web projects.
 - 2026-02-25: v2 - merged duplicate sections (Validation into Testing & Acceptance, Security into guardrail #8 + testing checklist), consolidated Lighthouse targets to one location, reordered sections to match skeleton, simplified Repo Context to table format, removed redundant accessibility section (covered by guardrail #8 + testing checklist).
 - 2026-02-28: Renamed for Dada Apartments website and added to `docs/plans/`.
+- 2026-02-28: Elevated Lighthouse 90+ mobile from guideline to mandatory release gate for every canonical route.

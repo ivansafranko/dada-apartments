@@ -87,18 +87,21 @@
 
   .booking-embed-frame {
     @apply block w-full rounded-xl border-0 bg-card;
-    min-height: 1600px;
+    min-height: 1800px;
+    height: 1800px;
   }
 
   @media (max-width: 1023px) {
     .booking-embed-frame {
-      min-height: 1900px;
+      min-height: 2200px;
+      height: 2200px;
     }
   }
 
   @media (max-width: 639px) {
     .booking-embed-frame {
-      min-height: 2300px;
+      min-height: 2600px;
+      height: 2600px;
     }
   }
 }
