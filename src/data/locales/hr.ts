@@ -1,12 +1,12 @@
-﻿import type { LocaleStrings } from "@/types/i18n";
+import type { LocaleStrings } from "@/types/i18n";
 
 export const hr: LocaleStrings = {
   code: "hr",
   htmlLang: "hr",
   languageLabel: "HR",
-  skipToContent: "PreskoÄi na sadrÅ¾aj",
+  skipToContent: "Preskoči na sadržaj",
   nav: {
-    home: "PoÄetna",
+    home: "Početna",
     about: "O nama",
     apartments: "Apartmani",
     book: "Rezervirajte online",
@@ -14,72 +14,72 @@ export const hr: LocaleStrings = {
     menu: "Izbornik"
   },
   hero: {
-    kicker: "LjeÄiliÅ¡ni grad. Dvije lokacije. Miran boravak.",
+    kicker: "Lječilišni grad. Dvije lokacije. Miran boravak.",
     headline: "Apartmani u Krapinskim Toplicama",
     subheadline:
-      "ÄŒist, moderan i ugodan smjeÅ¡taj blizu Aquae Vivae, s ukljuÄenim WiFi-jem i parkingom.",
+      "Čist, moderan i ugodan smještaj blizu Aquae Vivae, s uključenim WiFi-jem i parkingom.",
     bullets: [
       "Aquae Vivae na par minuta hoda",
-      "UreÄ‘eni i potpuno opremljeni apartmani",
-      "WiFi i parking ukljuÄeni"
+      "Uređeni i potpuno opremljeni apartmani",
+      "WiFi i parking uključeni"
     ],
-    cta: "IstraÅ¾ite apartmane"
+    cta: "Istražite apartmane"
   },
   about: {
     title: "Otkrijte Krapinske Toplice",
-    subtitle: "Mirni ljeÄiliÅ¡ni grad idealan za odmor, wellness i oporavak.",
+    subtitle: "Mirni lječilišni grad idealan za odmor, wellness i oporavak.",
     cards: [
       {
         title: "Mirna lokacija",
-        text: "UÅ¾ivajte u smjeÅ¡taju u prirodnom okruÅ¾enju i opuÅ¡tenoj atmosferi."
+        text: "Uživajte u smještaju u prirodnom okruženju i opuštenoj atmosferi."
       },
       {
         title: "Aquae Vivae vodeni park",
-        text: "Termalni bazeni i wellness sadrÅ¾aji udaljeni su svega nekoliko minuta."
+        text: "Termalni bazeni i wellness sadržaji udaljeni su svega nekoliko minuta."
       },
       {
         title: "Moderan komfor",
-        text: "Udoban interijer i oprema za bezbriÅ¾an boravak."
+        text: "Udoban interijer i oprema za bezbrižan boravak."
       }
     ]
   },
   apartments: {
     title: "Moderni apartmani",
-    subtitle: "Odaberite smjeÅ¡taj koji najbolje odgovara vaÅ¡em putovanju."
+    subtitle: "Odaberite smještaj koji najbolje odgovara vašem putovanju."
   },
   process: {
     title: "Kako rezervirati",
     subtitle: "Jednostavan proces u tri koraka.",
     steps: [
       {
-        title: "Odaberite smjeÅ¡taj",
+        title: "Odaberite smještaj",
         text: "Pogledajte ponudu apartmana i odaberite lokaciju koja vam odgovara."
       },
       {
-        title: "PoÅ¡aljite upit",
+        title: "Pošaljite upit",
         text: "Ispunite kontakt obrazac ili otvorite online rezervaciju."
       },
       {
         title: "Potvrdite dolazak",
-        text: "Nakon potvrde termina, sve je spremno za vaÅ¡ dolazak."
+        text: "Nakon potvrde termina, sve je spremno za vaš dolazak."
       }
     ]
   },
   testimonials: {
     title: "Iskustva gostiju",
-    subtitle: "Å to naÅ¡i gosti kaÅ¾u o svom boravku."
+    subtitle: "Što naši gosti kažu o svom boravku."
   },
   contact: {
     title: "Kontaktirajte nas",
-    subtitle: "PoÅ¡aljite upit i odgovorit Ä‡emo vam Å¡to je prije moguÄ‡e.",
+    subtitle: "Pošaljite upit i odgovorit ćemo vam što je prije moguće.",
     labels: {
-      name: "VaÅ¡e ime",
-      email: "VaÅ¡ email",
+      name: "Vaše ime",
+      email: "Vaš email",
       checkin: "Datum dolaska",
       checkout: "Datum odlaska",
       message: "Poruka",
-      submit: "PoÅ¡aljite poruku",
-      loading: "Å alje se..."
+      submit: "Pošaljite poruku",
+      loading: "Šalje se..."
     },
     placeholders: {
       name: "Unesite ime i prezime",
@@ -93,42 +93,42 @@ export const hr: LocaleStrings = {
     },
     validation: {
       required: "Molimo ispunite sva obavezna polja.",
-      submitError: "DoÅ¡lo je do pogreÅ¡ke pri slanju. PokuÅ¡ajte ponovno.",
-      successTitle: "Poruka je uspjeÅ¡no poslana!",
-      successText: "Hvala na upitu. Odgovorit Ä‡emo vam u najkraÄ‡em roku."
+      submitError: "Došlo je do pogreške pri slanju. Pokušajte ponovno.",
+      successTitle: "Poruka je uspješno poslana!",
+      successText: "Hvala na upitu. Odgovorit ćemo vam u najkraćem roku."
     }
   },
   book: {
     title: "Rezervirajte online",
-    intro: "Odaberite datume i nastavite na sigurno online rezervacijsko suÄelje.",
-    loadWidget: "UÄitaj online rezervacijski kalendar",
-    fallbackTitle: "Ako se modul ne uÄita",
+    intro: "Odaberite datume i nastavite na sigurno online rezervacijsko sučelje.",
+    loadWidget: "Učitaj online rezervacijski kalendar",
+    fallbackTitle: "Ako se modul ne učita",
     fallbackText:
-      "MoÅ¾ete rezervirati i izravno putem Booking.com ili nas kontaktirati telefonom.",
+      "Možete rezervirati i izravno putem Booking.com ili nas kontaktirati telefonom.",
     fallbackCta: "Rezervirajte na Booking.com"
   },
   landing: {
-    kicker: "SmjeÅ¡taj u Krapinskim Toplicama",
-    title: "Apartmani Krapinske Toplice i Apartman Krapinske Toplice",
+    kicker: "Smještaj u Krapinskim Toplicama",
+    title: "Apartmani Krapinske Toplice - smještaj, soba i apartmani",
     intro:
-      "Apartmani Krapinske Toplice i Apartman Krapinske Toplice: najvaÅ¾nije informacije na jednom mjestu, lokacije i najbrÅ¾i naÄin rezervacije.",
+      "Najvažnije informacije na jednom mjestu: lokacije, vrste smještaja i najbrži način rezervacije.",
     cards: [
       {
-        title: "SmjeÅ¡taj u centru",
-        text: "OdliÄno za goste koji Å¾ele biti blizu Aquae Vivae i sadrÅ¾aja u centru."
+        title: "Smještaj u centru",
+        text: "Odlično za goste koji žele biti blizu Aquae Vivae i sadržaja u centru."
       },
       {
         title: "Lokacija blizu bolnice",
-        text: "PraktiÄno za rehabilitaciju i duÅ¾e boravke u mirnijoj zoni."
+        text: "Praktično za rehabilitaciju i duže boravke u mirnijoj zoni."
       },
       {
         title: "Soba i studio opcije",
-        text: "Birajte izmeÄ‘u veÄ‡ih apartmana, studija i sobe."
+        text: "Birajte između većih apartmana, studija i sobe."
       }
     ],
     locationTitle: "Lokacija i udaljenosti",
     locationIntro:
-      "Krapinske Toplice poznate su po termalnom wellnessu i rehabilitaciji, a naÅ¡e lokacije pokrivaju centar i mirniju zonu.",
+      "Krapinske Toplice poznate su po termalnom wellnessu i rehabilitaciji, a naše lokacije pokrivaju centar i mirniju zonu.",
     locationCards: [
       {
         title: "Aquae Vivae",
@@ -136,22 +136,22 @@ export const hr: LocaleStrings = {
       },
       {
         title: "Bolnica za medicinsku rehabilitaciju",
-        text: "SmjeÅ¡taj je praktiÄan za goste koji dolaze na terapije i posjete."
+        text: "Smještaj je praktičan za goste koji dolaze na terapije i posjete."
       },
       {
         title: "Klinika Magdalena",
         text: "Dobra opcija za boravak tijekom pregleda i oporavka."
       }
     ],
-    faqTitle: "ÄŒesta pitanja",
+    faqTitle: "Česta pitanja",
     faq: [
       {
-        question: "Kako najbrÅ¾e rezervirati smjeÅ¡taj?",
-        answer: "NajbrÅ¾e je putem stranice za online rezervaciju ili telefonskim pozivom."
+        question: "Kako najbrže rezervirati smještaj?",
+        answer: "Najbrže je putem stranice za online rezervaciju ili telefonskim pozivom."
       },
       {
-        question: "Je li parking ukljuÄen?",
-        answer: "Da, parking je ukljuÄen u ponudu smjeÅ¡taja."
+        question: "Je li parking uključen?",
+        answer: "Da, parking je uključen u ponudu smještaja."
       },
       {
         question: "Imate li sobu i studio opcije?",
@@ -162,24 +162,24 @@ export const hr: LocaleStrings = {
   },
   thankYou: {
     title: "Hvala na upitu",
-    text: "VaÅ¡a poruka je zaprimljena. Kontaktirat Ä‡emo vas u najkraÄ‡em roku.",
-    homeCta: "Povratak na poÄetnu",
+    text: "Vaša poruka je zaprimljena. Kontaktirat ćemo vas u najkraćem roku.",
+    homeCta: "Povratak na početnu",
     bookCta: "Online rezervacija"
   },
   notFound: {
-    title: "Stranica nije pronaÄ‘ena",
-    text: "TraÅ¾ena stranica ne postoji ili je premjeÅ¡tena.",
-    homeCta: "Natrag na poÄetnu"
+    title: "Stranica nije pronađena",
+    text: "Tražena stranica ne postoji ili je premještena.",
+    homeCta: "Natrag na početnu"
   },
   footer: {
-    text: "DoÅ¾ivite najbolje od Krapinskih Toplica uz smjeÅ¡taj Apartmani Dada.",
-    copyright: "Â© 2026 Apartmani Dada. Sva prava pridrÅ¾ana."
+    text: "Doživite najbolje od Krapinskih Toplica uz smještaj Apartmani Dada.",
+    copyright: "© 2026 Apartmani Dada. Sva prava pridržana."
   },
   seo: {
     home: {
-      title: "Apartmani Krapinske Toplice | Apartman Krapinske Toplice",
+      title: "Apartmani Krapinske Toplice | Apartmani Dada",
       description:
-        "Apartmani Krapinske Toplice i Apartman Krapinske Toplice blizu Aquae Vivae. WiFi i parking ukljuÄeni. Rezervirajte smjeÅ¡taj u centru i mirnoj zoni."
+        "Apartmani Krapinske Toplice blizu Aquae Vivae. WiFi i parking uključeni. Rezervirajte smještaj u centru i mirnoj zoni."
     },
     book: {
       title: "Rezervacije | Apartmani Dada",
@@ -187,18 +187,17 @@ export const hr: LocaleStrings = {
         "Online rezervacije za Apartmani Dada u Krapinskim Toplicama. Sigurna i brza potvrda termina."
     },
     landing: {
-      title: "Apartmani Krapinske Toplice i Apartman Krapinske Toplice",
+      title: "Apartmani Krapinske Toplice - smještaj | Apartmani Dada",
       description:
-        "Apartmani Krapinske Toplice i Apartman Krapinske Toplice: smjeÅ¡taj, soba i apartmani u Krapinskim Toplicama blizu Aquae Vivae, bolnice i klinike Magdalena."
+        "Smještaj, soba i apartmani u Krapinskim Toplicama blizu Aquae Vivae, bolnice i klinike Magdalena."
     },
     thankYou: {
       title: "Hvala na upitu | Apartmani Dada",
-      description: "VaÅ¡a poruka je uspjeÅ¡no zaprimljena."
+      description: "Vaša poruka je uspješno zaprimljena."
     },
     notFound: {
-      title: "404 - Stranica nije pronaÄ‘ena | Apartmani Dada",
-      description: "TraÅ¾ena stranica nije pronaÄ‘ena."
+      title: "404 - Stranica nije pronađena | Apartmani Dada",
+      description: "Tražena stranica nije pronađena."
     }
   }
 };
-

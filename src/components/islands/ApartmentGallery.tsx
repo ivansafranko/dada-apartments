@@ -19,32 +19,16 @@ export default function ApartmentGallery({ images, prevLabel, nextLabel, gallery
   const [loadedIndexes, setLoadedIndexes] = useState<Set<number>>(() => new Set([0]));
   const [isSwitching, setIsSwitching] = useState(false);
   const preloadingIndexesRef = useRef<Set<number>>(new Set());
-  const pendingCallbacksRef = useRef<Map<number, Array<() => void>>>(new Map());
-  const preloadTimeoutsRef = useRef<Map<number, number>>(new Map());
 
   useEffect(() => {
     if (!images.length) {
       return;
     }
 
-    preloadTimeoutsRef.current.forEach((timeoutId) => window.clearTimeout(timeoutId));
-    preloadTimeoutsRef.current.clear();
-    preloadingIndexesRef.current.clear();
-    pendingCallbacksRef.current.clear();
-
     setIndex(0);
     setLoadedIndexes(new Set([0]));
     setIsSwitching(false);
   }, [images]);
-
-  useEffect(() => {
-    return () => {
-      preloadTimeoutsRef.current.forEach((timeoutId) => window.clearTimeout(timeoutId));
-      preloadTimeoutsRef.current.clear();
-      preloadingIndexesRef.current.clear();
-      pendingCallbacksRef.current.clear();
-    };
-  }, []);
 
   function markLoaded(imageIndex: number) {
     setLoadedIndexes((previous) => {
@@ -68,44 +52,19 @@ export default function ApartmentGallery({ images, prevLabel, nextLabel, gallery
     }
 
     if (preloadingIndexesRef.current.has(targetIndex)) {
-      if (onDone) {
-        const pending = pendingCallbacksRef.current.get(targetIndex) ?? [];
-        pending.push(onDone);
-        pendingCallbacksRef.current.set(targetIndex, pending);
-      }
       return;
     }
 
     preloadingIndexesRef.current.add(targetIndex);
-    pendingCallbacksRef.current.set(targetIndex, onDone ? [onDone] : []);
-
     const preload = new Image();
     preload.decoding = "async";
     preload.src = images[targetIndex].src;
 
-    let finished = false;
     const done = () => {
-      if (finished) {
-        return;
-      }
-      finished = true;
-
-      const timeoutId = preloadTimeoutsRef.current.get(targetIndex);
-      if (typeof timeoutId === "number") {
-        window.clearTimeout(timeoutId);
-        preloadTimeoutsRef.current.delete(targetIndex);
-      }
-
       preloadingIndexesRef.current.delete(targetIndex);
       markLoaded(targetIndex);
-
-      const pending = pendingCallbacksRef.current.get(targetIndex) ?? [];
-      pendingCallbacksRef.current.delete(targetIndex);
-      pending.forEach((callback) => callback());
+      onDone?.();
     };
-
-    const timeoutId = window.setTimeout(done, 8000);
-    preloadTimeoutsRef.current.set(targetIndex, timeoutId);
 
     preload.onload = done;
     preload.onerror = done;
