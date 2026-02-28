@@ -1,0 +1,62 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/layout/Header.astro";
+import Footer from "@/components/layout/Footer.astro";
+import { LOCALES } from "@/data/locales";
+import { SOCIALS } from "@/data/site";
+
+const locale = LOCALES.hr;
+const alternates = [
+  { hreflang: "hr", path: "/" },
+  { hreflang: "en", path: "/en/" },
+  { hreflang: "x-default", path: "/" }
+] as const;
+---
+
+<BaseLayout
+  locale="hr"
+  skipToContentLabel={locale.skipToContent}
+  meta={{
+    title: locale.seo.notFound.title,
+    description: locale.seo.notFound.description,
+    canonicalPath: "/404",
+    locale: "hr",
+    robots: "noindex, nofollow"
+  }}
+  alternates={alternates}
+>
+  <Fragment slot="header">
+    <Header
+      nav={locale.nav}
+      brand="Apartmani Dada"
+      switchHref="/en/"
+      switchLabel="EN"
+      links={{
+        home: "/",
+        apartments: "/#apartments-title",
+        about: "/#about-title",
+        book: "/book-now",
+        contact: "/#contact-title"
+      }}
+    />
+  </Fragment>
+
+  <section class="section-shell">
+    <div class="page-shell">
+      <div class="surface-card max-w-2xl">
+        <h1 class="section-title">{locale.notFound.title}</h1>
+        <p class="section-subtitle">{locale.notFound.text}</p>
+        <a href="/" class="btn-primary mt-8">{locale.notFound.homeCta}</a>
+      </div>
+    </div>
+  </section>
+
+  <Fragment slot="footer">
+    <Footer
+      brand="Apartmani Dada"
+      text={locale.footer.text}
+      copyright={locale.footer.copyright}
+      facebookUrl={SOCIALS.facebook}
+    />
+  </Fragment>
+</BaseLayout>

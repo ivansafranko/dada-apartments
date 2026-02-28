@@ -1,0 +1,51 @@
+---
+interface Props {
+  kicker: string;
+  headline: string;
+  subheadline: string;
+  bullets: string[];
+  ctaText: string;
+  ctaHref: string;
+  image: {
+    src: string;
+    alt: string;
+    width: number;
+    height: number;
+  };
+}
+
+const { kicker, headline, subheadline, bullets, ctaText, ctaHref, image } = Astro.props;
+---
+
+<section class="hero-gradient border-b border-border/60 pb-16 pt-12 sm:pb-20 sm:pt-16">
+  <div class="page-shell">
+    <div class="grid items-center gap-10 lg:grid-cols-2">
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-wide text-primary/80">{kicker}</p>
+        <h1 class="mt-4 font-serif text-4xl leading-tight text-primary sm:text-5xl">{headline}</h1>
+        <p class="mt-4 max-w-xl text-base text-muted-foreground sm:text-lg">{subheadline}</p>
+        <ul class="mt-6 space-y-2 text-sm text-primary sm:text-base">
+          {bullets.map((bullet) => (
+            <li class="flex items-start gap-2">
+              <span class="mt-1 h-2.5 w-2.5 shrink-0 rounded-full bg-accent"></span>
+              <span>{bullet}</span>
+            </li>
+          ))}
+        </ul>
+        <a href={ctaHref} class="btn-accent mt-8">{ctaText}</a>
+      </div>
+
+      <div class="surface-card overflow-hidden p-2">
+        <img
+          src={image.src}
+          alt={image.alt}
+          width={image.width}
+          height={image.height}
+          fetchpriority="high"
+          decoding="async"
+          class="h-auto w-full rounded-lg"
+        />
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,80 @@
+---
+import ApartmentGallery from "@/components/islands/ApartmentGallery";
+import { APARTMENTS, APARTMENT_LOCATIONS } from "@/data/apartments";
+import { getLocalizedText } from "@/types/content";
+import type { LocaleCode } from "@/types/seo";
+
+interface Props {
+  locale: LocaleCode;
+  title: string;
+  subtitle: string;
+}
+
+const { locale, title, subtitle } = Astro.props;
+---
+
+<section id="apartments" class="section-shell bg-muted/40">
+  <div class="page-shell">
+    <h2 id="apartments-title" class="section-title">{title}</h2>
+    <p class="section-subtitle">{subtitle}</p>
+
+    <div class="mt-10 space-y-12">
+      {APARTMENT_LOCATIONS.map((location) => {
+        const apartments = APARTMENTS.filter((apt) => location.apartmentIds.includes(apt.id));
+        return (
+          <section class="space-y-6">
+            <header>
+              <h3 class="text-2xl font-semibold text-primary">{getLocalizedText(location.title, locale)}</h3>
+              <p class="mt-2 text-sm text-muted-foreground">{getLocalizedText(location.description, locale)}</p>
+            </header>
+
+            <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+              {apartments.map((apartment) => (
+                <article class="surface-card">
+                  <h4 class="text-lg font-semibold text-primary">{getLocalizedText(apartment.name, locale)}</h4>
+                  <p class="mt-1 text-sm text-muted-foreground">{apartment.area} · {apartment.address}</p>
+                  <p class="mt-3 text-sm text-muted-foreground">{getLocalizedText(apartment.description, locale)}</p>
+                  <ul class="mt-3 flex flex-wrap gap-2 text-xs">
+                    {apartment.amenities.map((amenity) => (
+                      <li class="rounded-full border border-border bg-muted px-2 py-1 text-primary">
+                        {getLocalizedText(amenity.label, locale)}
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div class="mt-4">
+                    <ApartmentGallery
+                      client:visible
+                      galleryLabel={getLocalizedText(apartment.name, locale)}
+                      prevLabel={locale === "hr" ? "Prethodna slika" : "Previous image"}
+                      nextLabel={locale === "hr" ? "Sljedeća slika" : "Next image"}
+                      images={apartment.images.map((img) => ({
+                        src: img.src,
+                        alt: getLocalizedText(img.alt, locale),
+                        width: img.width,
+                        height: img.height
+                      }))}
+                    />
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            <div class="surface-card p-3">
+              <iframe
+                src={location.map.src}
+                width="100%"
+                height={location.map.height}
+                title={getLocalizedText(location.map.title, locale)}
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+                class="w-full rounded-lg border-0"
+                allowfullscreen
+              ></iframe>
+            </div>
+          </section>
+        );
+      })}
+    </div>
+  </div>
+</section>

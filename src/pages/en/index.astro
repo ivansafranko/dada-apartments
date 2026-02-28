@@ -1,0 +1,95 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/layout/Header.astro";
+import Footer from "@/components/layout/Footer.astro";
+import HeroSection from "@/components/sections/HeroSection.astro";
+import AboutSection from "@/components/sections/AboutSection.astro";
+import ApartmentsSection from "@/components/sections/ApartmentsSection.astro";
+import ProcessSection from "@/components/sections/ProcessSection.astro";
+import TestimonialsSection from "@/components/sections/TestimonialsSection.astro";
+import ContactSection from "@/components/sections/ContactSection.astro";
+import { LOCALES } from "@/data/locales";
+import { HERO_IMAGE } from "@/data/apartments";
+import { SOCIALS } from "@/data/site";
+import {
+  buildFaqSchema,
+  buildLodgingSchema,
+  buildOrganizationSchema,
+  buildWebsiteSchema
+} from "@/lib/structured-data";
+
+const locale = LOCALES.en;
+
+const alternates = [
+  { hreflang: "hr", path: "/" },
+  { hreflang: "en", path: "/en/" },
+  { hreflang: "x-default", path: "/" }
+] as const;
+
+const structuredData = [
+  buildWebsiteSchema("/en/"),
+  buildOrganizationSchema(),
+  buildLodgingSchema("en"),
+  buildFaqSchema(locale.landing.faq)
+];
+---
+
+<BaseLayout
+  locale="en"
+  skipToContentLabel={locale.skipToContent}
+  meta={{
+    title: locale.seo.home.title,
+    description: locale.seo.home.description,
+    canonicalPath: "/en/",
+    locale: "en"
+  }}
+  alternates={alternates}
+  structuredData={structuredData}
+  lcpImagePath={HERO_IMAGE.src}
+>
+  <Fragment slot="header">
+    <Header
+      nav={locale.nav}
+      brand="Apartmani Dada"
+      active="home"
+      switchHref="/"
+      switchLabel="HR"
+      links={{
+        home: "/en/",
+        apartments: "/en/#apartments-title",
+        about: "/en/#about-title",
+        book: "/en/book-now",
+        contact: "/en/#contact-title"
+      }}
+    />
+  </Fragment>
+
+  <HeroSection
+    kicker={locale.hero.kicker}
+    headline={locale.hero.headline}
+    subheadline={locale.hero.subheadline}
+    bullets={locale.hero.bullets}
+    ctaText={locale.hero.cta}
+    ctaHref="/en/#apartments-title"
+    image={{
+      src: HERO_IMAGE.src,
+      alt: HERO_IMAGE.alt.en,
+      width: HERO_IMAGE.width,
+      height: HERO_IMAGE.height
+    }}
+  />
+  <AboutSection title={locale.about.title} subtitle={locale.about.subtitle} cards={locale.about.cards} />
+  <ApartmentsSection locale="en" title={locale.apartments.title} subtitle={locale.apartments.subtitle} />
+  <ProcessSection title={locale.process.title} subtitle={locale.process.subtitle} steps={locale.process.steps} />
+  <TestimonialsSection locale="en" title={locale.testimonials.title} subtitle={locale.testimonials.subtitle} />
+  <ContactSection locale="en" copy={locale.contact} />
+
+  <Fragment slot="footer">
+    <Footer
+      brand="Apartmani Dada"
+      text={locale.footer.text}
+      copyright={locale.footer.copyright}
+      facebookUrl={SOCIALS.facebook}
+    />
+  </Fragment>
+</BaseLayout>

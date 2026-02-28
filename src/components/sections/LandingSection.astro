@@ -1,0 +1,79 @@
+---
+interface CardItem {
+  title: string;
+  text: string;
+}
+
+interface FaqItem {
+  question: string;
+  answer: string;
+}
+
+interface Props {
+  kicker: string;
+  title: string;
+  intro: string;
+  cards: CardItem[];
+  locationTitle: string;
+  locationIntro: string;
+  locationCards: CardItem[];
+  faqTitle: string;
+  faq: FaqItem[];
+  ctaText: string;
+  ctaHref: string;
+}
+
+const {
+  kicker,
+  title,
+  intro,
+  cards,
+  locationTitle,
+  locationIntro,
+  locationCards,
+  faqTitle,
+  faq,
+  ctaText,
+  ctaHref
+} = Astro.props;
+---
+
+<section class="section-shell">
+  <div class="page-shell">
+    <p class="text-sm font-semibold uppercase tracking-wide text-primary/80">{kicker}</p>
+    <h1 class="mt-3 font-serif text-4xl leading-tight text-primary sm:text-5xl">{title}</h1>
+    <p class="mt-4 max-w-3xl text-base text-muted-foreground sm:text-lg">{intro}</p>
+
+    <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+      {cards.map((card) => (
+        <article class="surface-card">
+          <h2 class="text-xl font-semibold text-primary">{card.title}</h2>
+          <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{card.text}</p>
+        </article>
+      ))}
+    </div>
+
+    <h2 class="section-title mt-12">{locationTitle}</h2>
+    <p class="section-subtitle">{locationIntro}</p>
+    <div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-3">
+      {locationCards.map((card) => (
+        <article class="surface-card">
+          <h3 class="text-lg font-semibold text-primary">{card.title}</h3>
+          <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{card.text}</p>
+        </article>
+      ))}
+    </div>
+
+    <h2 class="section-title mt-12">{faqTitle}</h2>
+    <div class="mt-8 space-y-3">
+      {faq.map((item) => (
+        <details class="surface-card p-4">
+          <summary class="cursor-pointer text-base font-semibold text-primary">{item.question}</summary>
+          <p class="mt-3 text-sm text-muted-foreground">{item.answer}</p>
+        </details>
+      ))}
+    </div>
+
+    <a href={ctaHref} class="btn-accent mt-10">{ctaText}</a>
+  </div>
+</section>

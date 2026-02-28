@@ -1,23 +1,14 @@
 [build]
-  publish = "."
+  command = "npm run build"
+  publish = "dist"
+
+[[headers]]
+  for = "/_astro/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
 
 [[headers]]
   for = "/images/*"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/*.avif"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/*.css"
-  [headers.values]
-    Cache-Control = "public, max-age=31536000, immutable"
-
-[[headers]]
-  for = "/*.js"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
@@ -32,8 +23,18 @@
     Cache-Control = "public, max-age=86400"
 
 [[redirects]]
+  from = "/sitemap.xml"
+  to = "/sitemap-index.xml"
+  status = 301
+
+[[redirects]]
   from = "/index.html"
   to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/book-now/index.html"
+  to = "/book-now"
   status = 301
 
 [[redirects]]
@@ -67,6 +68,11 @@
   status = 301
 
 [[redirects]]
+  from = "/en/book-now/index.html"
+  to = "/en/book-now"
+  status = 301
+
+[[redirects]]
   from = "/en/book-now.html"
   to = "/en/book-now"
   status = 301
@@ -87,28 +93,31 @@
   status = 301
 
 [[redirects]]
-  from = "/book-now"
-  to = "/book-now.html"
-  status = 200
-
-[[redirects]]
-  from = "/apartmani-krapinske-toplice"
-  to = "/apartmani-krapinske-toplice.html"
-  status = 200
+  from = "/success.html"
+  to = "/thank-you"
+  status = 301
 
 [[redirects]]
   from = "/success"
-  to = "/success.html"
-  status = 200
+  to = "/thank-you"
+  status = 301
 
-# Redirect HTTP to HTTPS
+[[redirects]]
+  from = "/thank-you/"
+  to = "/thank-you"
+  status = 301
+
+[[redirects]]
+  from = "/en/thank-you/"
+  to = "/en/thank-you"
+  status = 301
+
 [[redirects]]
   from = "http://*"
   to = "https://:splat"
   status = 301
   force = true
 
-# Redirect www to non-www
 [[redirects]]
   from = "https://www.apartments-dada.com/*"
   to = "https://apartments-dada.com/:splat"
@@ -116,9 +125,4 @@
   force = true
 
 [context.production.environment]
-  NODE_VERSION = "18"
-
-# Form handling - emails will be sent to the configured email
-# You'll need to configure this in Netlify admin panel:
-# Site Settings > Forms > Form notifications
-# Add espana.dsr@gmail.com as the notification email 
+  NODE_VERSION = "20"

@@ -1,0 +1,93 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/layout/Header.astro";
+import Footer from "@/components/layout/Footer.astro";
+import LandingSection from "@/components/sections/LandingSection.astro";
+import { LOCALES } from "@/data/locales";
+import { SITE, SOCIALS } from "@/data/site";
+import {
+  buildBreadcrumbSchema,
+  buildFaqSchema,
+  buildOrganizationSchema,
+  buildWebsiteSchema
+} from "@/lib/structured-data";
+
+const locale = LOCALES.en;
+
+const alternates = [
+  { hreflang: "hr", path: "/apartmani-krapinske-toplice" },
+  { hreflang: "en", path: "/en/apartmani-krapinske-toplice" },
+  { hreflang: "x-default", path: "/apartmani-krapinske-toplice" }
+] as const;
+
+const structuredData = [
+  buildWebsiteSchema("/en/apartmani-krapinske-toplice"),
+  buildOrganizationSchema(),
+  buildBreadcrumbSchema([
+    { name: locale.nav.home, path: "/en/" },
+    { name: locale.landing.title, path: "/en/apartmani-krapinske-toplice" }
+  ]),
+  buildFaqSchema(locale.landing.faq),
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: locale.seo.landing.title,
+    description: locale.seo.landing.description,
+    url: `${SITE.url}/en/apartmani-krapinske-toplice`,
+    inLanguage: "en"
+  }
+];
+---
+
+<BaseLayout
+  locale="en"
+  skipToContentLabel={locale.skipToContent}
+  meta={{
+    title: locale.seo.landing.title,
+    description: locale.seo.landing.description,
+    canonicalPath: "/en/apartmani-krapinske-toplice",
+    locale: "en"
+  }}
+  alternates={alternates}
+  structuredData={structuredData}
+>
+  <Fragment slot="header">
+    <Header
+      nav={locale.nav}
+      brand="Apartmani Dada"
+      active="apartments"
+      switchHref="/apartmani-krapinske-toplice"
+      switchLabel="HR"
+      links={{
+        home: "/en/",
+        apartments: "/en/#apartments-title",
+        about: "/en/#about-title",
+        book: "/en/book-now",
+        contact: "/en/#contact-title"
+      }}
+    />
+  </Fragment>
+
+  <LandingSection
+    kicker={locale.landing.kicker}
+    title={locale.landing.title}
+    intro={locale.landing.intro}
+    cards={locale.landing.cards}
+    locationTitle={locale.landing.locationTitle}
+    locationIntro={locale.landing.locationIntro}
+    locationCards={locale.landing.locationCards}
+    faqTitle={locale.landing.faqTitle}
+    faq={locale.landing.faq}
+    ctaText={locale.landing.cta}
+    ctaHref="/en/book-now"
+  />
+
+  <Fragment slot="footer">
+    <Footer
+      brand="Apartmani Dada"
+      text={locale.footer.text}
+      copyright={locale.footer.copyright}
+      facebookUrl={SOCIALS.facebook}
+    />
+  </Fragment>
+</BaseLayout>

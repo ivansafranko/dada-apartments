@@ -1,0 +1,26 @@
+{
+  "name": "dada-apartments-astro",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@astrojs/react": "^4.0.0",
+    "@astrojs/sitemap": "^3.0.0",
+    "@playform/compress": "^0.2.1",
+    "@tailwindcss/vite": "^4.0.0",
+    "astro": "^5.0.0",
+    "astro-critters": "^2.2.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "typescript": "^5.8.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.6"
+  }
+}

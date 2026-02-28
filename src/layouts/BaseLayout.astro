@@ -1,0 +1,83 @@
+---
+import "@/styles/global.css";
+import SeoHead from "@/components/seo/SeoHead.astro";
+import type { LocaleCode, SeoMeta, StructuredDataPayload, AlternateLocaleLink } from "@/types/seo";
+
+interface Props {
+  locale: LocaleCode;
+  skipToContentLabel: string;
+  meta: SeoMeta;
+  alternates: ReadonlyArray<AlternateLocaleLink>;
+  structuredData?: StructuredDataPayload[];
+  lcpImagePath?: string;
+}
+
+const { locale, skipToContentLabel, meta, alternates, structuredData = [], lcpImagePath } = Astro.props;
+const analyticsId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+---
+
+<!doctype html>
+<html lang={locale}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="format-detection" content="telephone=yes" />
+    <meta name="theme-color" content="#3A4A5C" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap"
+      media="print"
+      onload="this.onload=null;this.setAttribute('media','all')"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300..900&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap"
+      />
+    </noscript>
+
+    {lcpImagePath && <link rel="preload" as="image" href={lcpImagePath} fetchpriority="high" />}
+
+    <SeoHead meta={meta} alternates={alternates} structuredData={structuredData} />
+  </head>
+  <body>
+    <a href="#main-content" class="skip-link">{skipToContentLabel}</a>
+    <slot name="header" />
+    <main id="main-content">
+      <slot />
+    </main>
+    <slot name="footer" />
+
+    {analyticsId && (
+      <script is:inline define:vars={{ analyticsId }}>
+        (() => {
+          let loaded = false;
+          const load = () => {
+            if (loaded) return;
+            loaded = true;
+            window.dataLayer = window.dataLayer || [];
+            window.gtag = window.gtag || function gtag() { window.dataLayer.push(arguments); };
+            window.gtag("js", new Date());
+            window.gtag("config", analyticsId);
+            const s = document.createElement("script");
+            s.src = `https://www.googletagmanager.com/gtag/js?id=${analyticsId}`;
+            s.async = true;
+            document.head.appendChild(s);
+          };
+
+          ["pointerdown", "keydown", "scroll", "touchstart"].forEach((eventName) => {
+            document.addEventListener(eventName, load, { once: true, passive: true });
+          });
+          setTimeout(load, 6000);
+        })();
+      </script>
+    )}
+  </body>
+</html>

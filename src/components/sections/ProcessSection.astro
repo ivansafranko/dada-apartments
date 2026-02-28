@@ -1,0 +1,32 @@
+---
+interface Step {
+  title: string;
+  text: string;
+}
+
+interface Props {
+  title: string;
+  subtitle: string;
+  steps: Step[];
+}
+
+const { title, subtitle, steps } = Astro.props;
+---
+
+<section class="section-shell">
+  <div class="page-shell">
+    <h2 class="section-title">{title}</h2>
+    <p class="section-subtitle">{subtitle}</p>
+    <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+      {steps.map((step, index) => (
+        <article class="surface-card">
+          <p class="text-xs font-semibold uppercase tracking-wide text-accent">
+            {index + 1}.
+          </p>
+          <h3 class="mt-2 text-xl font-semibold text-primary">{step.title}</h3>
+          <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{step.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

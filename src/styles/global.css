@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #f4f7f6;
+  --color-foreground: #1f2933;
+  --color-card: #ffffff;
+  --color-muted: #f8f9fa;
+  --color-muted-foreground: #5f6c76;
+  --color-border: #dce3e8;
+  --color-primary: #3a4a5c;
+  --color-primary-foreground: #ffffff;
+  --color-accent: #ff8c00;
+  --color-accent-foreground: #1f2933;
+  --font-sans: "IBM Plex Sans", "Segoe UI", Roboto, Arial, sans-serif;
+  --font-serif: "Fraunces", Georgia, serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-primary font-semibold;
+  }
+
+  a {
+    @apply text-inherit;
+  }
+}
+
+@layer components {
+  .skip-link {
+    @apply sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[2000] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground;
+  }
+
+  .page-shell {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-shell {
+    @apply py-16 sm:py-24;
+  }
+
+  .section-title {
+    @apply font-serif text-3xl sm:text-4xl leading-tight;
+  }
+
+  .section-subtitle {
+    @apply mt-3 text-base sm:text-lg text-muted-foreground max-w-3xl;
+  }
+
+  .surface-card {
+    @apply bg-card border border-border rounded-xl p-6 shadow-sm;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center rounded-lg bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:opacity-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary;
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center rounded-lg bg-accent px-5 py-3 text-sm font-semibold text-accent-foreground transition hover:brightness-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-accent;
+  }
+
+  .hero-gradient {
+    background-image: radial-gradient(120% 120% at 100% 0%, rgba(255, 140, 0, 0.2), rgba(58, 74, 92, 0.06) 45%, transparent 70%);
+  }
+
+  .mobile-nav-details[open] summary svg {
+    transform: rotate(180deg);
+  }
+
+  .booking-widget-host {
+    @apply w-full;
+  }
+
+  .booking-widget-root {
+    @apply w-full;
+  }
+
+  .booking-widget-root :where(iframe) {
+    width: 100% !important;
+    max-width: 100% !important;
+    border: 0 !important;
+    display: block !important;
+  }
+
+  .booking-widget-root
+    :where(
+      [style*="overflow: auto"],
+      [style*="overflow:auto"],
+      [style*="overflow-y: auto"],
+      [style*="overflow-y:auto"]
+    ) {
+    overflow: visible !important;
+  }
+}

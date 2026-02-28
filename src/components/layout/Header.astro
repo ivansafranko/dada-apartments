@@ -1,0 +1,87 @@
+---
+interface NavLabels {
+  home: string;
+  about: string;
+  apartments: string;
+  book: string;
+  contact: string;
+  menu: string;
+}
+
+interface NavLinks {
+  home: string;
+  about: string;
+  apartments: string;
+  book: string;
+  contact: string;
+}
+
+interface Props {
+  nav: NavLabels;
+  links: NavLinks;
+  brand: string;
+  switchHref: string;
+  switchLabel: string;
+  active?: keyof NavLinks;
+}
+
+const { nav, links, brand, switchHref, switchLabel, active } = Astro.props;
+
+function linkClass(key: keyof NavLinks): string {
+  const base =
+    "rounded-md px-3 py-2 text-sm font-medium transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary";
+  return active === key
+    ? `${base} bg-primary text-primary-foreground`
+    : `${base} text-primary hover:bg-primary/10`;
+}
+---
+
+<header class="sticky top-0 z-50 border-b border-border bg-card/95 backdrop-blur">
+  <div class="page-shell">
+    <div class="flex min-h-16 items-center justify-between gap-4 py-3">
+      <a href={links.home} class="text-xl font-semibold text-primary no-underline">
+        {brand}
+      </a>
+
+      <nav class="hidden items-center gap-2 md:flex" aria-label="Primary">
+        <a class={linkClass("home")} href={links.home}>{nav.home}</a>
+        <a class={linkClass("about")} href={links.about}>{nav.about}</a>
+        <a class={linkClass("apartments")} href={links.apartments}>{nav.apartments}</a>
+        <a class={`${linkClass("book")} border border-accent`} href={links.book}>{nav.book}</a>
+        <a class={`${linkClass("contact")} bg-accent text-accent-foreground hover:brightness-95`} href={links.contact}>{nav.contact}</a>
+        <a
+          href={switchHref}
+          class="ml-2 inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-border px-3 text-sm font-semibold text-primary hover:bg-muted"
+          rel="alternate"
+        >
+          {switchLabel}
+        </a>
+      </nav>
+
+      <details class="mobile-nav-details relative md:hidden">
+        <summary class="inline-flex min-h-11 items-center gap-2 rounded-md border border-border px-3 py-2 text-sm font-semibold text-primary list-none marker:content-['']">
+          {nav.menu}
+          <svg class="h-4 w-4 transition-transform" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+            <path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 0 1 1.06.02L10 11.12l3.71-3.9a.75.75 0 1 1 1.08 1.04l-4.25 4.46a.75.75 0 0 1-1.08 0L5.21 8.27a.75.75 0 0 1 .02-1.06z" clip-rule="evenodd" />
+          </svg>
+        </summary>
+        <nav class="absolute right-0 mt-2 w-72 rounded-xl border border-border bg-card p-3 shadow-lg" aria-label="Mobile">
+          <div class="flex flex-col gap-1">
+            <a class={linkClass("home")} href={links.home}>{nav.home}</a>
+            <a class={linkClass("about")} href={links.about}>{nav.about}</a>
+            <a class={linkClass("apartments")} href={links.apartments}>{nav.apartments}</a>
+            <a class={linkClass("book")} href={links.book}>{nav.book}</a>
+            <a class={linkClass("contact")} href={links.contact}>{nav.contact}</a>
+            <a
+              href={switchHref}
+              class="mt-2 inline-flex min-h-11 items-center justify-center rounded-md border border-border px-3 py-2 text-sm font-semibold text-primary hover:bg-muted"
+              rel="alternate"
+            >
+              {switchLabel}
+            </a>
+          </div>
+        </nav>
+      </details>
+    </div>
+  </div>
+</header>

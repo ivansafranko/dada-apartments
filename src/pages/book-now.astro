@@ -1,0 +1,89 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Header from "@/components/layout/Header.astro";
+import Footer from "@/components/layout/Footer.astro";
+import BookingWidget from "@/components/islands/BookingWidget";
+import { LOCALES } from "@/data/locales";
+import { BOOKING, SITE, SOCIALS } from "@/data/site";
+import { buildOrganizationSchema, buildWebsiteSchema } from "@/lib/structured-data";
+
+const locale = LOCALES.hr;
+
+const alternates = [
+  { hreflang: "hr", path: "/book-now" },
+  { hreflang: "en", path: "/en/book-now" },
+  { hreflang: "x-default", path: "/book-now" }
+] as const;
+
+const structuredData = [
+  buildWebsiteSchema("/book-now"),
+  buildOrganizationSchema(),
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    name: locale.seo.book.title,
+    description: locale.seo.book.description,
+    url: `${SITE.url}/book-now`,
+    inLanguage: "hr"
+  }
+];
+---
+
+<BaseLayout
+  locale="hr"
+  skipToContentLabel={locale.skipToContent}
+  meta={{
+    title: locale.seo.book.title,
+    description: locale.seo.book.description,
+    canonicalPath: "/book-now",
+    locale: "hr"
+  }}
+  alternates={alternates}
+  structuredData={structuredData}
+>
+  <Fragment slot="header">
+    <Header
+      nav={locale.nav}
+      brand="Apartmani Dada"
+      active="book"
+      switchHref="/en/book-now"
+      switchLabel="EN"
+      links={{
+        home: "/",
+        apartments: "/#apartments-title",
+        about: "/#about-title",
+        book: "/book-now",
+        contact: "/#contact-title"
+      }}
+    />
+  </Fragment>
+
+  <section class="section-shell">
+    <div class="page-shell">
+      <h1 class="section-title">{locale.book.title}</h1>
+      <p class="section-subtitle">{locale.book.intro}</p>
+      <div class="mt-8">
+        <BookingWidget
+          client:load
+          hotelId={BOOKING.hotelId}
+          language="hr"
+          currency={BOOKING.currency}
+          loadLabel={locale.book.loadWidget}
+          fallbackBookingUrl={BOOKING.fallbackUrl}
+          fallbackTitle={locale.book.fallbackTitle}
+          fallbackText={locale.book.fallbackText}
+          fallbackCta={locale.book.fallbackCta}
+        />
+      </div>
+    </div>
+  </section>
+
+  <Fragment slot="footer">
+    <Footer
+      brand="Apartmani Dada"
+      text={locale.footer.text}
+      copyright={locale.footer.copyright}
+      facebookUrl={SOCIALS.facebook}
+    />
+  </Fragment>
+</BaseLayout>

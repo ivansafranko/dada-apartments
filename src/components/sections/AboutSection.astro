@@ -1,0 +1,29 @@
+---
+interface Card {
+  title: string;
+  text: string;
+}
+
+interface Props {
+  title: string;
+  subtitle: string;
+  cards: Card[];
+}
+
+const { title, subtitle, cards } = Astro.props;
+---
+
+<section id="about" class="section-shell">
+  <div class="page-shell">
+    <h2 id="about-title" class="section-title">{title}</h2>
+    <p class="section-subtitle">{subtitle}</p>
+    <div class="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+      {cards.map((card) => (
+        <article class="surface-card">
+          <h3 class="text-xl font-semibold text-primary">{card.title}</h3>
+          <p class="mt-3 text-sm leading-relaxed text-muted-foreground">{card.text}</p>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

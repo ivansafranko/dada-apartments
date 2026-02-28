@@ -1,0 +1,49 @@
+---
+import { SITE } from "@/data/site";
+import type { AlternateLocaleLink, SeoMeta, StructuredDataPayload } from "@/types/seo";
+
+interface Props {
+  meta: SeoMeta;
+  alternates: ReadonlyArray<AlternateLocaleLink>;
+  structuredData?: StructuredDataPayload[];
+}
+
+const { meta, alternates, structuredData = [] } = Astro.props;
+
+const canonicalUrl = new URL(meta.canonicalPath, SITE.url).toString();
+const ogImage = new URL(meta.ogImage ?? SITE.defaultOgImage, SITE.url).toString();
+const localeMap = {
+  hr: "hr_HR",
+  en: "en_GB"
+} as const;
+
+const dataBlocks = structuredData.flatMap((entry) => (Array.isArray(entry) ? entry : [entry]));
+---
+
+<title>{meta.title}</title>
+<meta name="description" content={meta.description} />
+<meta name="robots" content={meta.robots ?? "index, follow"} />
+<link rel="canonical" href={canonicalUrl} />
+
+{alternates.map((alt) => (
+  <link rel="alternate" hreflang={alt.hreflang} href={new URL(alt.path, SITE.url).toString()} />
+))}
+
+<meta property="og:type" content={meta.ogType ?? "website"} />
+<meta property="og:site_name" content={SITE.legalName} />
+<meta property="og:title" content={meta.title} />
+<meta property="og:description" content={meta.description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:image" content={ogImage} />
+<meta property="og:locale" content={localeMap[meta.locale]} />
+<meta property="og:locale:alternate" content={meta.locale === "hr" ? localeMap.en : localeMap.hr} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={meta.title} />
+<meta name="twitter:description" content={meta.description} />
+<meta name="twitter:image" content={ogImage} />
+<meta name="twitter:url" content={canonicalUrl} />
+
+{dataBlocks.map((entry) => (
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(entry)} />
+))}
