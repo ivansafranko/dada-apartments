@@ -22,17 +22,6 @@
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
-    position: relative;
-  }
-
-  /* Mobile bottom overscroll: shows footer color when pulling up past the bottom */
-  body::after {
-    content: '';
-    display: block;
-    height: 50vh;
-    margin-top: -50vh;
-    background-color: #3a4a5c;
-    pointer-events: none;
   }
 
   h1,
