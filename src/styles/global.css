@@ -18,15 +18,21 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: #3a4a5c;
-    /* footer color — shows during bottom overscroll on mobile */
   }
 
   body {
-    @apply text-foreground font-sans antialiased;
-    background-color: #f4f7f6;
-    /* page color — shows during top overscroll on mobile */
-    min-height: 100%;
+    @apply bg-background text-foreground font-sans antialiased;
+    position: relative;
+  }
+
+  /* Mobile bottom overscroll: shows footer color when pulling up past the bottom */
+  body::after {
+    content: '';
+    display: block;
+    height: 50vh;
+    margin-top: -50vh;
+    background-color: #3a4a5c;
+    pointer-events: none;
   }
 
   h1,
