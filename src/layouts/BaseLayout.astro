@@ -79,5 +79,8 @@ const analyticsId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
         })();
       </script>
     )}
+
+    <!-- Hack for mobile bottom overscroll: a fixed div colored as the footer, positioned out of normal bounds but visible during overscroll -->
+    <div class="fixed left-0 w-full bg-primary -z-10 pointer-events-none" style="height: 100vh; bottom: -50vh;" aria-hidden="true"></div>
   </body>
 </html>
