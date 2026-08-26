@@ -10,6 +10,10 @@ export interface Props {
   isBooking?: boolean;
   hasDatePicker?: boolean;
   ogImage?: string;
+  structuredData?: Record<string, unknown> | Record<string, unknown>[];
+  titleTranslationKey?: string;
+  descriptionTranslationKey?: string;
+  preloadImage?: string;
 }
 
 const {
@@ -19,6 +23,10 @@ const {
   isBooking = false,
   hasDatePicker = false,
   ogImage = 'https://apartments-dada.com/images/dada-apartments-krapinske-toplice-hero.webp',
+  structuredData,
+  titleTranslationKey,
+  descriptionTranslationKey,
+  preloadImage,
 } = Astro.props;
 ---
 
@@ -32,19 +40,22 @@ const {
     <link rel="alternate" hreflang="hr" href={canonical} />
     <link rel="alternate" hreflang="en" href={`${canonical}${canonical.includes('?') ? '&' : '?'}lang=en`} />
     <link rel="alternate" hreflang="x-default" href={canonical} />
-    <title data-translate={!isBooking ? 'page-title' : undefined}>{title}</title>
-    <meta name="description" data-translate={!isBooking ? 'page-description' : undefined} content={description} />
+    <title data-translate={titleTranslationKey ?? (!isBooking ? 'page-title' : undefined)}>{title}</title>
+    <meta name="description" data-translate={descriptionTranslationKey ?? (!isBooking ? 'page-description' : undefined)} content={description} />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Apartmani Dada" />
-    <meta name="theme-color" content="#1e40af" />
+    <meta name="theme-color" content="#032121" />
     <link rel="icon" type="image/svg+xml" href="/icon.svg" />
     <link rel="manifest" href="/site.webmanifest" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css" />
-    {hasDatePicker && <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />}
+    {preloadImage && <link rel="preload" as="image" href={preloadImage} fetchpriority="high" />}
+    {hasDatePicker && <link rel="preconnect" href="https://cdn.jsdelivr.net" />}
+    {hasDatePicker && <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" media="print" onload="this.media='all'" />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="hr_HR" />
+    <meta property="og:locale:alternate" content="en_US" />
     <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -54,6 +65,7 @@ const {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
+    {structuredData && <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />}
     <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-8QBRR4GF05"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
@@ -65,6 +77,10 @@ const {
   <body>
     <a class="skip-link" href="#main-content">Preskoči na sadržaj</a>
     <noscript><style>body { opacity: 1 !important; }</style></noscript>
+    <noscript>
+      {hasDatePicker && <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />}
+      <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+    </noscript>
     <Header isBooking={isBooking} />
     <main id="main-content" tabindex="-1">
       <slot />

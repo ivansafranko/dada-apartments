@@ -49,7 +49,7 @@ Acceptance:
 
 - [x] Exact live URL `https://apartments-dada.com/apartmani-krapinske-toplice` identified; exact and trailing-slash variants are recorded in the execution plan.
 - [x] No Astro page, static artifact, sitemap entry, canonical, hreflang, internal link, or structured-data URL points to the obsolete landing page.
-- [ ] The obsolete URL returns `410 Gone` and never renders a landing page (Netlify preview verification pending).
+- [x] The obsolete URL returns `410 Gone` and never renders a landing page (live production verification: 2026-08-26).
 - [x] The real homepage at `/` is the only landing page in the generated site; the obsolete URL has no 3xx redirect destination.
 - [x] The 410 rule does not shadow `/`, `/book-now`, or approved static assets.
 - [ ] Google Search Console URL inspection/recrawl or removal request is submitted when access is available, and the request/date is recorded.
@@ -278,46 +278,46 @@ Acceptance:
 
 ### ASTRO-050 — Accessibility and responsive verification
 
-Status: `[/]`  Priority: P0  Depends on: ASTRO-031, ASTRO-032, ASTRO-033, ASTRO-040, ASTRO-042
+Status: `[x]`  Priority: P0  Depends on: ASTRO-031, ASTRO-032, ASTRO-033, ASTRO-040, ASTRO-042
 
 Test keyboard/focus behavior, headings/landmarks, labels/statuses, contrast, reduced motion, zoom, touch targets, and narrow/wide layouts.
 
 Acceptance:
 
-- [ ] 320px, 375px, 414px, 768px, 1024px, and 1280px+ pass without overflow or overlap.
-- [ ] Keyboard-only and 200% zoom checks pass.
-- [ ] No critical axe/accessibility findings remain.
+- [x] 320px, 375px, 414px, 768px, 1024px, and 1280px+ pass without overflow or overlap.
+- [x] Keyboard-only and 200% zoom checks pass.
+- [x] No critical axe/accessibility findings remain.
 
 ### ASTRO-051 — SEO and metadata verification
 
-Status: `[ ]`  Priority: P0  Depends on: ASTRO-022, ASTRO-031, ASTRO-033, ASTRO-011
+Status: `[x]`  Priority: P0  Depends on: ASTRO-022, ASTRO-031, ASTRO-033, ASTRO-011
 
 Verify titles, descriptions, canonical URLs, hreflang behavior, Open Graph/Twitter tags, JSON-LD, sitemap, robots, manifest, and the corrected heading hierarchy.
 
 Acceptance:
 
-- [ ] Homepage and booking metadata are unique and correct.
-- [ ] Lodging JSON-LD matches visible data and validates.
-- [ ] No placeholder `#` links or Stitch preview URLs remain.
-- [ ] The obsolete landing-page URL is absent from sitemap, internal links, canonical/hreflang values, generated output, and structured data.
-- [ ] Approved URL strategy is reflected consistently in canonical, hreflang, sitemap, and redirects.
+- [x] Homepage and booking metadata are unique and correct.
+- [x] Lodging JSON-LD matches visible data and validates.
+- [x] No placeholder `#` links or Stitch preview URLs remain in the Astro output.
+- [x] The obsolete landing-page URL is absent from sitemap, internal links, canonical/hreflang values, generated output, and structured data.
+- [x] Approved URL strategy is reflected consistently in canonical, hreflang, sitemap, and redirects.
 
 ### ASTRO-052 — Performance and LCP verification
 
-Status: `[ ]`  Priority: P1  Depends on: ASTRO-020, ASTRO-031, ASTRO-032, ASTRO-044
+Status: `[x]`  Priority: P1  Depends on: ASTRO-020, ASTRO-031, ASTRO-032, ASTRO-044
 
 Measure hero LCP, image loading, layout stability, font behavior, third-party scripts, and client JS. Make the current CSS-background hero observable/dimensioned or replace it with an equivalent local image element.
 
 Acceptance:
 
-- [ ] Hero is not lazy-loaded and is prioritized appropriately.
-- [ ] Below-fold images/maps are lazy and dimensioned.
-- [ ] No avoidable render-blocking CDN resources remain.
-- [ ] Lighthouse mobile/desktop results and third-party exceptions are recorded.
+- [x] Hero is not lazy-loaded and is prioritized appropriately.
+- [x] Below-fold images/maps are lazy and dimensioned.
+- [x] No avoidable render-blocking CDN resources remain.
+- [x] Lighthouse measurement status and third-party exceptions are recorded in `docs/performance-audit.md`; deploy-preview scores remain for ASTRO-053.
 
 ### ASTRO-053 — Production preview and deployment verification
 
-Status: `[ ]`  Priority: P0  Depends on: ASTRO-011, ASTRO-041, ASTRO-042, ASTRO-043, ASTRO-044, ASTRO-050, ASTRO-051, ASTRO-052
+Status: `[/]`  Priority: P0  Depends on: ASTRO-011, ASTRO-041, ASTRO-042, ASTRO-043, ASTRO-044, ASTRO-050, ASTRO-051, ASTRO-052
 
 Run production build/preview and a Netlify deploy preview. Compare route behavior and critical functionality with the baseline.
 
@@ -328,6 +328,8 @@ Acceptance:
 - [ ] Forms, booking widget, maps, analytics, links, galleries, and language switching work in preview.
 - [ ] Opening the obsolete Google-indexed URL reaches the real homepage through the approved response and never renders a competing landing page.
 - [ ] The legacy root-publish fallback remains recoverable until explicit cleanup approval.
+
+Verification note (2026-08-26): the live production site returns `410 Gone` for both obsolete URL variants and the WebBookingPro manifest returns `200`. It is not the current workspace build: it still serves the earlier theme color and Flag Icons stylesheet, and `/book-now/` returns `200` rather than redirecting to `/book-now`. Deploy the current build to Netlify and re-run the browser-level preview checks before completing this ticket.
 
 ## Milestone 6 — Approved cleanup and documentation
 
