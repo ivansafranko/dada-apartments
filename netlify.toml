@@ -28,6 +28,12 @@
   status = 301
   force = true
 
+[[redirects]]
+  from = "/book-now/"
+  to = "/book-now"
+  status = 301
+  force = true
+
 # Redirect HTTP to HTTPS
 [[redirects]]
   from = "http://*"
