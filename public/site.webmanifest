@@ -1,0 +1,16 @@
+{
+    "name": "Apartmani Dada - Krapinske Toplice",
+    "short_name": "Apartmani Dada",
+    "description": "Premium apartments in Krapinske Toplice, Croatia",
+    "icons": [
+        {
+            "src": "/icon.svg",
+            "sizes": "any",
+            "type": "image/svg+xml"
+        }
+    ],
+    "theme_color": "#1e40af",
+    "background_color": "#ffffff",
+    "display": "browser",
+    "start_url": "/"
+}

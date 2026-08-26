@@ -1,0 +1,36 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const title = 'Rezervacije – Apartments Dada';
+const description = 'Online rezervacije za Apartmani Dada u Krapinskim Toplicama.';
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonical="https://apartments-dada.com/book-now"
+  isBooking
+>
+  <section class="booking-page" aria-labelledby="booking-heading">
+    <div class="container">
+      <h1 id="booking-heading" class="section-headline" data-translate="nav-book">Rezervirajte online</h1>
+      <p class="section-subheadline" data-translate="book-intro">Odaberite datume i rezervirajte svoj boravak.</p>
+
+      <div id="wbproot" class="notranslate" style="min-height: 70vh;" aria-live="polite">
+        <p id="booking-loading" role="status">Učitavamo sustav za rezervacije…</p>
+      </div>
+      <p id="booking-fallback" hidden>
+        Rezervacijski sustav trenutačno nije dostupan. Za pomoć nam se javite na
+        <a href="mailto:dragutin.safranko@gmail.com">dragutin.safranko@gmail.com</a> ili
+        <a href="tel:+385989982059">+385 98 998 2059</a>.
+      </p>
+      <noscript><p>Za rezervacije nas kontaktirajte na <a href="mailto:dragutin.safranko@gmail.com">dragutin.safranko@gmail.com</a> ili +385 98 998 2059.</p></noscript>
+    </div>
+  </section>
+
+  <script>
+    import { initBookingWidget } from '../../scripts/booking';
+
+    initBookingWidget();
+  </script>
+</BaseLayout>

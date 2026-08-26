@@ -1,0 +1,80 @@
+---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import '../styles/global.css';
+
+export interface Props {
+  title: string;
+  description: string;
+  canonical: string;
+  isBooking?: boolean;
+  hasDatePicker?: boolean;
+  ogImage?: string;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  isBooking = false,
+  hasDatePicker = false,
+  ogImage = 'https://apartments-dada.com/images/dada-apartments-krapinske-toplice-hero.webp',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="hr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="content-language" content="hr-HR" />
+    <link rel="canonical" href={canonical} />
+    <link rel="alternate" hreflang="hr" href={canonical} />
+    <link rel="alternate" hreflang="en" href={`${canonical}${canonical.includes('?') ? '&' : '?'}lang=en`} />
+    <link rel="alternate" hreflang="x-default" href={canonical} />
+    <title data-translate={!isBooking ? 'page-title' : undefined}>{title}</title>
+    <meta name="description" data-translate={!isBooking ? 'page-description' : undefined} content={description} />
+    <meta name="robots" content="index, follow" />
+    <meta name="author" content="Apartmani Dada" />
+    <meta name="theme-color" content="#1e40af" />
+    <link rel="icon" type="image/svg+xml" href="/icon.svg" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/lipis/flag-icons@6.6.6/css/flag-icons.min.css" />
+    {hasDatePicker && <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" />}
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content={canonical} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-8QBRR4GF05"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { window.dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-8QBRR4GF05');
+    </script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Preskoči na sadržaj</a>
+    <noscript><style>body { opacity: 1 !important; }</style></noscript>
+    <Header isBooking={isBooking} />
+    <main id="main-content" tabindex="-1">
+      <slot />
+    </main>
+    <Footer />
+    <script is:inline src="https://unpkg.com/lucide@latest/dist/umd/lucide.js" defer></script>
+    <script>
+      import { initSite } from '../scripts/site';
+
+      initSite();
+    </script>
+  </body>
+</html>
