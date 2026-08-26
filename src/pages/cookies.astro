@@ -2,12 +2,55 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Kolačići | Apartmani Dada" description="Informacije o kolačićima za Apartmani Dada." canonical="https://apartments-dada.com/cookies">
-  <section class="legal-page">
-    <div class="container">
-      <p class="eyebrow">Apartmani Dada</p>
-      <h1>Kolačići</h1>
-      <p>Ova stranica s informacijama o kolačićima bit će uskoro dostupna.</p>
+<BaseLayout title="Kolačići | Apartmani Dada" description="Informacije o korištenju kolačića na web stranici Apartmani Dada." canonical="https://apartments-dada.com/cookies" titleTranslationKey="cookies-page-title" descriptionTranslationKey="cookies-page-description">
+  <section class="legal-page" aria-labelledby="cookies-heading">
+    <div class="container legal-container">
+      <header class="legal-intro">
+        <p class="eyebrow" data-translate="legal-updated">Apartmani Dada · Zadnje ažuriranje: 26. kolovoza 2026.</p>
+        <h1 id="cookies-heading" data-translate="cookies-title">Kolačići</h1>
+        <p data-translate="cookies-intro">Ova stranica objašnjava kako se kolačići i slične tehnologije upotrebljavaju na apartments-dada.com.</p>
+      </header>
+
+      <div class="legal-content">
+        <section aria-labelledby="cookies-what">
+          <h2 id="cookies-what" data-translate="cookies-what-title">Što su kolačići?</h2>
+          <p data-translate="cookies-what-text">Kolačići su male tekstualne datoteke koje preglednik sprema na vaš uređaj. Pomažu stranicama da zapamte postavke, osiguraju osnovne funkcije ili izmjere korištenje stranice. Slične tehnologije mogu koristiti lokalnu pohranu preglednika ili identifikatore uređaja.</p>
+        </section>
+
+        <section aria-labelledby="cookies-types">
+          <h2 id="cookies-types" data-translate="cookies-types-title">Kategorije koje se mogu koristiti</h2>
+          <div class="legal-table-wrap" role="region" aria-label="Vrste kolačića" data-translate-aria-label="cookies-table-label" tabindex="0">
+            <table>
+              <thead><tr><th scope="col" data-translate="cookies-table-category">Kategorija</th><th scope="col" data-translate="cookies-table-purpose">Svrha</th><th scope="col" data-translate="cookies-table-example">Primjer</th></tr></thead>
+              <tbody>
+                <tr><td data-translate="cookies-row1-category">Funkcionalni</td><td data-translate="cookies-row1-purpose">Pamte osnovne postavke, primjerice odabrani jezik.</td><td data-translate="cookies-row1-example">Postavka jezika može biti spremljena u lokalnoj pohrani preglednika.</td></tr>
+                <tr><td data-translate="cookies-row2-category">Analitički</td><td data-translate="cookies-row2-purpose">Pomažu razumjeti kako se stranica koristi i poboljšati njezin sadržaj.</td><td data-translate="cookies-row2-example">Google Analytics 4 (mjerni identifikator G-8QBRR4GF05).</td></tr>
+                <tr><td data-translate="cookies-row3-category">Treće strane</td><td data-translate="cookies-row3-purpose">Mogu ih postaviti usluge koje se učitavaju s drugih domena.</td><td data-translate="cookies-row3-example">Google Maps, Google Fonts, Booking.com i sustav za online rezervacije.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section aria-labelledby="cookies-analytics">
+          <h2 id="cookies-analytics" data-translate="cookies-analytics-title">Analitika i usluge trećih strana</h2>
+          <p data-translate="cookies-analytics-text">Web stranica koristi Google Analytics 4 za razumijevanje posjećenosti i načina korištenja stranice. Google i drugi vanjski pružatelji mogu koristiti vlastite kolačiće ili slične identifikatore u skladu sa svojim pravilima. Kada otvorite kartu, sustav za rezervacije ili vanjsku poveznicu, na vaš se uređaj mogu primijeniti pravila odgovarajućeg pružatelja usluge.</p>
+        </section>
+
+        <section aria-labelledby="cookies-control">
+          <h2 id="cookies-control" data-translate="cookies-control-title">Kako upravljati kolačićima</h2>
+          <p data-translate="cookies-control-text">Kolačiće možete ograničiti ili izbrisati u postavkama preglednika. Imajte na umu da blokiranje određenih kolačića može utjecati na rad pojedinih funkcija, osobito vanjskih usluga za karte i rezervacije. Za više informacija o obradi osobnih podataka pogledajte Pravila privatnosti.</p>
+        </section>
+
+        <section aria-labelledby="cookies-contact">
+          <h2 id="cookies-contact" data-translate="cookies-contact-title">Kontakt</h2>
+          <p data-translate="cookies-contact-text">Za pitanja o kolačićima ili privatnosti obratite nam se na dragutin.safranko@gmail.com.</p>
+        </section>
+      </div>
+
+      <nav class="legal-related" aria-label="Povezani pravni dokumenti" data-translate-aria-label="related-documents-label">
+        <a href="/terms" data-translate="legal-terms">Uvjeti korištenja</a>
+        <a href="/privacy" data-translate="legal-privacy">Pravila privatnosti</a>
+      </nav>
     </div>
   </section>
 </BaseLayout>

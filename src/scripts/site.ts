@@ -33,6 +33,14 @@ function updateLanguage(locale: Locale) {
     const value = dictionary[element.dataset.translate ?? ''];
     if (value) element.textContent = value;
   });
+  document.querySelectorAll<HTMLElement>('[data-translate-alt]').forEach((element) => {
+    const value = dictionary[element.dataset.translateAlt ?? ''];
+    if (value) element.setAttribute('alt', value);
+  });
+  document.querySelectorAll<HTMLElement>('[data-translate-aria-label]').forEach((element) => {
+    const value = dictionary[element.dataset.translateAriaLabel ?? ''];
+    if (value) element.setAttribute('aria-label', value);
+  });
   document.querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[data-translate-placeholder]').forEach((element) => {
     const value = dictionary[element.dataset.translatePlaceholder ?? ''];
     if (value) element.placeholder = value;
@@ -41,7 +49,10 @@ function updateLanguage(locale: Locale) {
   document.documentElement.lang = locale;
   document.body.classList.toggle('english-locale', locale === 'en');
   document.body.classList.toggle('croatian-locale', locale === 'hr');
-  document.querySelector('meta[data-translate="page-description"]')?.setAttribute('content', dictionary['page-description']);
+  document.querySelectorAll<HTMLMetaElement>('meta[data-translate]').forEach((element) => {
+    const value = dictionary[element.dataset.translate ?? ''];
+    if (value) element.setAttribute('content', value);
+  });
 
   document.querySelectorAll<HTMLButtonElement>('.language-toggle').forEach((toggle) => {
     const isEnglish = locale === 'en';
@@ -98,6 +109,7 @@ function initMobileMenu() {
 
   button.addEventListener('click', toggle);
   menu.querySelectorAll('a').forEach((link) => link.addEventListener('click', close));
+  window.addEventListener('scroll', close, { passive: true });
   document.addEventListener('pointerdown', (event) => {
     if (!menu.contains(event.target as Node) && !button.contains(event.target as Node)) close();
   });

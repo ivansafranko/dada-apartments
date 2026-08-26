@@ -2,12 +2,63 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Pravila privatnosti | Apartmani Dada" description="Pravila privatnosti za Apartmani Dada." canonical="https://apartments-dada.com/privacy">
-  <section class="legal-page">
-    <div class="container">
-      <p class="eyebrow">Apartmani Dada</p>
-      <h1>Pravila privatnosti</h1>
-      <p>Ova stranica s pravilima privatnosti bit će uskoro dostupna.</p>
+<BaseLayout title="Pravila privatnosti | Apartmani Dada" description="Informacije o obradi osobnih podataka na web stranici Apartmani Dada." canonical="https://apartments-dada.com/privacy" titleTranslationKey="privacy-page-title" descriptionTranslationKey="privacy-page-description">
+  <section class="legal-page" aria-labelledby="privacy-heading">
+    <div class="container legal-container">
+      <header class="legal-intro">
+        <p class="eyebrow" data-translate="legal-updated">Apartmani Dada · Zadnje ažuriranje: 26. kolovoza 2026.</p>
+        <h1 id="privacy-heading" data-translate="privacy-title">Pravila privatnosti</h1>
+        <p data-translate="privacy-intro">Ovdje objašnjavamo koje podatke prikupljamo, zašto ih koristimo i koja prava imate u vezi sa svojim osobnim podacima.</p>
+      </header>
+
+      <div class="legal-content">
+        <section aria-labelledby="privacy-controller">
+          <h2 id="privacy-controller" data-translate="privacy-controller-title">Voditelj obrade i kontakt</h2>
+          <p data-translate="privacy-controller-text">Voditelj obrade za podatke prikupljene putem ove web stranice je Apartmani Dada. Za sva pitanja o privatnosti ili ostvarivanju svojih prava javite se na dragutin.safranko@gmail.com ili na +385 98 998 2059.</p>
+        </section>
+
+        <section aria-labelledby="privacy-data">
+          <h2 id="privacy-data" data-translate="privacy-data-title">Podaci koje obrađujemo</h2>
+          <p data-translate="privacy-data-text">Kada nam pošaljete upit, obrađujemo podatke koje unesete u obrazac: ime, e-mail adresu, datum dolaska i odlaska te sadržaj poruke. Pri korištenju stranice mogu se obrađivati i tehnički podaci, poput IP adrese, vrste preglednika, zapisa o posjetu i postavke jezika.</p>
+        </section>
+
+        <section aria-labelledby="privacy-purpose">
+          <h2 id="privacy-purpose" data-translate="privacy-purpose-title">Svrhe i pravne osnove</h2>
+          <ul>
+            <li data-translate="privacy-purpose-item1">odgovaranje na upite i poduzimanje radnji na vaš zahtjev prije sklapanja rezervacije;</li>
+            <li data-translate="privacy-purpose-item2">organizacija i izvršavanje ugovorenog smještaja, kada je rezervacija potvrđena;</li>
+            <li data-translate="privacy-purpose-item3">zaštita stranice, sprječavanje zlouporaba i održavanje njezina rada, kada za to postoji naš legitimni interes;</li>
+            <li data-translate="privacy-purpose-item4">analiza korištenja stranice, kada je to dopušteno i u skladu s vašim izborima vezanima uz kolačiće.</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="privacy-recipients">
+          <h2 id="privacy-recipients" data-translate="privacy-recipients-title">Primatelji i vanjske usluge</h2>
+          <p data-translate="privacy-recipients-text1">Podatke možemo obrađivati uz pomoć pružatelja tehničkih usluga za hosting i obrasce, sustava za online rezervacije te pružatelja analitike. Kada kliknete na poveznicu prema Booking.com ili koristite sustav za rezervacije, njihova pravila privatnosti uređuju obradu koju oni provode. Na stranici su dostupne i usluge trećih strana, primjerice Google Maps, Google Fonts i Google Analytics.</p>
+          <p data-translate="privacy-recipients-text2">Neki pružatelji usluga mogu obrađivati podatke izvan Europskog gospodarskog prostora. U takvim slučajevima primjenjuju se zaštitne mjere i uvjeti tih pružatelja u skladu s primjenjivim propisima.</p>
+        </section>
+
+        <section aria-labelledby="privacy-retention">
+          <h2 id="privacy-retention" data-translate="privacy-retention-title">Rok čuvanja</h2>
+          <p data-translate="privacy-retention-text">Podatke čuvamo samo onoliko dugo koliko je potrebno za svrhu zbog koje su prikupljeni, za rješavanje upita ili rezervacije te za ispunjavanje zakonskih obveza. Nakon isteka odgovarajućeg roka podatke brišemo ili anonimiziramo, osim ako ih moramo čuvati dulje zbog zakonskog zahtjeva ili zaštite pravnih zahtjeva.</p>
+        </section>
+
+        <section aria-labelledby="privacy-rights">
+          <h2 id="privacy-rights" data-translate="privacy-rights-title">Vaša prava</h2>
+          <p data-translate="privacy-rights-text1">U skladu s primjenjivim propisima možete zatražiti pristup, ispravak, brisanje, ograničenje obrade ili prenosivost svojih podataka te uložiti prigovor na obradu koja se temelji na legitimnom interesu. Ako se obrada temelji na privoli, možete je povući u bilo kojem trenutku, bez utjecaja na zakonitost prethodne obrade.</p>
+          <p data-translate="privacy-rights-text2">Zahtjev pošaljite na našu e-mail adresu. Također imate pravo podnijeti pritužbu Agenciji za zaštitu osobnih podataka (AZOP).</p>
+        </section>
+
+        <section aria-labelledby="privacy-security">
+          <h2 id="privacy-security" data-translate="privacy-security-title">Sigurnost i izmjene</h2>
+          <p data-translate="privacy-security-text">Primjenjujemo razumne tehničke i organizacijske mjere za zaštitu podataka. Ipak, nijedan prijenos podataka putem interneta ne može biti potpuno siguran. Ova pravila možemo ažurirati kada promijenimo način obrade podataka ili kada to zahtijevaju propisi.</p>
+        </section>
+      </div>
+
+      <nav class="legal-related" aria-label="Povezani pravni dokumenti" data-translate-aria-label="related-documents-label">
+        <a href="/terms" data-translate="legal-terms">Uvjeti korištenja</a>
+        <a href="/cookies" data-translate="legal-cookies">Kolačići</a>
+      </nav>
     </div>
   </section>
 </BaseLayout>

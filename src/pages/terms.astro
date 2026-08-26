@@ -2,12 +2,53 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="Uvjeti korištenja | Apartmani Dada" description="Uvjeti korištenja za Apartmani Dada." canonical="https://apartments-dada.com/terms">
-  <section class="legal-page">
-    <div class="container">
-      <p class="eyebrow">Apartmani Dada</p>
-      <h1>Uvjeti korištenja</h1>
-      <p>Ova stranica s uvjetima korištenja bit će uskoro dostupna.</p>
+<BaseLayout title="Uvjeti korištenja | Apartmani Dada" description="Uvjeti korištenja za Apartmani Dada." canonical="https://apartments-dada.com/terms" titleTranslationKey="terms-page-title" descriptionTranslationKey="terms-page-description">
+  <section class="legal-page" aria-labelledby="terms-heading">
+    <div class="container legal-container">
+      <header class="legal-intro">
+        <p class="eyebrow" data-translate="legal-updated">Apartmani Dada · Zadnje ažuriranje: 26. kolovoza 2026.</p>
+        <h1 id="terms-heading" data-translate="terms-title">Uvjeti korištenja</h1>
+        <p data-translate="terms-intro">Ovi uvjeti uređuju korištenje web stranice apartments-dada.com. Korištenjem stranice prihvaćate ove uvjete.</p>
+      </header>
+
+      <div class="legal-content">
+        <section aria-labelledby="terms-purpose">
+          <h2 id="terms-purpose" data-translate="terms-purpose-title">Svrha web stranice</h2>
+          <p data-translate="terms-purpose-text">Web stranica pruža informacije o smještaju Apartmani Dada, dostupnim jedinicama i načinima rezervacije. Nastojimo da informacije budu točne i ažurne, ali dostupnost, cijene, sadržaji i uvjeti mogu se promijeniti bez prethodne obavijesti.</p>
+        </section>
+
+        <section aria-labelledby="terms-reservations">
+          <h2 id="terms-reservations" data-translate="terms-reservations-title">Upiti i rezervacije</h2>
+          <p data-translate="terms-reservations-text1">Upit poslan obrascem na stranici nije potvrđena rezervacija. Rezervacija postaje valjana tek nakon naše potvrde ili prema pravilima vanjske platforme putem koje je rezervacija izvršena.</p>
+          <p data-translate="terms-reservations-text2">Za rezervacije napravljene putem vanjskih pružatelja usluga, uključujući sustav za online rezervacije i Booking.com, vrijede i njihovi zasebni uvjeti, pravila plaćanja, otkaza i privatnosti.</p>
+        </section>
+
+        <section aria-labelledby="terms-use">
+          <h2 id="terms-use" data-translate="terms-use-title">Dopušteno korištenje</h2>
+          <p data-translate="terms-use-text">Stranicu možete koristiti isključivo zakonito i u informativne svrhe ili za slanje stvarnog upita za smještaj. Nije dopušteno ometati rad stranice, pokušavati neovlašten pristup sustavima niti koristiti sadržaj na način koji bi mogao štetiti nama ili drugim korisnicima.</p>
+        </section>
+
+        <section aria-labelledby="terms-content">
+          <h2 id="terms-content" data-translate="terms-content-title">Sadržaj i poveznice</h2>
+          <p data-translate="terms-content-text1">Tekstovi, fotografije, dizajn i drugi sadržaji na ovoj stranici zaštićeni su propisima o autorskom i drugim srodnim pravima. Nije ih dopušteno kopirati, mijenjati ili koristiti u komercijalne svrhe bez prethodnog pisanog odobrenja.</p>
+          <p data-translate="terms-content-text2">Stranica može sadržavati poveznice na stranice trećih osoba. Za njihov sadržaj, dostupnost i pravila odgovoran je pojedini pružatelj usluge.</p>
+        </section>
+
+        <section aria-labelledby="terms-liability">
+          <h2 id="terms-liability" data-translate="terms-liability-title">Odgovornost</h2>
+          <p data-translate="terms-liability-text">Stranicu pružamo u dobroj vjeri i ulažemo razuman trud kako bi bila dostupna i sigurna. Ne možemo jamčiti da će raditi bez prekida ili pogrešaka. U najvećoj mjeri dopuštenoj zakonom ne odgovaramo za neizravnu štetu nastalu korištenjem ili nemogućnošću korištenja stranice.</p>
+        </section>
+
+        <section aria-labelledby="terms-changes">
+          <h2 id="terms-changes" data-translate="terms-changes-title">Izmjene i kontakt</h2>
+          <p data-translate="terms-changes-text">Ove uvjete možemo povremeno izmijeniti. Mjerodavna je verzija objavljena na ovoj stranici. Za pitanja nam se obratite na dragutin.safranko@gmail.com ili telefonom na +385 98 998 2059.</p>
+        </section>
+      </div>
+
+      <nav class="legal-related" aria-label="Povezani pravni dokumenti" data-translate-aria-label="related-documents-label">
+        <a href="/privacy" data-translate="legal-privacy">Pravila privatnosti</a>
+        <a href="/cookies" data-translate="legal-cookies">Kolačići</a>
+      </nav>
     </div>
   </section>
 </BaseLayout>

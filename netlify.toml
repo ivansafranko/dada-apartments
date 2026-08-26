@@ -8,18 +8,18 @@
 [build.processing.html]
   pretty_urls = true
 
-# Netlify requires a `to` path for custom error responses. The 410 status
-# keeps this from being an HTTP redirect, while the body is not the homepage.
+# Permanently route the obsolete Google-indexed landing page to the canonical
+# homepage, so visitors and search engines reach the current site immediately.
 [[redirects]]
   from = "/apartmani-krapinske-toplice"
-  to = "/410.html"
-  status = 410
+  to = "/"
+  status = 301
   force = true
 
 [[redirects]]
   from = "/apartmani-krapinske-toplice/"
-  to = "/410.html"
-  status = 410
+  to = "/"
+  status = 301
   force = true
 
 [[redirects]]
