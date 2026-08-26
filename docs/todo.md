@@ -94,7 +94,7 @@ Acceptance:
 - [x] Existing redirect behavior is preserved or each approved change is documented.
 - [x] Obsolete landing-page 410 status is included in the Netlify configuration.
 - [x] Netlify build command is `npm run build` and publish directory is `dist`.
-- [x] `/book-now/` and `/book-now.html` redirect to the single `/book-now` URL in configuration.
+- [ ] `/book-now/` and `/book-now.html` redirect to the single `/book-now` URL in configuration. Netlify normalizes trailing slashes before redirect evaluation, so a `/book-now/` rule loops; a revised URL-strategy decision is required.
 
 ## Milestone 2 — Assets, data, and shared shell
 
@@ -329,7 +329,7 @@ Acceptance:
 - [ ] Opening the obsolete Google-indexed URL reaches the real homepage through the approved response and never renders a competing landing page.
 - [ ] The legacy root-publish fallback remains recoverable until explicit cleanup approval.
 
-Verification note (2026-08-26): the live production site returns `410 Gone` for both obsolete URL variants and the WebBookingPro manifest returns `200`. It is not the current workspace build: it still serves the earlier theme color and Flag Icons stylesheet, and `/book-now/` returns `200` rather than redirecting to `/book-now`. Deploy the current build to Netlify and re-run the browser-level preview checks before completing this ticket.
+Verification note (2026-08-26): the live production site returns `410 Gone` for both obsolete URL variants, the WebBookingPro manifest returns `200`, and the current Astro SEO/performance build is deployed. Netlify normalizes trailing slashes before redirect evaluation; a forced `/book-now/` → `/book-now` rule loops. The rule was removed, leaving `/book-now.html` as a 301 alias and `/book-now/` as a normalized equivalent. A revised URL-strategy decision is required before completing this ticket.
 
 ## Milestone 6 — Approved cleanup and documentation
 
