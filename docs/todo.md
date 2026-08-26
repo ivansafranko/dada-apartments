@@ -278,15 +278,15 @@ Acceptance:
 
 ### ASTRO-050 — Accessibility and responsive verification
 
-Status: `[/]`  Priority: P0  Depends on: ASTRO-031, ASTRO-032, ASTRO-033, ASTRO-040, ASTRO-042
+Status: `[x]`  Priority: P0  Depends on: ASTRO-031, ASTRO-032, ASTRO-033, ASTRO-040, ASTRO-042
 
 Test keyboard/focus behavior, headings/landmarks, labels/statuses, contrast, reduced motion, zoom, touch targets, and narrow/wide layouts.
 
 Acceptance:
 
-- [ ] 320px, 375px, 414px, 768px, 1024px, and 1280px+ pass without overflow or overlap.
-- [ ] Keyboard-only and 200% zoom checks pass.
-- [ ] No critical axe/accessibility findings remain.
+- [x] 320px, 375px, 414px, 768px, 1024px, and 1280px+ pass without overflow or overlap.
+- [x] Keyboard-only and 200% zoom checks pass.
+- [x] No critical axe/accessibility findings remain.
 
 ### ASTRO-051 — SEO and metadata verification
 
