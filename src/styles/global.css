@@ -87,6 +87,7 @@
 }
 
 html {
+  background: var(--color-cream-100);
   scroll-behavior: smooth;
 }
 
