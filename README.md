@@ -1,90 +1,67 @@
-# Apartments Dada - Croatian Rental Website
+# Apartments Dada
 
-A modern, responsive website for apartment rentals in Krapinske Toplice, Croatia.
+Static Astro site for Apartments Dada in Krapinske Toplice, Croatia. Production is hosted on Netlify at `https://apartments-dada.com`.
 
-## 🏠 About
+## Prerequisites
 
-Apartments Dada offers premium apartment rentals in the peaceful spa town of Krapinske Toplice. Our accommodations combine modern comfort with traditional Croatian hospitality, located near the famous Aquae Vivae Water Park.
+- Node.js 18.17 or later
+- npm (the committed `package-lock.json` is the dependency source of truth)
 
-## 🎨 Design System
+## Local development
 
-This website implements a comprehensive design system based on modern property rental platforms:
+Install dependencies once, then use the project scripts:
 
-- **Colors**: Navy blue primary (#3A4A5C), orange accents (#FF8C00), light gray backgrounds
-- **Typography**: Inter font family with proper hierarchy
-- **Layout**: Asymmetric grid with generous whitespace
-- **Components**: Cards, forms, navigation with hover effects
-
-## 📁 File Structure
-
-```
-├── index.html          # Main HTML structure
-├── styles.css          # Complete CSS with design system
-├── script.js           # Interactive JavaScript features
-├── design-system.json  # Design system documentation
-└── README.md          # This file
+```sh
+npm install
+npm run dev
+npm run check
+npm run build
+npm run preview
 ```
 
-## ✨ Features
+`npm run dev` starts the local development server. `npm run check` runs Astro and TypeScript diagnostics. `npm run build` writes the deployable static site to `dist/`; `npm run preview` serves that built output for a local production check.
 
-### Navigation
-- Fixed header with smooth scrolling
-- Hover underlines for navigation links
-- Special CTA button styling for Contact
+## Architecture and ownership
 
-### Sections
-1. **Hero** - Value proposition with search functionality
-2. **About** - Information about Krapinske Toplice and location benefits
-3. **Apartments** - Two location groups with 4 apartments total
-4. **Process** - How to book steps
-5. **Testimonials** - Guest reviews with rotating highlights
-6. **Contact** - Contact form with validation
-7. **Footer** - Brand information and social links
+| Location | Responsibility |
+| --- | --- |
+| `src/pages/` | Route entry points and page-specific scripts |
+| `src/layouts/BaseLayout.astro` | Document metadata, shared head assets, analytics, header, and footer |
+| `src/components/` | Shared header and footer UI |
+| `src/data/apartments.ts` | Apartment details, gallery images, and booking links |
+| `src/data/translations.ts` | Croatian-default and English runtime copy |
+| `src/scripts/` | Browser enhancements for site navigation/language, dates, contact form, and booking widget |
+| `src/styles/global.css` | Global design tokens and site styles |
+| `public/` | Stable static URLs copied unchanged into `dist/`, including images, favicon, manifest, robots, sitemap, and the 410 document |
+| `netlify.toml` | Build settings and public redirect/status behavior |
 
-### Interactive Elements
-- Form validation for contact form
-- Search functionality with apartment highlighting
-- Smooth scrolling navigation
-- Hover effects on cards and buttons
-- Responsive mobile menu
-- Loading animations
-- Scroll-triggered animations
+Use `/images/...` paths for assets that must retain stable public URLs; their source files belong in `public/images/`. Do not add legacy root-published HTML, CSS, JavaScript, or image copies—Netlify deploys only Astro’s generated `dist/` output.
 
-## 🏨 Apartment Listings
+## Routes and URL behavior
 
-### City Center Location
-- **Dada Apartment 1** - Deluxe Suite (2BR, 1BA)
-- **Dada Apartment 2** - Family Comfort (3BR, 2BA)
+- `/` — homepage
+- `/book-now/` — canonical booking route
+- `/book-now` — normalized to `/book-now/` by Netlify Pretty URLs
+- `/book-now.html` — 301 redirect to `/book-now/`
+- `/cookies/`, `/privacy/`, `/terms/` — legal pages
+- `/apartmani-krapinske-toplice` and its trailing-slash variant — `410 Gone`
 
-### Peaceful Residential Area  
-- **Dada Apartment 3** - Garden View (2BR, 1BA)
-- **Dada Apartment 4** - Nature Retreat (1BR, 1BA)
+Croatian is server-rendered by default. The language control retains the existing runtime English experience using `?lang=en` and `localStorage` (`preferredLanguage`); it does not create separate localized routes.
 
-## 📱 Responsive Design
+## Deploying to Netlify
 
-- Mobile-first approach
-- Breakpoints: 768px (tablet), 480px (mobile)
-- Flexible grid layouts
-- Optimized typography scaling
-- Touch-friendly interaction areas
+The repository already declares the production build:
 
-## 🚀 Getting Started
+```toml
+[build]
+  command = "npm run build"
+  publish = "dist"
+```
 
-1. Open `index.html` in a modern web browser
-2. No build process required - pure HTML, CSS, JS
-3. All fonts load from Google Fonts CDN
-4. Works offline except for font loading
+Connect the repository in Netlify and use the checked-in `netlify.toml`; no separate publish directory setting should override it. Confirm a deploy preview with `npm run check` and `npm run build` first, then verify `/`, `/book-now/`, `/book-now.html`, the 410 URL, forms, and the third-party booking widget before promoting production.
 
-## 🌐 Domain
+Netlify Forms notifications are configured in the Netlify site settings, not in source control. The booking widget, Google Analytics, Google Maps, Booking.com links, Lucide icons, Google Fonts, and Flatpickr depend on external services and should be smoke-tested on a deploy preview.
 
-Designed for: **apartments-dada.com**
+## Recovery
 
-## 📞 Contact Information
-
-- **Email**: info@apartments-dada.com  
-- **Phone**: +385 49 123 456
-- **Location**: Krapinske Toplice, Croatia
-
----
-
-*Built with modern web standards and Croatian hospitality in mind.* 🇭🇷 
+The pre-Astro static implementation was retired under approved cleanup ticket ASTRO-060. Git history is the recovery source: restore a prior revision if comparison or rollback is required. Do not restore legacy files into the current deployment root; a production rollback should instead deploy a known-good Git revision with its matching Netlify configuration.

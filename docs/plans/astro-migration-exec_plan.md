@@ -400,9 +400,9 @@ Do not run implementation commands that create or overwrite application files be
 - Keep the old static site recoverable by retaining legacy files or moving them only through an approved, reversible Git change.
 - If the Astro build fails, use the terminal error to correct the smallest affected change and rerun `npm run build`; do not bypass errors by removing routes or integrations.
 - If generated output is wrong, remove only the generated output directory and rebuild; never remove source assets broadly.
-- If deployment fails, revert Netlify build/publish configuration to the last known working setting and use the legacy static path until the preview is fixed.
+- If deployment fails, deploy the last known-good Git revision with its matching Netlify configuration; do not restore legacy root-published files into the current revision.
 - If WebBookingPro, Netlify Forms, or analytics fails after migration, compare generated HTML and script timing with the preserved originals before changing integration behavior.
-- Recovery point: the pre-implementation commit on `astro-migration`, with `main` unchanged.
+- Recovery point: the last known-good Git revision; the approved ASTRO-060 cleanup is recoverable from Git history.
 
 ## 17. Progress
 
@@ -411,13 +411,14 @@ Do not run implementation commands that create or overwrite application files be
 - [x] (2026-08-26 Europe/Zagreb) Plan drafted at `docs/plans/astro-migration-exec_plan.md`.
 - [x] (2026-08-26 Europe/Zagreb) User decisions recorded: current language behavior, one `/book-now` URL, 410 retirement of obsolete landing page, inline success, existing FAQ answers, placeholder legal pages, Stitch fonts, Flatpickr, 2026 copyright, Google Search Console, and no unapproved dependencies.
 - [x] (2026-08-26 Europe/Zagreb) Static baseline captured at `docs/astro-migration-baseline.md`, including route/configuration behavior, source inventory, integration details, content structure, and source checksums.
-- [/] (2026-08-26 Europe/Zagreb) Obsolete URL identified and local 410 rules added with a dedicated non-homepage error body; Netlify production verification and Google Search Console recrawl/removal remain pending.
+- [/] (2026-08-26 Europe/Zagreb) Obsolete URL identified and deployed 410 behavior verified with a dedicated non-homepage error body; Google Search Console recrawl/removal remains pending.
 - [x] (2026-08-26 Europe/Zagreb) Astro foundation and configuration added: package scripts, static Astro config, strict TypeScript config, lockfile, and ignore rules; `npm run build` and `npm run check` pass.
-- [/] (2026-08-26 Europe/Zagreb) Netlify build command/publish directory and redirect rules configured; local Astro output now contains `/` and `/book-now`, while live preview verification remains pending.
-- [ ] Shared layout, data, components, and styling.
-- [ ] Client behavior and third-party integration verification.
-- [ ] Route, SEO, accessibility, performance, and production-preview acceptance.
-- [ ] Cleanup or legacy-file retirement, only after explicit approval.
+- [/] (2026-08-26 Europe/Zagreb) Netlify build command/publish directory and redirect rules configured; production verification confirms the Astro output is deployed. Final confirmation of Pretty URLs normalization for `/book-now` remains pending.
+- [x] (2026-08-26 Europe/Zagreb) Shared layout, typed data, components, and global styling implemented.
+- [x] (2026-08-26 Europe/Zagreb) Client behavior and third-party integrations verified in production: forms, booking widget, maps, analytics, links, galleries, and language switching.
+- [/] (2026-08-26 Europe/Zagreb) Route, SEO, accessibility, performance, and production-preview acceptance completed except for the outstanding `/book-now` normalization confirmation and Google Search Console action.
+- [x] (2026-08-26 Europe/Zagreb) Approved cleanup completed: removed root static-site sources and unreferenced `public/script.js`/`public/styles.css`; retained Astro-owned `public` assets. `/book-now.html` remains a 301 alias to `/book-now/`.
+- [x] (2026-08-26 Europe/Zagreb) Documentation updated for Astro development, architecture, asset ownership, route behavior, deployment, recovery, and the final ticket status.
 
 ## 18. Decision Log / Surprises
 
@@ -458,7 +459,7 @@ Do not run implementation commands that create or overwrite application files be
   **Decision:** Identify the exact indexed URL and known variants, return 410 Gone so the obsolete page does not exist, and request Google recrawl/removal through Search Console after deployment.
   **Date:** 2026-08-26.
 
-- **Decision:** Keep the current language behavior, make `/book-now` the single booking URL, retain inline form success and Flatpickr, adopt Stitch fonts, update copyright to 2026, and use Google Search Console for search cleanup.
+- **Decision:** Keep the current language behavior, make `/book-now/` the single booking URL, retain inline form success and Flatpickr, adopt Stitch fonts, update copyright to 2026, and use Google Search Console for search cleanup.
   **Rationale:** Confirmed by the user before implementation.
   **Date:** 2026-08-26.
 
@@ -471,19 +472,23 @@ Do not run implementation commands that create or overwrite application files be
   **Follow-up:** Verify the same build under the Netlify Node 18 environment before deployment.
   **Date:** 2026-08-26.
 
-- **Decision:** Netlify will run `npm run build` and publish `dist`; `/book-now` is canonical, its slash/HTML aliases permanently redirect to it, and the obsolete landing-page variants return 410.
+- **Decision:** Netlify will run `npm run build` and publish `dist`; `/book-now/` is canonical, while the extensionless and `.html` aliases normalize to it, and the obsolete landing-page variants return 410.
   **Rationale:** Implements the approved one-booking-URL and obsolete-page retirement decisions while moving deployment from root static publishing to Astro output.
+  **Date:** 2026-08-26.
+
+- **Decision:** Treat Git history as the only recovery path for the retired root static site.
+  **Rationale:** ASTRO-060 removed duplicate legacy files after approval; retaining duplicate files would reintroduce a second implementation path.
   **Date:** 2026-08-26.
 
 ## 19. Outcomes & Retrospective
 
-Complete after implementation and review. Record:
+The migration now uses Astro static output with Netlify publishing `dist`. The current implementation includes the homepage, booking route, legal pages, shared layout/components, typed content, browser enhancements, and stable static assets in `public/`.
 
-- Actual files and routes changed.
-- Dependency additions and the reason for each.
-- Final Lighthouse/accessibility results and known third-party exceptions.
-- Form, booking, analytics, maps, and URL verification results.
-- Any approved deviations from preserved content/functionality.
+- Dependencies added: Astro for static site generation; `@astrojs/check` and TypeScript for validation and typed source support. No UI framework, Tailwind, CMS, or extra optimization dependency was added.
+- Production verification recorded: forms, booking widget, maps, analytics, external links, galleries, and language switching work; the obsolete landing page returns `410 Gone`.
+- URL behavior: `/book-now/` is canonical and `/book-now.html` redirects to it. Final production confirmation that Netlify Pretty URLs normalizes `/book-now` remains pending.
+- Known external exceptions: Google Search Console recrawl/removal remains a manual action; Flatpickr, WebBookingPro, Google Analytics, Maps, Booking.com, Lucide, and Google Fonts require deploy-preview smoke testing because they are third-party services.
+- Approved cleanup: legacy root static files and unreferenced public CSS/JS were removed in ASTRO-060. Git history provides recovery.
 
 ## 20. Plan Revision Note
 

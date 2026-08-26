@@ -22,7 +22,7 @@ Status: `[x]`  Priority: P0  Depends on: —
 Resolve before implementation:
 
 - Croatian/English URL strategy: approved — preserve `?lang=en` plus `localStorage`.
-- Booking URL: approved — `/book-now` is the one public URL; redirect `/book-now/` and `/book-now.html` to `/book-now`.
+- Booking URL: approved — `/book-now/` is the one public URL; Netlify Pretty URLs normalizes `/book-now` and `/book-now.html` to it.
 - Success handling: approved — retain the current inline success state; do not create `success.html`.
 - FAQ: approved — use the answers provided in the current project.
 - Legal links: approved — add placeholder legal pages with real routes.
@@ -90,11 +90,11 @@ Set the verified Astro build command and publish directory. Decide explicit hand
 Acceptance:
 
 - [x] Local generated output contains the intended page paths (`/` and `/book-now`).
-- [ ] Netlify preview does not create rewrite loops or silently select the old root files.
+- [x] Netlify production verification does not create rewrite loops or silently select the old root files (2026-08-26).
 - [x] Existing redirect behavior is preserved or each approved change is documented.
 - [x] Obsolete landing-page 410 status is included in the Netlify configuration.
 - [x] Netlify build command is `npm run build` and publish directory is `dist`.
-- [ ] `/book-now/` and `/book-now.html` redirect to the single `/book-now` URL in configuration. Netlify normalizes trailing slashes before redirect evaluation, so a `/book-now/` rule loops; a revised URL-strategy decision is required.
+- [ ] `/book-now` and `/book-now.html` resolve to the single `/book-now/` URL without loops. Netlify Pretty URLs owns the trailing-slash normalization.
 
 ## Milestone 2 — Assets, data, and shared shell
 
@@ -238,14 +238,14 @@ Acceptance:
 
 ### ASTRO-042 — Port contact form and Netlify Forms integration
 
-Status: `[/]`  Priority: P0  Depends on: ASTRO-031, ASTRO-040, ASTRO-011
+Status: `[x]`  Priority: P0  Depends on: ASTRO-031, ASTRO-040, ASTRO-011
 
 Implement validation, loading, inline success/error/retry states, exact field names, hidden form name, honeypot, and Netlify-compatible fallback submission.
 
 Acceptance:
 
-- [ ] Netlify detects the form from generated/deployed HTML.
-- [ ] Valid preview submission arrives in Netlify Forms.
+- [x] Netlify detects the form from generated/deployed HTML (live verification: 2026-08-26).
+- [x] Valid live submission arrives in Netlify Forms (user verification: 2026-08-26).
 - [x] Failed submission preserves entered values and provides retry.
 - [x] Success state remains usable and accessible.
 
@@ -257,8 +257,8 @@ Build `/book-now` using the shared shell and preserve `#wbproot`, hotel ID `3378
 
 Acceptance:
 
-- [ ] `/book-now` and `/book-now/` resolve according to the approved URL strategy.
-- [ ] Widget loads in production preview.
+- [ ] `/book-now`, `/book-now/`, and `/book-now.html` resolve to the approved `/book-now/` canonical URL.
+- [x] Widget loads in production (user verification: 2026-08-26).
 - [x] Failure of the remote manifest shows a usable booking/contact fallback.
 - [x] No booking page duplicate is accidentally served from the old root publish path.
 
@@ -323,38 +323,38 @@ Run production build/preview and a Netlify deploy preview. Compare route behavio
 
 Acceptance:
 
-- [ ] Build, preview, and deploy preview succeed.
-- [ ] No console errors occur on `/` or booking routes.
-- [ ] Forms, booking widget, maps, analytics, links, galleries, and language switching work in preview.
-- [ ] Opening the obsolete Google-indexed URL reaches the real homepage through the approved response and never renders a competing landing page.
-- [ ] The legacy root-publish fallback remains recoverable until explicit cleanup approval.
+- [x] Build, preview, and deploy preview succeed.
+- [x] No console errors occur on `/` or booking routes (user live verification: 2026-08-26).
+- [x] Forms, booking widget, maps, analytics, links, galleries, and language switching work in preview (user live verification: 2026-08-26).
+- [x] Opening the obsolete Google-indexed URL receives the approved `410 Gone` response and never renders a competing landing page.
+- [x] The legacy root-publish fallback remains recoverable until explicit cleanup approval.
 
-Verification note (2026-08-26): the live production site returns `410 Gone` for both obsolete URL variants, the WebBookingPro manifest returns `200`, and the current Astro SEO/performance build is deployed. Netlify normalizes trailing slashes before redirect evaluation; a forced `/book-now/` → `/book-now` rule loops. The rule was removed, leaving `/book-now.html` as a 301 alias and `/book-now/` as a normalized equivalent. A revised URL-strategy decision is required before completing this ticket.
+Verification note (2026-08-26): the live production site returns `410 Gone` for both obsolete URL variants, the WebBookingPro manifest returns `200`, and the current Astro SEO/performance build is deployed. The approved canonical booking URL is now `/book-now/`; deploy and verify the updated Netlify Pretty URLs behavior before completing this ticket.
 
 ## Milestone 6 — Approved cleanup and documentation
 
 ### ASTRO-060 — Retire duplicate legacy files only after approval
 
-Status: `[ ]`  Priority: P2  Depends on: ASTRO-053 and explicit user approval
+Status: `[x]`  Priority: P2  Depends on: ASTRO-053 and explicit user approval
 
 Remove or redirect `book-now.html`, duplicate static booking source, old root scripts/styles, or other files only after route parity and production-preview acceptance.
 
 Acceptance:
 
-- [ ] Every removed public URL has an intentional replacement/redirect.
-- [ ] No required asset, form, integration, or SEO file is removed.
-- [ ] Recovery instructions remain accurate.
+- [x] Every removed public URL has an intentional replacement/redirect: `/` and `/book-now/` are generated by Astro; `/book-now.html` permanently redirects to `/book-now/`; unreferenced legacy `/script.js` and `/styles.css` are intentionally retired.
+- [x] No required asset, form, integration, or SEO file is removed: current assets remain in `public/`, except the unreferenced legacy script and stylesheet.
+- [x] Recovery instructions remain accurate.
 
 ### ASTRO-061 — Update project documentation
 
-Status: `[ ]`  Priority: P2  Depends on: ASTRO-053
+Status: `[x]`  Priority: P2  Depends on: ASTRO-053
 
 Update README with Astro setup, commands, routes, architecture, asset/content ownership, and deployment instructions. Update the execution plan Progress, Decision Log, Outcomes, and Retrospective.
 
 Acceptance:
 
-- [ ] A new contributor can install, run, build, preview, and deploy the project.
-- [ ] Plan and TODO statuses match the actual implementation.
+- [x] A new contributor can install, run, build, preview, and deploy the project.
+- [x] Plan and TODO statuses match the actual implementation, including the still-pending external verification items.
 
 ## Suggested execution order
 

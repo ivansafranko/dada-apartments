@@ -2,11 +2,11 @@
   command = "npm run build"
   publish = "dist"
 
-# Astro writes the canonical booking route as `book-now/index.html`. Netlify's
-# Pretty URLs feature turns `/book-now` into `/book-now/`, which conflicts with
-# the approved no-trailing-slash public URL and causes a redirect loop.
+# Astro writes the booking route as `book-now/index.html`. Netlify Pretty URLs
+# makes `/book-now/` its public canonical URL and safely normalizes the
+# extensionless alias to that form.
 [build.processing.html]
-  pretty_urls = false
+  pretty_urls = true
 
 # Netlify requires a `to` path for custom error responses. The 410 status
 # keeps this from being an HTTP redirect, while the body is not the homepage.
@@ -24,7 +24,7 @@
 
 [[redirects]]
   from = "/book-now.html"
-  to = "/book-now"
+  to = "/book-now/"
   status = 301
   force = true
 

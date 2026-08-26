@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://apartments-dada.com/sitemap.xml
