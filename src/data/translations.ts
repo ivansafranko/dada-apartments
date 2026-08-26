@@ -2,6 +2,8 @@ export const translations = {
   hr: {
     'page-title': 'Apartmani Dada - Apartmani u Krapinskim Toplicama, Hrvatska',
     'page-description': 'Moderni apartmani za odmor u Krapinskim Toplicama blizu Aquae Vivae parka. WiFi, parking, potpuno opremljeni smještaji u Hrvatskoj lječilišnoj destinaciji.',
+    'booking-page-title': 'Rezervacije – Apartmani Dada',
+    'booking-page-description': 'Online rezervacije za Apartmani Dada u Krapinskim Toplicama.',
     'nav-home': 'Početna', 'nav-about': 'O nama', 'nav-apartments': 'Apartmani', 'nav-book': 'Rezervirajte online', 'nav-contact': 'Kontakt',
     'hero-headline': 'Apartmani u Krapinskim Toplicama',
     'hero-subheadline': 'Moderni apartmani za odmor blizu Aquae Vivae vodenog parka. Potpuno opremljeni smještaji s WiFi-em, parkingom i prekrasnim pogledom u vodećoj lječilišnoj destinaciji Hrvatske.',
@@ -22,6 +24,7 @@ export const translations = {
   },
   en: {
     'page-title': 'Apartmani Dada - Apartments in Krapinske Toplice', 'page-description': "Modern vacation rentals in Krapinske Toplice near Aquae Vivae Water Park. WiFi, parking, fully equipped apartments in Croatia's spa destination.",
+    'booking-page-title': 'Book Now – Apartmani Dada', 'booking-page-description': 'Book your stay online at Apartmani Dada in Krapinske Toplice.',
     'nav-home': 'Homepage', 'nav-about': 'About', 'nav-apartments': 'Apartments', 'nav-book': 'Book Now', 'nav-contact': 'Contact',
     'hero-headline': 'Apartments in Krapinske Toplice', 'hero-subheadline': "Modern vacation rentals near Aquae Vivae Water Park. Fully equipped apartments with WiFi, parking, and stunning views in Croatia's premier spa destination.", 'explore-btn': 'Explore Apartments',
     'about-headline': 'Discover Krapinske Toplice', 'about-subheadline': 'A peaceful spa town in the heart of Croatia, perfect for relaxation and rejuvenation.', 'about-card1-title': 'Tranquil Location', 'about-card1-text': 'Enjoy your vacation in the heart of nature! Our apartments in Krapinske Toplice offer you comfortable accommodation near thermal springs and perfectly peaceful atmosphere.', 'about-card2-title': 'Aquae Vivae Water Park', 'about-card2-text': 'Just minutes from our apartments, enjoy the renowned water park featuring thermal pools, wellness facilities, and fun activities for the whole family.', 'about-card3-title': 'Modern Comfort', 'about-card3-text': 'Our apartments offer modernly equipped space and everything you need for a pleasant, carefree and unforgettable stay.',

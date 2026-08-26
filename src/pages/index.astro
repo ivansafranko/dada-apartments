@@ -6,9 +6,77 @@ import { translations } from '../data/translations';
 const copy = translations.hr as Record<string, string>;
 const title = copy['page-title'];
 const description = copy['page-description'];
+const homepageStructuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'LodgingBusiness',
+    name: 'Apartmani Dada - City Center Location',
+    url: 'https://apartments-dada.com/',
+    logo: 'https://apartments-dada.com/icon.svg',
+    image: 'https://apartments-dada.com/images/dada-apartments-krapinske-toplice-hero.webp',
+    description: 'Apartments in Krapinske Toplice city center, Croatia, three minutes from Aquae Vivae Water Park.',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Ul. Antuna Mihanovića 3H',
+      addressLocality: 'Krapinske Toplice',
+      postalCode: '49217',
+      addressCountry: 'HR',
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+385 98 998 2059',
+      contactType: 'customer service',
+      email: 'dragutin.safranko@gmail.com',
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '9.8',
+      bestRating: '10',
+      ratingCount: '25',
+    },
+    priceRange: '€€',
+    amenityFeature: ['WiFi', 'Parking', 'Air Conditioning', 'Kitchen', 'Balcony'].map((name) => ({
+      '@type': 'LocationFeatureSpecification',
+      name,
+    })),
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'LodgingBusiness',
+    name: 'Studio & Soba Šafranko - Near Hospital',
+    url: 'https://apartments-dada.com/',
+    logo: 'https://apartments-dada.com/icon.svg',
+    image: 'https://apartments-dada.com/images/apartments/apartment-3/studio-safranko-bedroom-001.webp',
+    description: 'Studio apartment and room in Krapinske Toplice near the rehabilitation hospital, Magdalena Clinic, and Aquae Vivae Water Park.',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: 'Ul. Ksavera Šandora Đalskog 2',
+      addressLocality: 'Krapinske Toplice',
+      postalCode: '49217',
+      addressCountry: 'HR',
+    },
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+385 98 998 2059',
+      contactType: 'customer service',
+      email: 'dragutin.safranko@gmail.com',
+    },
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: '9.3',
+      bestRating: '10',
+      ratingCount: '25',
+    },
+    priceRange: '€',
+    amenityFeature: ['WiFi', 'Parking', 'Air Conditioning', 'Kitchenette'].map((name) => ({
+      '@type': 'LocationFeatureSpecification',
+      name,
+    })),
+  },
+];
 ---
 
-<BaseLayout title={title} description={description} canonical="https://apartments-dada.com/" hasDatePicker>
+<BaseLayout title={title} description={description} canonical="https://apartments-dada.com/" hasDatePicker structuredData={homepageStructuredData} preloadImage="/images/dada-apartments-krapinske-toplice-hero.webp">
   <section id="home" class="hero-section" aria-labelledby="hero-headline">
     <div class="container">
       <div class="hero-content">
@@ -91,7 +159,7 @@ const description = copy['page-description'];
                           aria-hidden={index === 0 ? undefined : 'true'}
                           width="420"
                           height="280"
-                          loading={apartment.id === 1 && index === 0 ? 'eager' : 'lazy'}
+                          loading="lazy"
                           decoding="async"
                         />
                       ))}
