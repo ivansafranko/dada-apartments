@@ -94,7 +94,7 @@ html {
 body {
   min-width: 320px;
   margin: 0;
-  background: var(--color-surface);
+  background: var(--color-cream-100);
   color: var(--color-text);
   font-family: var(--font-body);
   line-height: var(--leading-normal);
@@ -176,7 +176,7 @@ a {
   --shadow-soft: 0 1.25rem 3.5rem rgb(18 59 61 / 0.09);
 }
 
-body { background: var(--color-cream-50); color: var(--color-ink); font-family: var(--font-body); }
+body { background: var(--color-cream-100); color: var(--color-ink); font-family: var(--font-body); }
 .container { width: min(100% - 2.5rem, 75rem); margin-inline: auto; padding: 0; }
 .header { position: fixed; inset: 0 0 auto; z-index: 20; background: rgb(251 249 244 / .9); border-bottom: 1px solid rgb(193 200 199 / .2); box-shadow: 0 1px 3px rgb(0 0 0 / .08); backdrop-filter: blur(.75rem); transition: background .2s ease, box-shadow .2s ease; }
 .header.is-scrolled { background: rgb(251 249 244 / .98); box-shadow: 0 .4rem 1rem rgb(3 33 33 / .08); }
