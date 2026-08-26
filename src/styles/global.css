@@ -1,0 +1,286 @@
+/* Shared design tokens for the Astro application. */
+:root {
+  /* Stitch palette */
+  --color-teal-950: #123b3d;
+  --color-teal-900: #174f50;
+  --color-teal-800: #1f6664;
+  --color-teal-700: #2b7a76;
+  --color-teal-100: #dceceb;
+  --color-cream-50: #fffdf8;
+  --color-cream-100: #f8f4eb;
+  --color-cream-200: #eee8dc;
+  --color-orange-600: #d96b27;
+  --color-orange-500: #e98232;
+  --color-orange-100: #fbe4d2;
+  --color-ink: #1d2928;
+  --color-muted: #5e6b68;
+  --color-white: #ffffff;
+
+  /* Existing semantic aliases keep components independent from palette names. */
+  --color-primary: var(--color-teal-900);
+  --color-primary-strong: var(--color-teal-950);
+  --color-surface: var(--color-cream-50);
+  --color-surface-muted: var(--color-cream-100);
+  --color-accent: var(--color-orange-500);
+  --color-text: var(--color-ink);
+  --color-text-muted: var(--color-muted);
+
+  /* Typography: display headings follow the Stitch direction; body has a system fallback. */
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-size-xs: 0.75rem;
+  --font-size-sm: 0.875rem;
+  --font-size-base: 1rem;
+  --font-size-lg: 1.125rem;
+  --font-size-xl: 1.25rem;
+  --font-size-2xl: 1.5rem;
+  --font-size-3xl: 1.875rem;
+  --font-size-4xl: 2.25rem;
+  --font-size-5xl: 3rem;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --leading-tight: 1.2;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.75;
+
+  /* Layout scale */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-20: 5rem;
+  --space-24: 6rem;
+  --container-max: 75rem;
+  --container-gutter: clamp(1rem, 4vw, 2rem);
+
+  /* Shape and depth */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+  --radius-full: 9999px;
+  --shadow-sm: 0 1px 3px rgb(18 59 61 / 0.1);
+  --shadow-md: 0 8px 24px rgb(18 59 61 / 0.12);
+  --shadow-lg: 0 16px 40px rgb(18 59 61 / 0.16);
+  --border-subtle: 1px solid var(--color-cream-200);
+
+  /* Responsive layout reference points */
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  background: var(--color-surface);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  line-height: var(--leading-normal);
+  text-rendering: optimizeLegibility;
+}
+
+.logo-text {
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.gallery-indicator {
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+}
+
+img,
+svg,
+video {
+  max-width: 100%;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:where(a, button, input, textarea, select):focus-visible {
+  outline: 3px solid var(--color-orange-500);
+  outline-offset: 3px;
+}
+
+.skip-link { background: var(--color-teal-950); color: var(--color-white); left: var(--space-4); padding: var(--space-3) var(--space-4); position: fixed; top: -5rem; z-index: 100; }.skip-link:focus { top: var(--space-4); }
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Stitch visual layer: warm editorial hospitality, with the legacy CSS removed from Astro output. */
+:root {
+  --color-teal-950: #123b3d;
+  --color-teal-900: #174f50;
+  --color-teal-800: #1f6664;
+  --color-teal-100: #dceceb;
+  --color-cream-50: #fffdf8;
+  --color-cream-100: #f8f4eb;
+  --color-cream-200: #eee8dc;
+  --color-orange-600: #d96b27;
+  --color-orange-500: #e98232;
+  --color-ink: #1d2928;
+  --color-muted: #66726e;
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', sans-serif;
+  --shadow-soft: 0 1.25rem 3.5rem rgb(18 59 61 / 0.09);
+}
+
+body { background: var(--color-cream-50); color: var(--color-ink); font-family: var(--font-body); }
+.container { width: min(100% - 2.5rem, 75rem); margin-inline: auto; padding: 0; }
+.header { position: fixed; inset: 0 0 auto; z-index: 20; background: rgb(251 249 244 / .9); border-bottom: 1px solid rgb(193 200 199 / .2); box-shadow: 0 1px 3px rgb(0 0 0 / .08); backdrop-filter: blur(.75rem); transition: background .2s ease, box-shadow .2s ease; }
+.header.is-scrolled { background: rgb(251 249 244 / .98); box-shadow: 0 .4rem 1rem rgb(3 33 33 / .08); }
+.header-content { align-items: center; display: flex; justify-content: space-between; min-height: 4.375rem; padding: 0; }
+.logo a, .nav-link, .nav-mobile-logo, .mobile-nav-link { text-decoration: none; }
+.header .container { width: min(100% - 3rem, 80rem); }
+.logo-text { color: #032121; font-size: clamp(1.5rem, 2vw, 2rem); letter-spacing: -.04em; }
+.navigation { align-items: center; display: flex; }
+.nav-desktop { align-items: center; display: flex; gap: 2rem; }
+.header-actions { gap: 1rem; margin-left: 2rem; }
+.nav-mobile, .mobile-menu { display: none; }
+.nav-link { border-bottom: 2px solid transparent; color: #414848; font-size: .875rem; font-weight: 600; letter-spacing: .05em; padding: .45rem 0 .35rem; transition: border-color .2s ease, color .2s ease; }
+.nav-link:hover { color: #032121; background: transparent; }
+.nav-link.active { border-bottom-color: #964917; color: #964917; }
+.nav-book { background: transparent; border-radius: 0; color: #414848; padding: .45rem 0 .35rem; }
+.nav-book:hover { background: transparent; color: #964917; }
+.nav-cta { background: #964917; border: 0; border-radius: 99rem; color: white !important; padding: .7rem 1.5rem; }
+.nav-cta:hover { background: #7a3912; color: white !important; }
+.language-toggle { align-items: center; border: 0; border-radius: 0; background: transparent; color: #414848; display: flex; font: inherit; font-size: .875rem; font-weight: 600; gap: .25rem; letter-spacing: .05em; padding: .35rem 0; }
+.language-toggle:hover { background: transparent; color: #032121; transform: none; }.language-icon { fill: none; height: 1.1rem; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1.7; width: 1.1rem; }
+
+main { overflow: hidden; }
+.hero-section { background: var(--color-cream-100); padding: 9.5rem 0 5rem; }
+.hero-content { display: grid; grid-template-columns: minmax(0, .88fr) minmax(25rem, 1.12fr); align-items: center; gap: clamp(2rem, 6vw, 7rem); }
+.hero-text { padding: 2rem 0; }
+.eyebrow { color: var(--color-orange-600); font-size: .68rem; font-weight: 700; letter-spacing: .18em; margin: 0 0 1.25rem; text-transform: uppercase; }
+.hero-headline, .section-headline { color: var(--color-teal-950); font-family: var(--font-display); font-weight: 600; letter-spacing: -.045em; line-height: 1.02; }
+.hero-headline { font-size: clamp(3.25rem, 6vw, 6.3rem); margin: 0; max-width: 8ch; }
+.hero-subheadline { color: var(--color-muted); font-size: 1rem; line-height: 1.8; margin: 1.7rem 0 2rem; max-width: 34rem; }
+.hero-cta { align-items: center; display: flex; flex-wrap: wrap; gap: 1rem; }
+.explore-btn { background: var(--color-teal-900); border-radius: 99rem; color: white; display: inline-block; font-size: .78rem; font-weight: 700; letter-spacing: .08em; padding: 1rem 1.4rem; text-decoration: none; text-transform: uppercase; }
+.explore-btn:hover { background: var(--color-orange-600); }
+.hero-secondary-link, .text-link { color: var(--color-teal-900); font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-decoration: none; text-transform: uppercase; }
+.hero-secondary-link::after, .text-link::after { content: ''; display: inline-block; border-bottom: 1px solid currentColor; margin: 0 0 .2rem .6rem; width: 2rem; }
+.hero-image { min-height: 34rem; position: relative; }
+.hero-image img { display: block; height: 100%; min-height: 34rem; object-fit: cover; width: 100%; border-radius: 12rem 12rem .75rem .75rem; }
+.hero-image::after { border: 1px solid var(--color-orange-500); border-radius: 12rem 12rem .75rem .75rem; content: ''; inset: 1rem -1rem -1rem 1rem; pointer-events: none; position: absolute; z-index: 0; }
+.hero-image img { position: relative; z-index: 1; }
+.hero-image-caption { bottom: 1rem; color: white; font-size: .65rem; left: 1.25rem; letter-spacing: .14em; position: absolute; text-transform: uppercase; z-index: 2; }
+
+.feature-strip { background: var(--color-teal-900); color: white; padding: 1.5rem 0; }
+.feature-grid { display: grid; grid-template-columns: repeat(3, 1fr); }
+.feature-item { align-items: flex-start; border-right: 1px solid rgb(255 255 255 / .2); display: flex; gap: 1rem; padding: .5rem clamp(1rem, 3vw, 3rem); }
+.feature-item:first-child { padding-left: 0; }.feature-item:last-child { border: 0; }.feature-number { color: var(--color-orange-500); font-family: var(--font-display); font-size: 1.5rem; }
+.feature-item strong { font-family: var(--font-display); font-size: 1rem; font-weight: 500; }.feature-item p { color: rgb(255 255 255 / .68); font-size: .72rem; margin: .25rem 0 0; }
+
+.location-bento { background: var(--color-cream-50); padding: 8rem 0; }
+.faq-section { background: #fbf9f4; padding: clamp(4rem, 8vw, 7.5rem) 0; }.faq-content { max-width: 56rem; }.faq-section .section-heading--center { margin-bottom: 2rem; }.faq-list { display: grid; gap: .75rem; }.faq-item { background: #f0eee9; border: 1px solid rgb(193 200 199 / .35); border-radius: .75rem; color: #032121; padding: 0 1.25rem; }.faq-item summary { align-items: center; cursor: pointer; display: flex; font-size: 1rem; font-weight: 700; justify-content: space-between; list-style: none; padding: 1.25rem 0; }.faq-item summary::-webkit-details-marker { display: none; }.faq-item summary::after { color: #964917; content: '+'; font-size: 1.5rem; font-weight: 400; line-height: 1; margin-left: 1rem; }.faq-item[open] summary::after { content: '−'; }.faq-item p { color: #414848; line-height: 1.7; margin: 0; padding: 0 0 1.25rem; }
+.bento-grid { display: grid; grid-template-columns: 1.05fr .85fr .85fr; gap: 1rem; min-height: 32rem; }
+.bento-intro { align-self: center; padding: 2rem 3rem 2rem 0; }.bento-intro h2 { color: var(--color-teal-950); font-family: var(--font-display); font-size: clamp(2.8rem, 5vw, 4.7rem); letter-spacing: -.05em; line-height: .98; margin: 0 0 1.5rem; }.bento-intro h2 em { color: var(--color-orange-600); font-style: italic; }.bento-intro p:not(.eyebrow) { color: var(--color-muted); font-size: .9rem; line-height: 1.8; max-width: 27rem; margin-bottom: 2rem; }
+.bento-card { align-items: flex-start; background: var(--color-teal-900); border-radius: .75rem; color: white; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; padding: 1.5rem; position: relative; }.bento-card::before { background: linear-gradient(145deg, rgb(18 59 61 / .2), rgb(18 59 61 / .9)), url('/images/apartments/apartment-1/dada-apartment-1-balcony-001.webp') center/cover; content: ''; inset: 0; opacity: .85; position: absolute; }.bento-card-small { background: var(--color-orange-600); }.bento-card-small::before { background: linear-gradient(145deg, rgb(217 107 39 / .05), rgb(217 107 39 / .8)), url('/images/apartments/apartment-3/studio-safranko-living-room-001.webp') center/cover; }.bento-card > * { position: relative; z-index: 1; }.bento-label { font-size: .63rem; letter-spacing: .15em; text-transform: uppercase; }.bento-card h3 { font-family: var(--font-display); font-size: 1.75rem; font-weight: 500; line-height: 1; margin: 0 0 .5rem; }.bento-card p { color: rgb(255 255 255 / .75); font-size: .75rem; line-height: 1.5; margin: 0; }
+
+.apartments-section { background: var(--color-cream-100); padding: 7rem 0; }.apartments-section > .container > .section-headline, .testimonials-section .section-headline, .contact-section .section-headline { font-size: clamp(2.5rem, 4.5vw, 4.5rem); margin: 0 0 1rem; }.section-subheadline { color: var(--color-muted); font-size: .95rem; margin: 0 0 3rem; }.location-group { margin-top: 5rem; }.location-title { color: var(--color-teal-900); font-family: var(--font-display); font-size: 1.8rem; font-weight: 500; margin-bottom: 1.5rem; }.apartments-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.25rem; }.apartment-card { background: var(--color-cream-50); border: 1px solid var(--color-cream-200); border-radius: .75rem; box-shadow: none; overflow: hidden; }.apartment-gallery { height: 20rem; }.gallery-image { height: 100%; object-fit: cover; }.gallery-prev, .gallery-next { background: white; border: 0; border-radius: 50%; color: var(--color-teal-900); height: 2.75rem; width: 2.75rem; }.apartment-content { padding: 1.5rem; }.apartment-header { align-items: start; }.apartment-title-location h4 { color: var(--color-teal-950); font-family: var(--font-display); font-size: 1.45rem; font-weight: 500; }.apartment-location { color: var(--color-muted); font-size: .72rem; }.apartment-rating-booking { gap: .75rem; }.booking-rating { background: var(--color-orange-100); color: var(--color-orange-600); }.booking-btn-compact { background: var(--color-teal-900); border-radius: 99rem; font-size: .68rem; padding: .65rem .85rem; }.amenity { background: var(--color-teal-100); border-radius: 99rem; color: var(--color-teal-900); font-size: .65rem; padding: .35rem .6rem; }
+.location-info { border-top: 1px solid var(--color-cream-200); margin-top: 2rem; padding-top: 2rem; }.location-info h4 { color: var(--color-teal-900); font-family: var(--font-display); font-size: 1.4rem; font-weight: 500; }.location-map iframe { border-radius: .75rem !important; }
+.about-section { background: var(--color-teal-950); color: white; padding: 8rem 0; }.about-section .section-headline { color: white; font-size: clamp(2.5rem, 5vw, 5rem); }.about-section .section-subheadline, .about-card p { color: rgb(255 255 255 / .7); }.about-grid, .testimonials-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; }.about-card { background: rgb(255 255 255 / .06); border: 1px solid rgb(255 255 255 / .13); border-radius: .75rem; padding: 1.5rem; }.about-card h3 { color: white; font-family: var(--font-display); font-size: 1.35rem; font-weight: 500; }
+.about-icon { color: var(--color-orange-500); margin-bottom: 2rem; }
+.testimonials-section { background: var(--color-cream-50); padding: 8rem 0; }.testimonial-card { background: white; border: 1px solid var(--color-cream-200); border-radius: .75rem; box-shadow: var(--shadow-soft); padding: 1.75rem; }.testimonial-card h3 { color: var(--color-teal-900); font-family: var(--font-display); font-size: 1.2rem; }.testimonial-card p { color: var(--color-muted); font-size: .82rem; line-height: 1.7; }.testimonial-avatar { align-items: center; background: var(--color-orange-100); border-radius: 50%; color: var(--color-orange-600); display: flex; font-family: var(--font-display); font-size: 1.3rem; height: 3rem; justify-content: center; width: 3rem; }
+.contact-content { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(18rem, .7fr); gap: 3rem; }.contact-form { background: var(--color-cream-50); border-radius: .75rem; padding: 2rem; }.form-group { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }.form-field { display: flex; flex-direction: column; gap: .45rem; margin-bottom: 1rem; }.form-field label { color: var(--color-teal-900); font-size: .7rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }.form-field input, .form-field textarea { background: transparent; border: 0; border-bottom: 1px solid var(--color-cream-200); color: var(--color-ink); font: inherit; padding: .7rem 0; width: 100%; }.form-field textarea { min-height: 7rem; resize: vertical; }.contact-submit { border: 0; color: white; cursor: pointer; font: inherit; font-weight: 700; padding: 1rem 1.4rem; }
+.contact-section { background: var(--color-orange-100); padding: 8rem 0; }.contact-submit { background: var(--color-teal-900); border-radius: 99rem; }.contact-info { background: var(--color-cream-50); border-radius: .75rem; padding: 2rem; }.footer { background: var(--color-teal-950); }.footer-bottom { border-top-color: rgb(255 255 255 / .15); }.footer p, .footer h2 { color: white; }.back-to-top { background: var(--color-orange-600); }
+.booking-page { min-height: 70vh; padding: 10rem 0 6rem; }.booking-page .section-headline { font-size: clamp(3rem, 6vw, 5.5rem); }.booking-page .section-subheadline { margin-bottom: 2rem; }
+.booking-page #booking-loading { color: var(--color-muted); padding: 2rem 0; }.booking-page #booking-fallback { background: var(--color-cream-100); border-left: .25rem solid var(--color-orange-600); color: var(--color-ink); margin: 2rem 0 0; max-width: 42rem; padding: 1rem 1.25rem; }.booking-page #booking-fallback a { color: var(--color-teal-900); font-weight: 700; }
+@media (max-width: 768px) { .container { width: min(100% - 2rem, 40rem); }.hero-section { padding-top: 8rem; }.hero-content { display: flex; flex-direction: column; gap: 2rem; }.hero-text { padding: 0; }.hero-headline { font-size: clamp(3.2rem, 16vw, 5rem); }.hero-image, .hero-image img { min-height: 25rem; width: 100%; }.feature-grid { grid-template-columns: 1fr; }.feature-item, .feature-item:first-child { border-bottom: 1px solid rgb(255 255 255 / .2); border-right: 0; padding: 1rem 0; }.feature-item:last-child { border-bottom: 0; }.location-bento { padding: 5rem 0; }.bento-grid { grid-template-columns: 1fr 1fr; }.bento-intro { grid-column: 1 / -1; padding: 0 0 2rem; }.bento-card-tall { min-height: 24rem; }.apartments-grid { grid-template-columns: 1fr; }.apartment-gallery { height: 17rem; } }
+@media (max-width: 768px) { .about-grid, .testimonials-grid, .contact-content { grid-template-columns: 1fr; }.form-group { grid-template-columns: 1fr; gap: 0; } }
+@media (max-width: 640px) { .header .container { width: min(100% - 2rem, 40rem); }.nav-desktop { display: none; }.nav-mobile { display: block; }.nav-mobile-row1, .nav-mobile-actions { align-items: center; display: flex; }.nav-mobile-row1 { justify-content: space-between; min-height: 4.375rem; }.nav-mobile-actions { gap: .75rem; }.nav-mobile-logo { color: #032121; font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; }.hamburger-menu { background: transparent; border: 0; color: #032121; cursor: pointer; display: grid; gap: .25rem; padding: .55rem 0 .55rem .55rem; }.hamburger-line { background: currentColor; display: block; height: 1px; width: 1.4rem; }.mobile-menu { background: #fbf9f4; border-top: 1px solid rgb(193 200 199 / .3); box-shadow: 0 1rem 2rem rgb(3 33 33 / .1); padding: .75rem 1rem 1rem; }.mobile-menu.active { display: grid; }.mobile-nav-link { color: #414848; font-size: .875rem; font-weight: 600; letter-spacing: .05em; padding: .85rem .5rem; }.mobile-nav-book { background: transparent; border-radius: 0; color: #414848; margin-top: 0; text-align: left; }.header-content { min-height: 4.375rem; }.bento-grid { grid-template-columns: 1fr; }.bento-card-small, .bento-card-tall { min-height: 18rem; }.location-title { font-size: 1.5rem; } }
+
+/* ASTRO-032A — direct Stitch treatment for cards, testimonials, contact, and footer. */
+.apartments-section { background: #f5f3ee; padding: clamp(4rem, 8vw, 7.5rem) 0; }
+.apartments-section > .container > .eyebrow, .apartments-section > .container > .section-headline, .apartments-section > .container > .section-subheadline { text-align: center; }
+.apartments-section > .container > .section-subheadline { margin-inline: auto; }
+.location-group { margin-top: clamp(3.5rem, 7vw, 5.5rem); }
+.location-title { color: #032121; font-size: clamp(1.75rem, 3vw, 2rem); margin-bottom: 1.5rem; }
+.apartments-grid { gap: 2rem; }
+.apartment-card { background: #fbf9f4; border: 1px solid rgb(193 200 199 / .35); border-radius: 1rem; box-shadow: 0 .35rem 1rem rgb(3 33 33 / .08); overflow: hidden; }
+.apartment-gallery { aspect-ratio: 16 / 10; height: auto; isolation: isolate; overflow: hidden; position: relative; touch-action: pan-y; }
+.gallery-images { height: 100%; position: relative; width: 100%; }
+.gallery-image { height: 100%; inset: 0; object-fit: cover; opacity: 0; pointer-events: none; position: absolute; transition: opacity .25s ease; width: 100%; }
+.gallery-image.active { opacity: 1; pointer-events: auto; }
+.gallery-prev, .gallery-next { align-items: center; background: rgb(251 249 244 / .78); border: 0; border-radius: 50%; color: #032121; cursor: pointer; display: flex; font-family: Georgia, serif; font-size: 2rem; height: 2.75rem; justify-content: center; line-height: 1; padding: 0 0 .18rem; position: absolute; top: 50%; transform: translateY(-50%); width: 2.75rem; z-index: 2; }
+.gallery-prev { left: 1rem; }.gallery-next { right: 1rem; }.gallery-prev:hover, .gallery-next:hover { background: #fbf9f4; }
+.gallery-indicators { bottom: .85rem; display: flex; gap: .35rem; left: 50%; position: absolute; transform: translateX(-50%); z-index: 2; }
+.gallery-indicator { background: rgb(251 249 244 / .65); border-radius: 99rem; height: .45rem; transition: background .2s ease, width .2s ease; width: .45rem; }.gallery-indicator.active { background: #964917; width: 1.35rem; }
+.apartment-content { padding: 1.5rem; }.apartment-header { align-items: flex-start; display: flex; gap: 1rem; justify-content: space-between; }.apartment-title-location h4 { color: #032121; font-family: var(--font-display); font-size: 1.75rem; font-weight: 700; line-height: 1.2; margin: 0; }.apartment-location { color: #414848; font-size: .75rem; line-height: 1.4; margin: .4rem 0 0; }.apartment-rating-booking { align-items: center; display: flex; flex-shrink: 0; gap: .5rem; }.booking-rating, .booking-btn-compact { align-items: center; box-sizing: border-box; display: inline-flex; height: 2.5rem; justify-content: center; }.booking-rating { background: #032121; border-radius: .25rem; color: white; font-size: .875rem; font-weight: 700; padding: 0 .45rem; }.booking-btn-compact { background: #032121; border-radius: .25rem; color: white; font-size: .7rem; font-weight: 700; padding: 0 .7rem; text-decoration: none; }.booking-btn-compact:hover { background: #1a3636; color: white; }.apartment-amenities { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1.25rem; }.amenity { background: #f0eee9; border-radius: 99rem; color: #414848; font-size: .7rem; padding: .35rem .7rem; }
+.location-info { border-top-color: rgb(193 200 199 / .45); }.location-info h4 { color: #032121; }.location-map iframe { min-height: 18rem; }
+
+.section-heading--center { margin: 0 auto 4rem; max-width: 48rem; text-align: center; }.section-heading--center .section-headline { color: #032121; }.section-heading--center .section-subheadline { color: #414848; margin: 1rem auto 0; }
+.testimonials-section { background: #f5f3ee; padding: clamp(4rem, 8vw, 7.5rem) 0; }.testimonials-grid { gap: 2rem; }.testimonial-card { align-items: center; background: #fbf9f4; border: 1px solid rgb(193 200 199 / .35); border-radius: 1rem; box-shadow: 0 1px 3px rgb(0 0 0 / .1); display: flex; flex-direction: column; padding: 2rem; text-align: center; }.testimonial-avatar { background: #032121; color: white; font-family: var(--font-body); font-size: 1.1rem; font-weight: 700; height: 3rem; margin-bottom: 1rem; width: 3rem; }.testimonial-card h3 { color: #032121; font-family: var(--font-display); font-size: 1.4rem; font-weight: 700; margin: 0 0 1rem; }.testimonial-card p { color: #414848; font-size: .95rem; font-style: italic; line-height: 1.6; margin: 0; }
+
+.contact-section { background: #fbf9f4; padding: clamp(4rem, 8vw, 7.5rem) 0; }.contact-content { gap: 3rem; grid-template-columns: repeat(2, minmax(0, 1fr)); }.contact-form-panel { background: #f0eee9; border: 1px solid rgb(193 200 199 / .35); border-radius: 1rem; padding: 2rem; }.contact-form { background: transparent; border-radius: 0; padding: 0; }.form-group { gap: 1.5rem; }.form-field { gap: .55rem; margin-bottom: 1.5rem; }.form-field label { color: #1b1c19; font-size: .85rem; letter-spacing: .05em; text-transform: none; }.form-field input, .form-field textarea { background: #fbf9f4; border: 1px solid #727878; border-radius: .5rem; color: #1b1c19; padding: .8rem; }.form-field textarea { min-height: 7.5rem; }.contact-submit { background: #964917; border-radius: .5rem; box-shadow: 0 .25rem .5rem rgb(3 33 33 / .16); display: block; letter-spacing: .05em; padding: 1rem; width: 100%; }.contact-submit:hover { background: #7a3912; }.contact-info { background: #f5f3ee; border: 1px solid rgb(193 200 199 / .35); border-radius: 1rem; display: flex; flex-direction: column; gap: 2.5rem; justify-content: center; padding: 3rem; }.contact-item { align-items: flex-start; display: flex; gap: 1.5rem; }.contact-icon { align-items: center; background: #fbf9f4; border: 1px solid rgb(193 200 199 / .25); border-radius: 50%; color: #964917; display: flex; flex: 0 0 auto; height: 3rem; justify-content: center; width: 3rem; }.contact-icon svg { height: 1.25rem; width: 1.25rem; }.contact-item h3 { color: #414848; font-family: var(--font-body); font-size: .65rem; font-weight: 700; letter-spacing: .12em; margin: .25rem 0 .35rem; text-transform: uppercase; }.contact-item p, .contact-item p a { color: #032121; font-size: 1rem; font-weight: 600; margin: 0; text-decoration: none; }.contact-item p a:hover { color: #964917; }.form-success-message { color: #032121; padding: 2rem 0; text-align: center; }.success-icon { color: #964917; }
+.contact-submit:disabled { cursor: progress; opacity: .72; }.form-status, .form-error { margin-top: 1rem; }.form-status { color: #174f50; }.form-error { color: #9c2f1c; font-weight: 600; }.form-retry { background: transparent; border: 1px solid currentColor; border-radius: .5rem; color: #174f50; cursor: pointer; font: inherit; font-weight: 700; margin-top: 1rem; padding: .65rem 1rem; }.form-retry:hover { background: #fbf9f4; }
+
+.footer { background: #032121; color: white; margin-top: 0; padding: clamp(4rem, 8vw, 7.5rem) 0 0; }.footer-content { align-items: flex-start; display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 3rem; padding-bottom: 4rem; }.footer-brand { max-width: 25rem; }.footer-wordmark { color: white; font-family: var(--font-display); font-size: clamp(1.75rem, 3vw, 2rem); font-weight: 600; margin: 0 0 1rem; }.footer-brand > p:last-child { color: rgb(255 255 255 / .8); font-size: 1rem; line-height: 1.6; margin: 0; }.footer-links { display: grid; gap: .75rem; }.footer-links a { color: rgb(255 255 255 / .72); font-size: .95rem; text-decoration: none; }.footer-links a:hover { color: white; text-decoration: underline; text-decoration-color: #964917; text-underline-offset: .3rem; }.footer-social { margin-top: .75rem; }.footer-bottom { align-items: center; border-top: 1px solid rgb(255 255 255 / .2); display: flex; justify-content: center; min-height: 5rem; position: relative; }.footer-bottom p { color: rgb(255 255 255 / .5); font-size: .85rem; margin: 0; text-align: center; }.back-to-top { align-items: center; background: transparent; border: 1px solid rgb(255 255 255 / .4); border-radius: 50%; color: white; cursor: pointer; display: flex; height: 2.5rem; justify-content: center; position: absolute; right: 0; width: 2.5rem; }.back-to-top:hover { background: #964917; border-color: #964917; }
+.legal-page { min-height: 65vh; padding: 10rem 0 6rem; }.legal-page h1 { color: #032121; font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 4.5rem); margin: 0 0 1rem; }.legal-page p:not(.eyebrow) { color: #414848; font-size: 1rem; max-width: 40rem; }
+
+/* Flatpickr is deliberately loaded only for the homepage contact form. */
+.flatpickr-calendar { border: 1px solid rgb(193 200 199 / .7); box-shadow: 0 .75rem 2rem rgb(3 33 33 / .14); font-family: var(--font-body); }.flatpickr-months .flatpickr-month, .flatpickr-current-month .flatpickr-monthDropdown-months, .flatpickr-current-month input.cur-year { color: #032121; font-family: var(--font-body); }.flatpickr-day.selected, .flatpickr-day.selected:hover, .flatpickr-day.startRange, .flatpickr-day.endRange { background: #964917; border-color: #964917; }.flatpickr-day.today { border-color: #964917; }.flatpickr-day:hover { background: #f0eee9; border-color: #f0eee9; }
+
+@media (max-width: 768px) { .contact-content { grid-template-columns: 1fr; }.footer-content { grid-template-columns: 1fr; }.footer-links { grid-template-columns: repeat(3, auto); }.apartment-header { flex-direction: column; }.apartment-rating-booking { width: 100%; }.location-map iframe { min-height: 14rem; } }
+@media (max-width: 480px) { .apartments-grid, .testimonials-grid { gap: 1.25rem; }.apartment-content, .testimonial-card, .contact-form-panel, .contact-info { padding: 1.25rem; }.apartment-title-location h4 { font-size: 1.5rem; }.apartment-rating-booking { align-items: stretch; flex-wrap: wrap; }.booking-btn-compact { justify-content: center; }.gallery-prev { left: .65rem; }.gallery-next { right: .65rem; }.gallery-prev, .gallery-next { height: 2.75rem; width: 2.75rem; }.contact-info { gap: 1.75rem; }.contact-item { gap: 1rem; }.contact-item p, .contact-item p a { overflow-wrap: anywhere; }.footer-links { grid-template-columns: 1fr; }.footer-bottom { justify-content: flex-start; min-height: 6rem; padding-right: 3.5rem; }.footer-bottom p { text-align: left; }.back-to-top { right: 0; } }
+
+/* ASTRO-050 — keyboard and touch-target safeguards. */
+:where(a, button, input, textarea, select, summary):focus-visible { outline: 3px solid var(--color-orange-500); outline-offset: 3px; }.language-toggle { justify-content: center; min-height: 2.75rem; min-width: 2.75rem; }.hamburger-menu { align-items: center; justify-content: center; min-height: 2.75rem; min-width: 2.75rem; }.mobile-nav-link, .footer-links a { align-items: center; display: inline-flex; min-height: 2.75rem; }.back-to-top { height: 2.75rem; width: 2.75rem; }.faq-item summary { min-height: 2.75rem; }
+
+/* Footer refinements: a compact social mark and an editorial single-line tagline. */
+.footer-brand { max-width: none; }.footer-tagline { white-space: nowrap; }.footer-social { align-items: center; border: 1px solid rgb(255 255 255 / .35); border-radius: 50%; display: inline-flex; justify-content: center; margin-top: .75rem; width: 2.75rem; }.footer-social svg { fill: currentColor; height: 1.25rem; width: 1.25rem; }.footer-social:hover { background: #964917; border-color: #964917; text-decoration: none !important; }
+@media (max-width: 40rem) { .footer-tagline { white-space: normal; } }
+
+/* Match the “Mirna lokacija” feature-strip green, with terracotta and white contact details. */
+.contact-info { background: var(--color-teal-900); border-color: var(--color-teal-900); }.contact-icon { background: transparent; border-color: rgb(255 255 255 / .26); color: var(--color-orange-500); }.contact-item h3 { color: var(--color-orange-500); }.contact-item p, .contact-item p a { color: white; }.contact-item p a:hover { color: #f1b17d; }

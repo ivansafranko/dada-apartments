@@ -452,6 +452,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const prevBtn = gallery.querySelector('.gallery-prev');
         const nextBtn = gallery.querySelector('.gallery-next');
         const indicators = Array.from(gallery.querySelectorAll('.gallery-indicator'));
+        const status = gallery.querySelector('.gallery-status');
         let currentIndex = 0;
 
         if (!images.length) return;
@@ -468,6 +469,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 indicator.classList.toggle('active', isActive);
                 indicator.setAttribute('aria-pressed', String(isActive));
             });
+            const galleryName = gallery.dataset.galleryName || 'Apartment';
+            gallery.setAttribute('aria-label', `${galleryName} photo gallery, image ${currentIndex + 1} of ${images.length}`);
+            if (status) status.textContent = `Image ${currentIndex + 1} of ${images.length}`;
         }
 
         prevBtn?.addEventListener('click', () => showImage(currentIndex - 1));
@@ -478,6 +482,7 @@ document.addEventListener('DOMContentLoaded', function() {
         gallery.addEventListener('pointerdown', (event) => {
             if (event.pointerType !== 'touch' || event.target.closest('button')) return;
             swipeStart = { x: event.clientX, y: event.clientY, pointerId: event.pointerId };
+            gallery.setPointerCapture?.(event.pointerId);
         });
         gallery.addEventListener('pointerup', (event) => {
             if (!swipeStart || event.pointerId !== swipeStart.pointerId) return;
@@ -489,6 +494,7 @@ document.addEventListener('DOMContentLoaded', function() {
             showImage(currentIndex + (horizontalDistance < 0 ? 1 : -1));
         });
         gallery.addEventListener('pointercancel', () => { swipeStart = null; });
+        gallery.addEventListener('lostpointercapture', () => { swipeStart = null; });
         gallery.addEventListener('keydown', (event) => {
             if (event.key === 'ArrowLeft') { event.preventDefault(); showImage(currentIndex - 1); }
             if (event.key === 'ArrowRight') { event.preventDefault(); showImage(currentIndex + 1); }

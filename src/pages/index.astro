@@ -1,0 +1,236 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { apartments, locations } from '../data/apartments';
+import { translations } from '../data/translations';
+
+const copy = translations.hr as Record<string, string>;
+const title = copy['page-title'];
+const description = copy['page-description'];
+---
+
+<BaseLayout title={title} description={description} canonical="https://apartments-dada.com/" hasDatePicker>
+  <section id="home" class="hero-section" aria-labelledby="hero-headline">
+    <div class="container">
+      <div class="hero-content">
+        <div class="hero-text">
+          <p class="eyebrow">Apartmani Dada · Krapinske Toplice</p>
+          <h1 id="hero-headline" class="hero-headline" data-translate="hero-headline">{copy['hero-headline']}</h1>
+          <p class="hero-subheadline" data-translate="hero-subheadline">{copy['hero-subheadline']}</p>
+          <div class="hero-cta">
+            <a class="explore-btn" href="#apartments" data-translate="explore-btn">{copy['explore-btn']}</a>
+            <a class="hero-secondary-link" href="/book-now" data-translate="nav-book">{copy['nav-book']}</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <img src="/images/dada-apartments-krapinske-toplice-hero.webp" width="900" height="720" loading="eager" fetchpriority="high" alt="Apartmani Dada in Krapinske Toplice surrounded by greenery" />
+          <span class="hero-image-caption">Krapinske Toplice · Hrvatska</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="feature-strip" aria-label="Apartmani Dada highlights">
+    <div class="container feature-grid">
+      <article class="feature-item"><span class="feature-number">01</span><div><strong>Mirna lokacija</strong><p>U srcu hrvatske lječilišne regije</p></div></article>
+      <article class="feature-item"><span class="feature-number">02</span><div><strong>Aquae Vivae</strong><p>Tri minute od termalnog parka</p></div></article>
+      <article class="feature-item"><span class="feature-number">03</span><div><strong>Osjećaj doma</strong><p>Promišljen komfor za svaki boravak</p></div></article>
+    </div>
+  </section>
+
+  <section class="location-bento" aria-labelledby="place-heading">
+    <div class="container bento-grid">
+      <div class="bento-intro"><p class="eyebrow">The place</p><h2 id="place-heading">Mali grad.<br /><em>Veliki predah.</em></h2><p>Krapinske Toplice spajaju ljekovite vode, šetnje i sporiji ritam. Sve što vam treba za nekoliko dana potpunog odmora nalazi se nadohvat ruke.</p><a href="#about" class="text-link">Upoznajte mjesto <span aria-hidden="true">↗</span></a></div>
+      <div class="bento-card bento-card-tall"><span class="bento-label">01 / priroda</span><div><h3>Zelenilo na pragu</h3><p>Jutarnja kava, svježi zrak i mir koji se osjeti.</p></div></div>
+      <div class="bento-card bento-card-small"><span class="bento-label">02 / wellness</span><div><h3>Vrijeme za sebe</h3><p>Termalna voda i wellness sadržaji nekoliko koraka od vas.</p></div></div>
+    </div>
+  </section>
+
+  <section class="faq-section" aria-labelledby="faq-heading">
+    <div class="container faq-content">
+      <div class="section-heading section-heading--center">
+        <h2 id="faq-heading" class="section-headline">Česta pitanja</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Gdje pronaći smještaj u Krapinskim Toplicama blizu Aquae Vivae?</summary>
+          <p>Apartmani Dada nude dvije lokacije, s praktičnim pristupom Aquae Vivae i blizinom bolnice (ovisno o lokaciji smještaja).</p>
+        </details>
+        <details class="faq-item">
+          <summary>Imate li sobu u ponudi?</summary>
+          <p>Da — uz apartmane nudimo i sobu s kupaonicom kao jednostavniju opciju smještaja.</p>
+        </details>
+        <details class="faq-item">
+          <summary>Što je uključeno u smještaj?</summary>
+          <p>Standardno nudimo WiFi, klimu i parking, a detalji ovise o odabranom apartmanu ili sobi.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section id="apartments" class="apartments-section" aria-labelledby="apartments-heading">
+    <div class="container">
+      <p class="eyebrow">Stay · Rest · Explore</p>
+      <h2 id="apartments-heading" class="section-headline" data-translate="apartments-headline">{copy['apartments-headline']}</h2>
+      <p class="section-subheadline" data-translate="apartments-subheadline">{copy['apartments-subheadline']}</p>
+
+      {locations.map((location) => (
+        <div class="location-group">
+          <h3 class="location-title" data-translate={location.titleKey}>{copy[location.titleKey]}</h3>
+          <div class="apartments-grid">
+            {location.apartmentIds.map((id) => {
+              const apartment = apartments.find((item) => item.id === id)!;
+              return (
+                <article class="apartment-card">
+                  <div class="apartment-gallery" data-apartment={apartment.id} data-gallery-name={copy[apartment.nameKey]} role="region" aria-roledescription="carousel" aria-label={`${copy[apartment.nameKey]} photo gallery, image 1 of ${apartment.images.length}`} tabindex="0">
+                    <div class="gallery-images" id={`apartment-gallery-${apartment.id}-images`}>
+                      {apartment.images.map((galleryImage, index) => (
+                        <img
+                          src={galleryImage.src}
+                          alt={galleryImage.alt}
+                          class:list={['gallery-image', { active: index === 0 }]}
+                          aria-hidden={index === 0 ? undefined : 'true'}
+                          width="420"
+                          height="280"
+                          loading={apartment.id === 1 && index === 0 ? 'eager' : 'lazy'}
+                          decoding="async"
+                        />
+                      ))}
+                    </div>
+                    <button class="gallery-prev" type="button" aria-controls={`apartment-gallery-${apartment.id}-images`} aria-label={`Previous image of ${copy[apartment.nameKey]}`}>&#8249;</button>
+                    <button class="gallery-next" type="button" aria-controls={`apartment-gallery-${apartment.id}-images`} aria-label={`Next image of ${copy[apartment.nameKey]}`}>&#8250;</button>
+                    <div class="gallery-indicators">
+                      {apartment.images.map((_, index) => <button class:list={['gallery-indicator', { active: index === 0 }]} type="button" aria-controls={`apartment-gallery-${apartment.id}-images`} aria-label={`Show image ${index + 1} of ${copy[apartment.nameKey]}`} aria-pressed={index === 0 ? 'true' : 'false'}></button>)}
+                    </div>
+                    <p class="visually-hidden gallery-status" aria-live="polite">Image 1 of {apartment.images.length}</p>
+                  </div>
+                  <div class="apartment-content">
+                    <div class="apartment-header">
+                      <div class="apartment-title-location">
+                        <h4 data-translate={apartment.nameKey}>{copy[apartment.nameKey]}</h4>
+                        <p class="apartment-location">{apartment.address}</p>
+                      </div>
+                      <div class="apartment-rating-booking">
+                        <div class="apartment-rating"><span class="booking-rating">{apartment.rating}</span></div>
+                        <a href={apartment.bookingUrl} class="booking-btn-compact" target="_blank" rel="noopener noreferrer">
+                          <span data-translate="booking-btn-short">Booking.com</span>
+                        </a>
+                      </div>
+                    </div>
+                    <div class="apartment-amenities">
+                      {apartment.amenities.map((amenity) => <span class="amenity" data-translate={amenity}>{copy[amenity]}</span>)}
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+          <div class="location-info">
+            <h4 data-translate={location.highlightsTitleKey}>{copy[location.highlightsTitleKey]}</h4>
+            <p data-translate={location.highlightsTextKey}>{copy[location.highlightsTextKey]}</p>
+            <div class="location-map">
+              <iframe src={location.mapEmbedUrl} width="100%" height="300" style="border:0; border-radius: 0.75rem;" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade" title={location.mapTitle}></iframe>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section id="about" class="about-section" aria-labelledby="about-heading">
+    <div class="container">
+      <div class="about-content">
+        <p class="eyebrow">The Dada feeling</p>
+        <h2 id="about-heading" class="section-headline" data-translate="about-headline">{copy['about-headline']}</h2>
+        <p class="section-subheadline" data-translate="about-subheadline">{copy['about-subheadline']}</p>
+        <div class="about-grid">
+          {[
+            ['trees', 'about-card1-title', 'about-card1-text'],
+            ['waves', 'about-card2-title', 'about-card2-text'],
+            ['building', 'about-card3-title', 'about-card3-text'],
+          ].map(([icon, heading, text]) => (
+            <article class="about-card">
+              <div class="about-icon"><i data-lucide={icon} aria-hidden="true"></i></div>
+              <h3 data-translate={heading}>{copy[heading]}</h3>
+              <p data-translate={text}>{copy[text]}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials-section" aria-labelledby="testimonials-heading">
+    <div class="container">
+      <div class="section-heading section-heading--center">
+        <h2 id="testimonials-heading" class="section-headline" data-translate="testimonials-headline">{copy['testimonials-headline']}</h2>
+        <p class="section-subheadline" data-translate="testimonials-subheadline">{copy['testimonials-subheadline']}</p>
+      </div>
+      <div class="testimonials-grid">
+        {[['J', 'Jana', 'testimonial1-text'], ['T', 'Tamara', 'testimonial2-text'], ['D', 'Darko', 'testimonial3-text']].map(([initial, name, text]) => (
+          <article class="testimonial-card">
+            <div class="testimonial-avatar" aria-hidden="true">{initial}</div>
+            <h3>{name}</h3>
+            <p data-translate={text}>{copy[text]}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact-section" aria-labelledby="contact-heading">
+    <div class="container">
+      <div class="section-heading section-heading--center">
+        <h2 id="contact-heading" class="section-headline" data-translate="contact-headline">{copy['contact-headline']}</h2>
+        <p class="section-subheadline" data-translate="contact-subheadline">{copy['contact-subheadline']}</p>
+      </div>
+      <div class="contact-content">
+        <div class="contact-form-panel">
+          <form class="contact-form" name="contact-form" data-netlify="true" netlify-honeypot="bot-field" method="POST" action="/" enctype="application/x-www-form-urlencoded">
+            <input type="hidden" name="form-name" value="contact-form" />
+            <div class="form-group">
+              <div class="form-field"><label for="name" data-translate="form-name">{copy['form-name']}</label><input id="name" type="text" name="name" placeholder={copy['form-name']} data-translate-placeholder="form-name" required /></div>
+              <div class="form-field"><label for="email" data-translate="form-email">{copy['form-email']}</label><input id="email" type="email" name="email" placeholder={copy['form-email']} data-translate-placeholder="form-email" required /></div>
+            </div>
+            <div class="form-group">
+              <div class="form-field"><label for="checkin" data-translate="form-checkin">{copy['form-checkin']}</label><input id="checkin" type="date" name="checkin" required /></div>
+              <div class="form-field"><label for="checkout" data-translate="form-checkout">{copy['form-checkout']}</label><input id="checkout" type="date" name="checkout" required /></div>
+            </div>
+            <div class="form-field"><label for="message" data-translate="form-message">{copy['form-message']}</label><textarea id="message" name="message" placeholder={copy['form-message']} data-translate-placeholder="form-message" required></textarea></div>
+            <div class="visually-hidden"><label for="bot-field">Don’t fill this out if you’re human</label><input id="bot-field" name="bot-field" /></div>
+            <button type="submit" class="contact-submit" data-translate="form-submit">{copy['form-submit']}</button>
+          </form>
+          <div id="form-status" class="form-status" role="status" aria-live="polite" hidden></div>
+          <div id="form-error" class="form-error" role="alert" tabindex="-1" hidden></div>
+          <button id="form-retry" class="form-retry" type="button" hidden>Try again</button>
+          <div id="form-success-message" class="form-success-message" role="status" aria-live="polite" tabindex="-1" hidden>
+            <div class="success-content">
+              <i data-lucide="check-circle" class="success-icon" aria-hidden="true"></i>
+              <h3 data-translate="form-success-title">{copy['form-success-title']}</h3>
+              <p data-translate="form-success-text">{copy['form-success-text']}</p>
+            </div>
+          </div>
+        </div>
+        <aside class="contact-info" aria-label="Contact details">
+          <div class="contact-item"><div class="contact-icon"><i data-lucide="phone" aria-hidden="true"></i></div><div><h3><span data-translate="contact-phone">{copy['contact-phone']}</span></h3><p><a href="tel:+385989982059">+385 98 998 2059</a></p></div></div>
+          <div class="contact-item"><div class="contact-icon"><i data-lucide="mail" aria-hidden="true"></i></div><div><h3><span data-translate="contact-email">{copy['contact-email']}</span></h3><p><a href="mailto:dragutin.safranko@gmail.com">dragutin.safranko@gmail.com</a></p></div></div>
+          <div class="contact-item"><div class="contact-icon"><i data-lucide="map-pin" aria-hidden="true"></i></div><div><h3><span data-translate="contact-location">{copy['contact-location']}</span></h3><p data-translate="contact-location-text">{copy['contact-location-text']}</p></div></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
+  <script is:inline src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/hr.js" defer></script>
+  <script>
+    import { initContactForm } from '../scripts/contact-form';
+    import { initDatePickers } from '../scripts/date-picker';
+
+    initContactForm();
+
+    if (document.readyState === 'complete') {
+      initDatePickers();
+    } else {
+      window.addEventListener('load', initDatePickers, { once: true });
+    }
+  </script>
+</BaseLayout>

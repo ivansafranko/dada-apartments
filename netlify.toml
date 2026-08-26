@@ -1,15 +1,32 @@
 [build]
-  publish = "."
+  command = "npm run build"
+  publish = "dist"
+
+# Astro writes the canonical booking route as `book-now/index.html`. Netlify's
+# Pretty URLs feature turns `/book-now` into `/book-now/`, which conflicts with
+# the approved no-trailing-slash public URL and causes a redirect loop.
+[build.processing.html]
+  pretty_urls = false
+
+# Netlify requires a `to` path for custom error responses. The 410 status
+# keeps this from being an HTTP redirect, while the body is not the homepage.
+[[redirects]]
+  from = "/apartmani-krapinske-toplice"
+  to = "/410.html"
+  status = 410
+  force = true
 
 [[redirects]]
-  from = "/book-now"
-  to = "/book-now.html"
-  status = 200
+  from = "/apartmani-krapinske-toplice/"
+  to = "/410.html"
+  status = 410
+  force = true
 
 [[redirects]]
-  from = "/success"
-  to = "/success.html"
-  status = 200
+  from = "/book-now.html"
+  to = "/book-now"
+  status = 301
+  force = true
 
 # Redirect HTTP to HTTPS
 [[redirects]]
@@ -31,4 +48,4 @@
 # Form handling - emails will be sent to the configured email
 # You'll need to configure this in Netlify admin panel:
 # Site Settings > Forms > Form notifications
-# Add espana.dsr@gmail.com as the notification email 
+# Add espana.dsr@gmail.com as the notification email
