@@ -4,7 +4,7 @@ export const translations = {
     'page-description': 'Moderni apartmani za odmor u Krapinskim Toplicama blizu Aquae Vivae parka. WiFi, parking, potpuno opremljeni smještaji u Hrvatskoj lječilišnoj destinaciji.',
     'booking-page-title': 'Rezervacije – Apartmani Dada',
     'booking-page-description': 'Online rezervacije za Apartmani Dada u Krapinskim Toplicama.',
-    'nav-home': 'Početna', 'nav-about': 'O nama', 'nav-apartments': 'Apartmani', 'nav-book': 'Rezervirajte online', 'nav-contact': 'Kontakt',
+    'nav-home': 'Početna', 'nav-about': 'O nama', 'nav-apartments': 'Apartmani', 'nav-book': 'Rezervirajte online', 'nav-contact': 'Kontakt', 'home-link-label': 'Početna stranica', 'primary-nav-label': 'Glavna navigacija', 'back-to-top-label': 'Povratak na vrh', 'facebook-label': 'Facebook (otvara se u novoj kartici)',
     'hero-headline': 'Apartmani u Krapinskim Toplicama',
     'hero-subheadline': 'Moderni apartmani za odmor blizu Aquae Vivae vodenog parka. Potpuno opremljeni smještaji s WiFi-em, parkingom i prekrasnim pogledom u vodećoj lječilišnoj destinaciji Hrvatske.',
     'explore-btn': 'Istražite apartmane', 'hero-image-alt': 'Apartmani Dada u Krapinskim Toplicama okruženi zelenilom', 'hero-image-caption': 'Krapinske Toplice · Hrvatska',
@@ -34,7 +34,7 @@ export const translations = {
   en: {
     'page-title': 'Apartmani Dada - Apartments in Krapinske Toplice', 'page-description': "Modern vacation rentals in Krapinske Toplice near Aquae Vivae Water Park. WiFi, parking, fully equipped apartments in Croatia's spa destination.",
     'booking-page-title': 'Book Now – Apartmani Dada', 'booking-page-description': 'Book your stay online at Apartmani Dada in Krapinske Toplice.',
-    'nav-home': 'Homepage', 'nav-about': 'About', 'nav-apartments': 'Apartments', 'nav-book': 'Book Now', 'nav-contact': 'Contact',
+    'nav-home': 'Homepage', 'nav-about': 'About', 'nav-apartments': 'Apartments', 'nav-book': 'Book Now', 'nav-contact': 'Contact', 'home-link-label': 'Homepage', 'primary-nav-label': 'Primary navigation', 'back-to-top-label': 'Back to top', 'facebook-label': 'Facebook (opens in a new tab)',
     'hero-headline': 'Apartments in Krapinske Toplice', 'hero-subheadline': "Modern vacation rentals near Aquae Vivae Water Park. Fully equipped apartments with WiFi, parking, and stunning views in Croatia's premier spa destination.", 'explore-btn': 'Explore Apartments', 'hero-image-alt': 'Apartmani Dada in Krapinske Toplice surrounded by greenery', 'hero-image-caption': 'Krapinske Toplice · Croatia',
     'feature-strip-label': 'Apartmani Dada highlights', 'feature1-title': 'Peaceful location', 'feature1-text': 'In the heart of Croatia’s spa region', 'feature2-title': 'Aquae Vivae', 'feature2-text': 'Three minutes from the thermal park', 'feature3-title': 'A home-like stay', 'feature3-text': 'Thoughtful comfort for every stay',
     'place-eyebrow': 'The place', 'place-title-line1': 'Small town.', 'place-title-line2': 'A big reset.', 'place-text': 'Krapinske Toplice brings together healing waters, gentle walks and a slower rhythm. Everything you need for a few truly restorative days is close at hand.', 'place-link': 'Discover the town', 'place-card1-label': '01 / nature', 'place-card1-title': 'Greenery at your door', 'place-card1-text': 'Morning coffee, fresh air and a calm you can feel.', 'place-card2-label': '02 / wellness', 'place-card2-title': 'Time for yourself', 'place-card2-text': 'Thermal water and wellness facilities just a few steps away.',

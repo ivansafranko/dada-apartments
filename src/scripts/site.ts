@@ -1,12 +1,12 @@
 import { defaultLocale, translations, type Locale } from '../data/translations';
 
-declare global {
-  interface Window {
-    lucide?: { createIcons: () => void };
-  }
-}
-
 let currentLanguage: Locale = defaultLocale;
+
+const mobileMenuLabel = (isOpen: boolean) => {
+  const english = document.documentElement.lang === 'en';
+  if (english) return isOpen ? 'Close navigation menu' : 'Open navigation menu';
+  return isOpen ? 'Zatvori navigaciju' : 'Otvori navigaciju';
+};
 
 const getSavedLanguage = (): Locale => {
   try {
@@ -22,8 +22,6 @@ const scrollToTarget = (target: Element) => {
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   window.scrollTo({ top, behavior: reduceMotion ? 'auto' : 'smooth' });
 };
-
-const refreshIcons = () => window.lucide?.createIcons();
 
 function updateLanguage(locale: Locale) {
   currentLanguage = locale;
@@ -57,14 +55,15 @@ function updateLanguage(locale: Locale) {
   document.querySelectorAll<HTMLButtonElement>('.language-toggle').forEach((toggle) => {
     const isEnglish = locale === 'en';
     toggle.setAttribute('aria-pressed', String(isEnglish));
-    toggle.setAttribute('aria-label', isEnglish ? 'Prebaci na hrvatski' : 'Switch to English');
+    toggle.setAttribute('aria-label', isEnglish ? 'Switch to Croatian' : 'Prebaci na engleski');
     const label = toggle.querySelector('.lang-text');
     if (label) label.textContent = isEnglish ? 'EN' : 'HR';
   });
 
   try { localStorage.setItem('preferredLanguage', locale); } catch { /* Storage may be unavailable. */ }
+  const menu = document.querySelector<HTMLElement>('#mobileMenu');
+  document.querySelector<HTMLButtonElement>('#hamburgerMenu')?.setAttribute('aria-label', mobileMenuLabel(menu?.classList.contains('active') ?? false));
   window.dispatchEvent(new CustomEvent('apartmani-dada:language-change', { detail: locale }));
-  refreshIcons();
 }
 
 function initLanguage() {
@@ -94,7 +93,7 @@ function initMobileMenu() {
     button.classList.remove('active');
     menu.classList.remove('active');
     button.setAttribute('aria-expanded', 'false');
-    button.setAttribute('aria-label', 'Open navigation menu');
+    button.setAttribute('aria-label', mobileMenuLabel(false));
     menu.setAttribute('aria-hidden', 'true');
   };
   const toggle = () => {
@@ -103,7 +102,7 @@ function initMobileMenu() {
     button.classList.add('active');
     menu.classList.add('active');
     button.setAttribute('aria-expanded', 'true');
-    button.setAttribute('aria-label', 'Close navigation menu');
+    button.setAttribute('aria-label', mobileMenuLabel(true));
     menu.setAttribute('aria-hidden', 'false');
   };
 
@@ -195,5 +194,4 @@ export function initSite() {
   initMobileMenu();
   initHeaderAndBackToTop();
   initGalleries();
-  window.setTimeout(refreshIcons, 0);
 }

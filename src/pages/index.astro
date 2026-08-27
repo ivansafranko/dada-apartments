@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Icon, { type IconName } from '../components/Icon.astro';
 import { apartments, locations } from '../data/apartments';
 import { translations } from '../data/translations';
 
@@ -76,7 +77,7 @@ const homepageStructuredData = [
 ];
 ---
 
-<BaseLayout title={title} description={description} canonical="https://apartments-dada.com/" hasDatePicker structuredData={homepageStructuredData} preloadImage="/images/dada-apartments-krapinske-toplice-hero.webp">
+<BaseLayout title={title} description={description} canonical="https://apartments-dada.com/" structuredData={homepageStructuredData} preloadImage="/images/dada-apartments-krapinske-toplice-hero-1600.webp" preloadImageSrcSet="/images/dada-apartments-krapinske-toplice-hero-768.webp 768w, /images/dada-apartments-krapinske-toplice-hero-1600.webp 1600w" preloadImageSizes="(max-width: 768px) calc(100vw - 2rem), 50vw">
   <section id="home" class="hero-section" aria-labelledby="hero-headline">
     <div class="container">
       <div class="hero-content">
@@ -90,7 +91,11 @@ const homepageStructuredData = [
           </div>
         </div>
         <div class="hero-image">
-          <img src="/images/dada-apartments-krapinske-toplice-hero.webp" width="900" height="720" loading="eager" fetchpriority="high" alt="Apartmani Dada u Krapinskim Toplicama okruženi zelenilom" data-translate-alt="hero-image-alt" />
+          <picture>
+            <source media="(max-width: 768px)" srcset="/images/dada-apartments-krapinske-toplice-hero-768.webp" type="image/webp" />
+            <source srcset="/images/dada-apartments-krapinske-toplice-hero-1600.webp" type="image/webp" />
+            <img src="/images/dada-apartments-krapinske-toplice-hero-1600.webp" width="1600" height="1060" loading="eager" fetchpriority="high" alt="Apartmani Dada u Krapinskim Toplicama okruženi zelenilom" data-translate-alt="hero-image-alt" />
+          </picture>
           <span class="hero-image-caption" data-translate="hero-image-caption">Krapinske Toplice · Hrvatska</span>
         </div>
       </div>
@@ -108,8 +113,8 @@ const homepageStructuredData = [
   <section class="location-bento" aria-labelledby="place-heading">
     <div class="container bento-grid">
       <div class="bento-intro"><h2 id="place-heading"><span data-translate="place-title-line1">Mali grad.</span><br /><em data-translate="place-title-line2">Veliki predah.</em></h2><p data-translate="place-text">Krapinske Toplice spajaju ljekovite vode, šetnje i sporiji ritam. Sve što vam treba za nekoliko dana potpunog odmora nalazi se nadohvat ruke.</p><a href="#about" class="text-link"><span data-translate="place-link">Upoznajte mjesto</span></a></div>
-      <div class="bento-card bento-card-tall"><span class="bento-label" data-translate="place-card1-label">01 / priroda</span><div><h3 data-translate="place-card1-title">Zelenilo na pragu</h3><p data-translate="place-card1-text">Jutarnja kava, svježi zrak i mir koji se osjeti.</p></div></div>
-      <div class="bento-card bento-card-small"><span class="bento-label" data-translate="place-card2-label">02 / wellness</span><div><h3 data-translate="place-card2-title">Vrijeme za sebe</h3><p data-translate="place-card2-text">Termalna voda i wellness sadržaji nekoliko koraka od vas.</p></div></div>
+      <div class="bento-card bento-card-tall"><img class="bento-card-image" src="/images/apartments/apartment-1/dada-apartment-1-balcony-001.webp" width="3024" height="4032" loading="lazy" decoding="async" alt="" /><span class="bento-label" data-translate="place-card1-label">01 / priroda</span><div><h3 data-translate="place-card1-title">Zelenilo na pragu</h3><p data-translate="place-card1-text">Jutarnja kava, svježi zrak i mir koji se osjeti.</p></div></div>
+      <div class="bento-card bento-card-small"><img class="bento-card-image" src="/images/apartments/apartment-3/studio-safranko-living-room-001.webp" width="2728" height="3638" loading="lazy" decoding="async" alt="" /><span class="bento-label" data-translate="place-card2-label">02 / wellness</span><div><h3 data-translate="place-card2-title">Vrijeme za sebe</h3><p data-translate="place-card2-text">Termalna voda i wellness sadržaji nekoliko koraka od vas.</p></div></div>
     </div>
   </section>
 
@@ -215,7 +220,7 @@ const homepageStructuredData = [
             ['building', 'about-card3-title', 'about-card3-text'],
           ].map(([icon, heading, text]) => (
             <article class="about-card">
-              <div class="about-icon"><i data-lucide={icon} aria-hidden="true"></i></div>
+              <div class="about-icon"><Icon name={icon as IconName} /></div>
               <h3 data-translate={heading}>{copy[heading]}</h3>
               <p data-translate={text}>{copy[text]}</p>
             </article>
@@ -270,33 +275,38 @@ const homepageStructuredData = [
           <button id="form-retry" class="form-retry" type="button" hidden>Try again</button>
           <div id="form-success-message" class="form-success-message" role="status" aria-live="polite" tabindex="-1" hidden>
             <div class="success-content">
-              <i data-lucide="check-circle" class="success-icon" aria-hidden="true"></i>
+              <Icon name="check-circle" class="success-icon" />
               <h3 data-translate="form-success-title">{copy['form-success-title']}</h3>
               <p data-translate="form-success-text">{copy['form-success-text']}</p>
             </div>
           </div>
         </div>
         <aside class="contact-info" aria-label="Podaci za kontakt" data-translate-aria-label="contact-details-label">
-          <div class="contact-item"><div class="contact-icon"><i data-lucide="phone" aria-hidden="true"></i></div><div><h3><span data-translate="contact-phone">{copy['contact-phone']}</span></h3><p><a href="tel:+385989982059">+385 98 998 2059</a></p></div></div>
-          <div class="contact-item"><div class="contact-icon"><i data-lucide="mail" aria-hidden="true"></i></div><div><h3><span data-translate="contact-email">{copy['contact-email']}</span></h3><p><a href="mailto:dragutin.safranko@gmail.com">dragutin.safranko@gmail.com</a></p></div></div>
-          <div class="contact-item"><div class="contact-icon"><i data-lucide="map-pin" aria-hidden="true"></i></div><div><h3><span data-translate="contact-location">{copy['contact-location']}</span></h3><p data-translate="contact-location-text">{copy['contact-location-text']}</p></div></div>
+          <div class="contact-item"><div class="contact-icon"><Icon name="phone" /></div><div><h3><span data-translate="contact-phone">{copy['contact-phone']}</span></h3><p><a href="tel:+385989982059">+385 98 998 2059</a></p></div></div>
+          <div class="contact-item"><div class="contact-icon"><Icon name="mail" /></div><div><h3><span data-translate="contact-email">{copy['contact-email']}</span></h3><p><a href="mailto:dragutin.safranko@gmail.com">dragutin.safranko@gmail.com</a></p></div></div>
+          <div class="contact-item"><div class="contact-icon"><Icon name="map-pin" /></div><div><h3><span data-translate="contact-location">{copy['contact-location']}</span></h3><p data-translate="contact-location-text">{copy['contact-location-text']}</p></div></div>
         </aside>
       </div>
     </div>
   </section>
 
-  <script is:inline src="https://cdn.jsdelivr.net/npm/flatpickr" defer></script>
-  <script is:inline src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/hr.js" defer></script>
   <script>
     import { initContactForm } from '../scripts/contact-form';
-    import { initDatePickers } from '../scripts/date-picker';
 
     initContactForm();
 
-    if (document.readyState === 'complete') {
-      initDatePickers();
+    const contactSection = document.querySelector('#contact');
+    const loadDatePickers = () => { void import('../scripts/date-picker').then(({ initDatePickers }) => initDatePickers()); };
+
+    if (contactSection && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        observer.disconnect();
+        loadDatePickers();
+      }, { rootMargin: '600px 0px' });
+      observer.observe(contactSection);
     } else {
-      window.addEventListener('load', initDatePickers, { once: true });
+      window.addEventListener('load', loadDatePickers, { once: true });
     }
   </script>
 </BaseLayout>
